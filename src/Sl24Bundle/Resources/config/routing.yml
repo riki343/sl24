@@ -1,0 +1,3 @@
+sl24_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: Sl24Bundle:Default:index }
