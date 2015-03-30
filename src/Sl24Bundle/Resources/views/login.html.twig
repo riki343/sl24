@@ -1,0 +1,33 @@
+{% extends '@Sl24/layout.html.twig' %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h2>Вхід</h2>
+                    </div>
+                    <form class="form-horizontal" action="{{ path('sl24_login_check') }}" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Введіть логін/email" name="_username" value="{{ last_username }}">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Введіть пароль" name="_password">
+                        </div>
+                        {% if error %}
+                            <div class="alert alert-danger">
+                                {{ error.message }}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-footer">
+                            <input type="hidden" name="_target_path" value="/user/home" />
+                            <button type="submit" class="btn btn-info pull-right btn-submit">Логін</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

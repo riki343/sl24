@@ -1,3 +1,14 @@
 sl24_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: Sl24Bundle:Default:index }
+    path:     /
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_login:
+    path: /login
+    defaults: { _controller: Sl24Bundle:Index:login }
+
+sl24_login_check:
+    path: /login_check
+    defaults: { _controller: Sl24Bundle:Index:loginCheck }
+
+sl24_logout:
+    path: /logout
