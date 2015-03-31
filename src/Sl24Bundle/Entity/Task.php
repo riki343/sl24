@@ -34,7 +34,7 @@ class Task
 
     /**
      * @var string
-     * @ORM\Column(name="description", type="string", length="1000")
+     * @ORM\Column(name="description", type="string", length=1000)
      */
     private $description;
 
@@ -82,4 +82,221 @@ class Task
      * @ORM\JoinColumn(name="assigned_id", referencedColumnName="id")
      */
     private $assigned;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Task
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Task
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Task
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set statusID
+     *
+     * @param integer $statusID
+     * @return Task
+     */
+    public function setStatusID($statusID)
+    {
+        $this->statusID = $statusID;
+
+        return $this;
+    }
+
+    /**
+     * Get statusID
+     *
+     * @return integer 
+     */
+    public function getStatusID()
+    {
+        return $this->statusID;
+    }
+
+    /**
+     * Set ownerID
+     *
+     * @param integer $ownerID
+     * @return Task
+     */
+    public function setOwnerID($ownerID)
+    {
+        $this->ownerID = $ownerID;
+
+        return $this;
+    }
+
+    /**
+     * Get ownerID
+     *
+     * @return integer 
+     */
+    public function getOwnerID()
+    {
+        return $this->ownerID;
+    }
+
+    /**
+     * Set assignedID
+     *
+     * @param integer $assignedID
+     * @return Task
+     */
+    public function setAssignedID($assignedID)
+    {
+        $this->assignedID = $assignedID;
+
+        return $this;
+    }
+
+    /**
+     * Get assignedID
+     *
+     * @return integer 
+     */
+    public function getAssignedID()
+    {
+        return $this->assignedID;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \Sl24Bundle\Entity\TaskStatus $status
+     * @return Task
+     */
+    public function setStatus(\Sl24Bundle\Entity\TaskStatus $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \Sl24Bundle\Entity\TaskStatus 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param \Sl24Bundle\Entity\User $owner
+     * @return Task
+     */
+    public function setOwner(\Sl24Bundle\Entity\User $owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \Sl24Bundle\Entity\User 
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Set assigned
+     *
+     * @param \Sl24Bundle\Entity\User $assigned
+     * @return Task
+     */
+    public function setAssigned(\Sl24Bundle\Entity\User $assigned = null)
+    {
+        $this->assigned = $assigned;
+
+        return $this;
+    }
+
+    /**
+     * Get assigned
+     *
+     * @return \Sl24Bundle\Entity\User 
+     */
+    public function getAssigned()
+    {
+        return $this->assigned;
+    }
 }

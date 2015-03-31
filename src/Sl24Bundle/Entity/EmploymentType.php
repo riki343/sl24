@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * TaskStatus
+ * EmploymentType
  *
- * @ORM\Table(name="task_statuses")
+ * @ORM\Table(name="employment_types")
  * @ORM\Entity
  */
-class TaskStatus
+class EmploymentType
 {
     /**
      * @var integer
@@ -59,7 +59,7 @@ class TaskStatus
      * Set label
      *
      * @param string $label
-     * @return TaskStatus
+     * @return EmploymentType
      */
     public function setLabel($label)
     {
@@ -82,7 +82,7 @@ class TaskStatus
      * Set color
      *
      * @param string $color
-     * @return TaskStatus
+     * @return EmploymentType
      */
     public function setColor($color)
     {
