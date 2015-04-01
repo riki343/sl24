@@ -10,6 +10,15 @@
 
 {% block JavaScripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/sl24/js/Custom/') }}"></script>
+    <script>
+        var TEMPLATES = {
+            'meetings': "{{ asset('bundles/sl24/templates/meetings.html') }}",
+            'main': "{{ asset('bundles/sl24/templates/main.html') }}",
+            'tasks': "{{ asset('bundles/sl24/templates/tasks.html') }}"
+        };
+    </script>
+
+    <script src="{{ asset('bundles/sl24/js/Custom/homepageController.js') }}"></script>
     <script src="{{ asset('bundles/sl24/js/Custom/meetingController.js') }}"></script>
+    <script src="{{ asset('bundles/sl24/js/Custom/taskController.js') }}"></script>
 {% endblock %}

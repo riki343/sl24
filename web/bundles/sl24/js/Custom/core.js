@@ -9,11 +9,15 @@ Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locati
         $routeProvider
             .when('/', {
                 templateUrl: TEMPLATES.main,
-                controller: 'UserController'
+                controller: 'HomepageController'
             })
             .when('/meetings', {
                 templateUrl: TEMPLATES.meetings,
                 controller: 'MeetingController'
+            })
+            .when('/tasks', {
+                templateUrl: TEMPLATES.tasks,
+                controller: 'TaskController'
             })
             .otherwise({
                 redirectTo: '/'
