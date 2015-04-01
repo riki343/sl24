@@ -1,7 +1,7 @@
 {% extends '@Sl24/layout.html.twig' %}
 
 {% block base %}
-    <base href="/">
+    <base href="{{ path('sl24_homepage') }}">
 {% endblock %}
 
 {% block page %}
@@ -10,8 +10,8 @@
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation" style="color:#a71a1a !important;"></div>
             </div>
+            <a href="/" class="logo"><b>SL24</b></a>
 
-            <a href="index.html" class="logo"><b>SL24</b></a>
             <div class="nav pull-right notify-row" id="top_menu">
                 <ul class="nav top-menu">
                     <li class="dropdown">
@@ -158,16 +158,15 @@
                     <p class="centered"><a href="profile.html"><img src="{{ asset('bundles/sl24/img/friends/ui-sam.jpg') }}" class="img-circle" width="60"></a></p>
                     <h5 class="centered">Нікіта Ляшенко</h5>
 
-
                     <li class="sub-menu">
-                        <a class="active"  href="index.html" >
+                        <a class="active"  href="/" >
                             <i class="fa fa-desktop"></i>
                             <span>Головна</span>
                         </a>
                     </li>
 
                     <li class="sub-menu">
-                        <a href="javascript:;" >
+                        <a href="/meetings" >
                             <i class="fa fa-male"></i>
                             <span>Зустрічі</span>
                         </a>

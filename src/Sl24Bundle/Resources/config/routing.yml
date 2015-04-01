@@ -12,3 +12,7 @@ sl24_login_check:
 
 sl24_logout:
     path: /logout
+
+sl24_default:
+    pattern: /{some}
+    defaults: { _controller: Sl24Bundle:Index:index }

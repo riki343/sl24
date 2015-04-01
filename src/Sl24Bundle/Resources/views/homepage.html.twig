@@ -3,5 +3,13 @@
 {% block title %}Home Page{% endblock %}
 
 {% block body %}
-    <a href="/dawdw">Хня</a>
+    <a href="/meetings">Хня</a>
+    <a href="/logout" target="_self">Exit</a>
+    <div ng-view></div>
+{% endblock %}
+
+{% block JavaScripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/sl24/js/Custom/') }}"></script>
+    <script src="{{ asset('bundles/sl24/js/Custom/meetingController.js') }}"></script>
 {% endblock %}

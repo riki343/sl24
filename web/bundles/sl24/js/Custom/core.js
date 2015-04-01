@@ -8,14 +8,15 @@ Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locati
 
         $routeProvider
             .when('/', {
-                templateUrl: TEMPLATES.index,
-                controller: 'indexController'
+                templateUrl: TEMPLATES.main,
+                controller: 'UserController'
             })
-            .when('/trading', {
-                templateUrl: TEMPLATES.trading,
-                controller: 'tradingController'
+            .when('/meetings', {
+                templateUrl: TEMPLATES.meetings,
+                controller: 'MeetingController'
             })
-            .when('/logout', {
+            .otherwise({
+                redirectTo: '/'
             });
 
         $locationProvider.html5Mode(true);
