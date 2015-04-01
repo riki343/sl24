@@ -67,7 +67,7 @@ class Meeting
 
     /**
      * @var int
-     * @ORM\Column(name="assistant_id", type="integer")
+     * @ORM\Column(name="assistant_id", type="integer", nullable=true, options={"default" = null})
      */
     private $assistantID;
 
@@ -132,6 +132,43 @@ class Meeting
      * @ORM\Column(name="client_birthday", type="date")
      */
     private $clientBirthday;
+
+    public function getInArray() {
+        return array(
+            'id' => $this->getId(),
+            'credentials' => $this->getCredentials(),
+            'consultantID' => $this->getConsultantID(),
+            'assistantID' => $this->getAssistantID(),
+            'status' => $this->getStatus()->getInArray(),
+            'employmentType' => $this->getEmploymentType()->getInArray(),
+            'date' => $this->getDate()->format('Y-m-d'),
+            'price' => $this->getPrice(),
+            'years' => $this->getYears(),
+            'progress' => $this->getProgress(),
+            'age' => $this->getAge(),
+            'payDate' => $this->getPayDate()->format('Y-m-d'),
+            'workingMonthID' => $this->getWorkingMonthID(),
+            'clientBirthday' =>
+                array(
+                    'year' => $this->getClientBirthday()->format('Y'),
+                    'month' => $this->getClientBirthday()->format('m'),
+                    'day' => $this->getClientBirthday()->format('d'),
+                ),
+        );
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param int $meeting_id
+     * @param object $data
+     */
+    public static function editInfo(EntityManager $em, $meeting_id, $data) {
+        $meeting = $em->getRepository('Sl24Bundle:Meeting')->find($meeting_id);
+        $meeting->setAge($data->age);
+        $meeting->setClientBirthday($data->clientBirthday);
+        $meeting->setCredentials($data->credentials);
+        $meeting->setStatusID($data->status->id);
+    }
 
     /**
      * Get id

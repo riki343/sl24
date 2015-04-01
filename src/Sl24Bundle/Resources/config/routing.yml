@@ -1,5 +1,5 @@
 sl24_homepage:
-    path:     /
+    path: /
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_login:
@@ -12,6 +12,10 @@ sl24_login_check:
 
 sl24_logout:
     path: /logout
+
+sl24_getMeetings:
+    pattern: user/{user_id}/meetings
+    defaults: { _controller: Sl24Bundle:Meeting:getMeetings }
 
 sl24_default:
     pattern: /{some}

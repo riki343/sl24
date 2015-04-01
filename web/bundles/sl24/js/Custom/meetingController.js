@@ -3,13 +3,17 @@ Sl24.controller('MeetingController', ['$scope', '$http',
         $scope.meetings = null;
         $scope.test = "SomeTestVariable";
 
-        $scope.getMeetings = function (month_id) {
+        $scope.urlGetMeetings = URLS.getMeetings;
 
-            $http.get('#')
+        $scope.getMeetings = function (user_id) {
+            var meetingsUrl = $scope.urlGetMeetings.replace('user_id', user_id);
+            $http.get(meetingsUrl)
                 .success(function (response) {
-                    $scope.meetings = response.meetings;
+                    $scope.meetings = response;
                 }
             );
         };
+
+        $scope.getMeetings(1);
     }
 ]);

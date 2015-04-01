@@ -3,8 +3,6 @@
 {% block title %}Home Page{% endblock %}
 
 {% block body %}
-    <a href="/meetings">Хня</a>
-    <a href="/logout" target="_self">Exit</a>
     <div ng-view></div>
 {% endblock %}
 
@@ -16,6 +14,8 @@
             'main': "{{ asset('bundles/sl24/templates/main.html') }}",
             'tasks': "{{ asset('bundles/sl24/templates/tasks.html') }}"
         };
+
+        URLS.getMeetings = "{{ path('sl24_getMeetings', { 'user_id': 'user_id' }) }}";
     </script>
 
     <script src="{{ asset('bundles/sl24/js/Custom/homepageController.js') }}"></script>
