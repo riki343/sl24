@@ -491,10 +491,10 @@ class Meeting
     /**
      * Set employmentType
      *
-     * @param \Sl24Bundle\Entity\EmploymentType $employmentType
+     * @param EmploymentType $employmentType
      * @return Meeting
      */
-    public function setEmploymentType(\Sl24Bundle\Entity\EmploymentType $employmentType = null)
+    public function setEmploymentType(EmploymentType $employmentType = null)
     {
         $this->employmentType = $employmentType;
 
@@ -504,7 +504,7 @@ class Meeting
     /**
      * Get employmentType
      *
-     * @return \Sl24Bundle\Entity\EmploymentType 
+     * @return EmploymentType 
      */
     public function getEmploymentType()
     {
@@ -517,7 +517,7 @@ class Meeting
      * @param \Sl24Bundle\Entity\MeetingStatus $status
      * @return Meeting
      */
-    public function setStatus(\Sl24Bundle\Entity\MeetingStatus $status = null)
+    public function setStatus(MeetingStatus $status = null)
     {
         $this->status = $status;
 
