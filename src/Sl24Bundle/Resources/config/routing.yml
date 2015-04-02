@@ -21,6 +21,10 @@ sl24_getMeetingsInfo:
     pattern: /meetings/getmeetingsInfo
     defaults: { _controller: Sl24Bundle:Meeting:getMeetingsInfo }
 
+sl_24_get_tasks:
+    path: /getTasks
+    defaults: { _controller: Sl24Bundle:Task:getTasks }
+
 sl24_default:
     pattern: /{some}
     defaults: { _controller: Sl24Bundle:Index:index }

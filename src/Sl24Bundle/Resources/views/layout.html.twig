@@ -123,8 +123,21 @@
         </script>
 
         <script>
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            });
+
+            $('#task-view-tabs a').click(function (e) {
+                if ($(this).id != $('a#add_new_task_btn').id) {
+                    $(this).tab('show');
+                }
+                e.preventDefault();
+            });
+
             URLS = {
-                'asset': "{{ asset('') }}"
+                'asset': "{{ asset('') }}",
+                getTasks: "{{ path('sl_24_get_tasks') }}"
             };
         </script>
     {% endblock %}

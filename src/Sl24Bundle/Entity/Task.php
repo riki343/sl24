@@ -299,4 +299,20 @@ class Task
     {
         return $this->assigned;
     }
+
+    public function getInArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'date' => $this->getDate(),
+            'statusID' => $this->getStatusID(),
+            'status' => $this->getStatus(),
+            'ownerID' => $this->getOwnerID(),
+            'owner' => $this->getOwner(),
+            'assignedID' => $this->getAssignedID(),
+            'assigned' => $this->getAssigned(),
+        );
+    }
 }
