@@ -143,7 +143,7 @@ class Meeting
             'credentials' => $this->getCredentials(),
             'consultantID' => $this->getConsultantID(),
             'consultant' => $this->getConsultant()->getInArray(),
-            'assistantID' => $this->getAssistantID(),
+            'assistant' => $this->getAssistantID(),
             'status' => $this->getStatus()->getInArray(),
             'employmentType' => $this->getEmploymentType()->getInArray(),
             'date' => $this->getDate()->format('Y-m-d'),

@@ -208,6 +208,29 @@ class User implements UserInterface, \Serializable
         );
     }
 
+    public function getChildsListInArray() {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'surname' => $this->getSurname(),
+            'username' => $this->getUsername(),
+            'directorNumber' => $this->getDirectorNumber(),
+            'email' => $this->getEmail(),
+            'level' => $this->getLevel(),
+            'parentID' => $this->getParentID(),
+            'slNumber' => $this->getSlNumber(),
+            'score' => $this->getScore(),
+            'teamScore' => $this->getTeamScore(),
+            'dealDate' => $this->getDealDate()->format('Y-m-d'),
+            'cufflinks' => $this->getCufflinks(),
+            'diary' => $this->getDiary(),
+            'watches' => $this->getWatches(),
+            'parker' => $this->getParker(),
+            'firstSeminar' => $this->getFirstSeminar()->format('Y-m-d'),
+            'childs' => Functions::arrayToJson($this->getChilds()),
+        );
+    }
+
     public function __construct()
     {
         $this->active = true;

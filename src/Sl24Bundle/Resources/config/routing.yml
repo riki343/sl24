@@ -33,10 +33,6 @@ sl_24_get_tasks:
     path: /getTasks
     defaults: { _controller: Sl24Bundle:Task:getTasks }
 
-
-
-
-
 #############################################################
 ################### Default Routes Block ####################
 ##### Please add your SHIT code ABOVE this block, thx... ####
