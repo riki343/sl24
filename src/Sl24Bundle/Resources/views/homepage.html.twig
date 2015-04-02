@@ -14,7 +14,8 @@
             'meeting': "{{ asset('bundles/sl24/templates/meeting.html') }}",
             'meetingsAddNew': "{{ asset('bundles/sl24/templates/meetingsAddNew.html') }}",
             'main': "{{ asset('bundles/sl24/templates/main.html') }}",
-            'tasks': "{{ asset('bundles/sl24/templates/tasks.html') }}"
+            'tasks': "{{ asset('bundles/sl24/templates/tasks.html') }}",
+            'team': "{{ asset('bundles/sl24/templates/team.html') }}"
         };
 
         URLS.getMeetings = "{{ path('sl24_getMeetings', { 'user_id': 'user_id' }) }}";
@@ -29,4 +30,5 @@
     <script src="{{ asset('bundles/sl24/js/Custom/homepageController.js') }}"></script>
     <script src="{{ asset('bundles/sl24/js/Custom/meetingController.js') }}"></script>
     <script src="{{ asset('bundles/sl24/js/Custom/taskController.js') }}"></script>
+    <script src="{{ asset('bundles/sl24/js/Custom/teamController.js') }}"></script>
 {% endblock %}
