@@ -2244,4 +2244,15 @@ label {
     min-height: 900px;
 }
 
+.plus-team
+{
+    margin-right: 10px;
+    color:gray;
+}
+.plus-team:hover
+{
+    margin-right: 10px;
+    color: #c62828;
+}
+
 
