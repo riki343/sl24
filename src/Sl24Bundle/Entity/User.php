@@ -227,8 +227,20 @@ class User implements UserInterface, \Serializable
             'watches' => $this->getWatches(),
             'parker' => $this->getParker(),
             'firstSeminar' => $this->getFirstSeminar()->format('Y-m-d'),
-            'childs' => Functions::arrayToJson($this->getChilds()),
+            'childs' => User::childsRecursion($this->getChilds()),
         );
+    }
+
+    /**
+     * @param $array
+     * @return array
+     */
+    public static function childsRecursion($array) {
+        $jsonArray = array();
+        foreach ($array as $item) {
+            $jsonArray[] = $item->getChildsListInArray();
+        }
+        return $jsonArray;
     }
 
     public function __construct()

@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TeamController extends Controller
 {
-    public function GetTeams()
+    public function GetTeamsAction()
     {
+        /** @var User $user */
         $user = $this->getUser();
-
-
+        return new JsonResponse($user->getChildsListInArray());
     }
 }

@@ -33,6 +33,11 @@ sl_24_get_tasks:
     path: /getTasks
     defaults: { _controller: Sl24Bundle:Task:getTasks }
 
+sl_24_get_team:
+    path: /getTeam
+    defaults: { _controller: Sl24Bundle:Team:GetTeams }
+
+
 #############################################################
 ################### Default Routes Block ####################
 ##### Please add your SHIT code ABOVE this block, thx... ####
