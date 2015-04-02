@@ -4,11 +4,17 @@ namespace Sl24Bundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 
 
 class IndexController extends Controller
 {
+    /**
+     * @Security("has_role('ROLE_USER')")
+     * @Route("/")
+     * @return Response
+     */
     public function indexAction()
     {
         return $this->render('Sl24Bundle::homepage.html.twig');
