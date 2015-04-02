@@ -155,8 +155,14 @@
         <aside>
             <div id="sidebar"  class="nav-collapse ">
                 <ul class="sidebar-menu" id="nav-accordion">
-                    <p class="centered"><a href="profile.html"><img src="{{ asset('bundles/sl24/img/friends/ui-sam.jpg') }}" class="img-circle" width="60"></a></p>
-                    <h5 class="centered">Нікіта Ляшенко</h5>
+                    <li>
+                        <p class="centered">
+                            <a href="profile.html">
+                                <img src="{{ asset('bundles/sl24/img/friends/ui-sam.jpg') }}" class="img-circle" width="60">
+                            </a>
+                        </p>
+                        <h5 class="centered">{{ app.user.name ~ ' ' ~ app.user.surname }}</h5>
+                    </li>
 
                     <li class="sub-menu">
                         <a href="/" >
