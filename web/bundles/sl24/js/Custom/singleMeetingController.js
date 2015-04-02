@@ -35,5 +35,6 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
         };
 
         $scope.getMeeting($scope.meeting_id);
+        $scope.getMeetingsInfo();
     }
 ]);

@@ -1,32 +1,62 @@
 <label>
     П.І.Б Клієнта
     <input type="text" value="[[meeting.credentials]]"/>
-</label>
+</label><br>
 
 <label>
     Дирекція
     <select ng-model="meeting.assistant.id">
-        <option ng-repeat="assistant in meetingsInfo.assistants" value="[[ assistant.id ]]"></option>
+        <option ng-repeat="assistant in meetingsInfo.assistants" value="[[ assistant.id ]]">[[ assistant.username ]]</option>
     </select>
-    <input type="text" value="[[meeting.assistant.id]]"/>
-</label>
+</label><br>
 
 <label>
-    П.І.Б Клієнта
-    <input type="text" value="[[meeting.credentials]]"/>
-</label>
+    Статус зустрічі
+    <select ng-model="meeting.status.id">
+        <option ng-repeat="status in meetingsInfo.statuses" value="[[ status.id ]]">[[ status.label ]]</option>
+    </select>
+</label><br>
 
 <label>
-    П.І.Б Клієнта
-    <input type="text" value="[[meeting.credentials]]"/>
-</label>
+    Вид зайнятості клієнта
+    <select ng-model="meeting.employmentType.id">
+        <option ng-repeat="type in meetingsInfo.employmentTypes" value="[[ type.id ]]">[[ type.label ]]</option>
+    </select>
+</label><br>
 
 <label>
-    П.І.Б Клієнта
-    <input type="text" value="[[meeting.credentials]]"/>
-</label>
+    Вік клієнта
+    <input type="text" value="[[meeting.age]]"/>
+</label><br>
 
 <label>
-    П.І.Б Клієнта
-    <input type="text" value="[[meeting.credentials]]"/>
-</label>
+    Дата народження клієнта
+    <input type="date" value="[[meeting.clientBirtday]]"/>
+</label><br>
+
+<label>
+    Дата зустрічі
+    <input type="date" value="[[meeting.date]]"/>
+</label><br>
+
+<label>
+    Ціна контракту
+    <input type="text" value="[[meeting.price]]"/>
+</label><br>
+
+<label>
+    Дата оплати
+    <input type="date" value="[[meeting.payDate]]"/>
+</label><br>
+
+<label>
+    Срок контракту
+    <input type="text" value="[[meeting.years]]"/>
+</label><br>
+
+<label>
+    Прогрес зустрічі
+    <select ng-model="meeting.progress">
+        <option ng-repeat="i in [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]" value="[[ status.id ]]">[[ i ]]%</option>
+    </select>
+</label><br>
