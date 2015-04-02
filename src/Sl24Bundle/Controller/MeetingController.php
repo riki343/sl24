@@ -3,6 +3,8 @@
 namespace Sl24Bundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use Sl24Bundle\Entity\Meeting;
+use Sl24Bundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,5 +35,16 @@ class MeetingController extends Controller
         $em = $this->getDoctrine()->getManager();
         $meeting = Meeting::editInfo($em, $meeting_id, $data);
         return new JsonResponse($meeting->getInArray());
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getMeetingsInfoAction() {
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        /** @var User $user */
+        $user = $this->getUser();
+        return new JsonResponse(Meeting::getMeetingsInfo($em, $user));
     }
 }

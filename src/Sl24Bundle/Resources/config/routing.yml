@@ -14,8 +14,12 @@ sl24_logout:
     path: /logout
 
 sl24_getMeetings:
-    pattern: user/{user_id}/meetings
+    pattern: /user/{user_id}/meetings
     defaults: { _controller: Sl24Bundle:Meeting:getMeetings }
+
+sl24_getMeetingsInfo:
+    pattern: /meetings/getmeetingsInfo
+    defaults: { _controller: Sl24Bundle:Meeting:getMeetingsInfo }
 
 sl24_default:
     pattern: /{some}

@@ -80,19 +80,19 @@ class Meeting
 
     /**
      * @var float
-     * @ORM\Column(name="price", type="float")
+     * @ORM\Column(name="price", type="float", nullable=true, options={"default" = null})
      */
     private $price;
 
     /**
      * @var int
-     * @ORM\Column(name="years", type="integer")
+     * @ORM\Column(name="years", type="integer", nullable=true, options={"default" = null})
      */
     private $years;
 
     /**
      * @var int
-     * @ORM\Column(name="progress", type="integer")
+     * @ORM\Column(name="progress", type="integer", options={"default" = 0})
      */
     private $progress;
 
@@ -117,7 +117,7 @@ class Meeting
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="pay_date", type="date")
+     * @ORM\Column(name="pay_date", type="date", nullable=true, options={"default" = null})
      */
     private $payDate;
 
@@ -129,15 +129,20 @@ class Meeting
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="client_birthday", type="date")
+     * @ORM\Column(name="client_birthday", type="date", nullable=true, options={"default" = null})
      */
     private $clientBirthday;
+
+    public function __construct() {
+        $this->setProgress(0);
+    }
 
     public function getInArray() {
         return array(
             'id' => $this->getId(),
             'credentials' => $this->getCredentials(),
             'consultantID' => $this->getConsultantID(),
+            'consultant' => $this->getConsultant()->getInArray(),
             'assistantID' => $this->getAssistantID(),
             'status' => $this->getStatus()->getInArray(),
             'employmentType' => $this->getEmploymentType()->getInArray(),
@@ -153,21 +158,110 @@ class Meeting
                     'year' => $this->getClientBirthday()->format('Y'),
                     'month' => $this->getClientBirthday()->format('m'),
                     'day' => $this->getClientBirthday()->format('d'),
+                    'date' => $this->getClientBirthday()->format('Y-m-d'),
                 ),
         );
     }
 
     /**
      * @param EntityManager $em
+     * @param User $user
+     * @param object $data
+     * @return Meeting
+     */
+    public static function addNewMeeting(EntityManager $em, User $user, $data) {
+        $meetingStatus = $em->getRepository('Sl24Bundle:MeetingStatus')->find($data->status);
+        $employmentType = $em->getRepository('Sl24Bundle:EmploymentType')->find($data->type);
+        $meeting = new Meeting();
+        $meeting->setCredentials($data->credentials);
+        $meeting->setDate($data->date);
+        $meeting->setStatus($meetingStatus);
+        $meeting->setClientBirthday($data->clientBirthday);
+        $meeting->setAge($data->age);
+        $meeting->setConsultant($user);
+        /*if ($data->assistant) {
+            $assistant = $em->getRepository('User')->findBy(array(''));
+        }*/
+        $meeting->setEmploymentType($employmentType);
+        $meeting->setPayDate($data->payDate);
+        $meeting->setYears($data->years);
+        $meeting->setPrice($data->price);
+        /*
+         * Working month
+         */
+        $em->persist($meeting);
+        $em->flush();
+
+        return $meeting;
+    }
+
+    /**
+     * @param EntityManager $em
      * @param int $meeting_id
      * @param object $data
+     * @return Meeting
      */
     public static function editInfo(EntityManager $em, $meeting_id, $data) {
         $meeting = $em->getRepository('Sl24Bundle:Meeting')->find($meeting_id);
+        $status = $em->getRepository('Sl24Bundle:MeetingStatus')
+            ->find($data->status->id);
+        $employmentType = $em->getRepository('Sl24Bundle:EmploymentType')
+            ->find($data->employmentType->id);
+
         $meeting->setAge($data->age);
-        $meeting->setClientBirthday($data->clientBirthday);
+        $meeting->setClientBirthday($data->clientBirthday->date);
         $meeting->setCredentials($data->credentials);
-        $meeting->setStatusID($data->status->id);
+        $meeting->setStatus($status);
+        /*
+         * $meeting->setAssistant();
+         */
+        $meeting->setEmploymentType($employmentType);
+        $meeting->setDate($data->date);
+        $meeting->setPrice($data->price);
+        $meeting->setYears($data->years);
+        $meeting->setProgress($data->progress);
+        /*
+         * working Month
+         */
+        $meeting->setPayDate($data->payDate);
+
+        $em->persist($meeting);
+        $em->flush();
+
+        return $meeting;
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param int $meeting_id
+     */
+    public static function removeMeeting(EntityManager $em, $meeting_id) {
+        $meeting = $em->getRepository('Sl24Bundle:Meeting')->find($meeting_id);
+        $em->remove($meeting);
+        $em->flush();
+    }
+
+    public static function getMeetingsInfo(EntityManager $em, User $user) {
+        $assistants = array();
+        $tempUser = $user;
+        while ($tempUser->getParent() != null) {
+            $assistants[] = $tempUser->getParent()->getInArray();
+            $tempUser = $tempUser->getParent();
+        }
+
+        $statuses = Functions::arrayToJson(
+            $em->getRepository('Sl24Bundle:MeetingStatus')->findAll()
+        );
+
+        $employmentTypes = Functions::arrayToJson(
+            $em->getRepository('Sl24Bundle:EmploymentType')->findAll()
+        );
+
+        return array(
+            'assistants' => $assistants,
+            'statuses' => $statuses,
+            'employmentTypes' => $employmentTypes,
+        );
     }
 
     /**

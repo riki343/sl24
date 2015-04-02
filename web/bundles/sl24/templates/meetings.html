@@ -1,1 +1,30 @@
-[[meetings]]
+<div ng-init="getMeetings(1);">
+
+    <button class="btn btn-default btn-info" data-toggle="modal" data-target="#add_new_meeting" ng-click="getMeetingsInfo();">Додати зустріч</button>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="col-md-1">№</th>
+            <th class="col-md-3">П.І.Б</th>
+            <th class="col-md-2">Консультант</th>
+            <th class="col-md-2">Статус</th>
+            <th class="col-md-2">Дата Зустрічі</th>
+            <th class="col-md-2">Прогрес</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="meeting in meetings">
+            <td class="col-md-1">[[ $index + 1 ]]</td>
+            <td class="col-md-3">[[ meeting.credentials ]]</td>
+            <td class="col-md-2">[[ meeting.consultant.name + ' ' + meeting.consultant.surname ]]</td>
+            <td class="col-md-2">[[ meeting.status.label ]]</td>
+            <td class="col-md-2">[[ meeting.date ]]</td>
+            <td class="col-md-2">[[ meeting.progress ]]%</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div ng-include="templateMeetingsAddNew"></div>
+</div>

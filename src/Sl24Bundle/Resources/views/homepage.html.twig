@@ -11,11 +11,13 @@
     <script>
         var TEMPLATES = {
             'meetings': "{{ asset('bundles/sl24/templates/meetings.html') }}",
+            'meetingsAddNew': "{{ asset('bundles/sl24/templates/meetingsAddNew.html') }}",
             'main': "{{ asset('bundles/sl24/templates/main.html') }}",
             'tasks': "{{ asset('bundles/sl24/templates/tasks.html') }}"
         };
 
         URLS.getMeetings = "{{ path('sl24_getMeetings', { 'user_id': 'user_id' }) }}";
+        URLS.getMeetingsInfo = "{{ path('sl24_getMeetingsInfo') }}";
     </script>
 
     <script src="{{ asset('bundles/sl24/js/Custom/homepageController.js') }}"></script>
