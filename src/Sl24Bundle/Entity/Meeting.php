@@ -98,7 +98,7 @@ class Meeting
 
     /**
      * @var int
-     * @ORM\Column(name="age", type="integer")
+     * @ORM\Column(name="age", type="integer", nullable=true, options={"default" = null})
      */
     private $age;
 
@@ -123,7 +123,7 @@ class Meeting
 
     /**
      * @var int
-     * @ORM\Column(name="working_month_id", type="integer")
+     * @ORM\Column(name="working_month_id", type="integer", nullable=true, options={"default" = null})
      */
     private $workingMonthID;
 
@@ -151,15 +151,18 @@ class Meeting
             'years' => $this->getYears(),
             'progress' => $this->getProgress(),
             'age' => $this->getAge(),
-            'payDate' => $this->getPayDate()->format('Y-m-d'),
+            'payDate' => ($this->getPayDate())
+                ? $this->getPayDate()->format('Y-m-d')
+                : null,
             'workingMonthID' => $this->getWorkingMonthID(),
-            'clientBirthday' =>
-                array(
+            'clientBirthday' => ($this->getClientBirthday())
+                ? array(
                     'year' => $this->getClientBirthday()->format('Y'),
                     'month' => $this->getClientBirthday()->format('m'),
                     'day' => $this->getClientBirthday()->format('d'),
                     'date' => $this->getClientBirthday()->format('Y-m-d'),
-                ),
+                )
+                : null,
         );
     }
 
@@ -171,21 +174,18 @@ class Meeting
      */
     public static function addNewMeeting(EntityManager $em, User $user, $data) {
         $meetingStatus = $em->getRepository('Sl24Bundle:MeetingStatus')->find($data->status);
-        $employmentType = $em->getRepository('Sl24Bundle:EmploymentType')->find($data->type);
+        $employmentType = $em->getRepository('Sl24Bundle:EmploymentType')->find($data->employmentType);
         $meeting = new Meeting();
         $meeting->setCredentials($data->credentials);
-        $meeting->setDate($data->date);
+        $meeting->setDate(\DateTime::createFromFormat('Y-m-d', date('Y-m-d', strtotime($data->date))));
         $meeting->setStatus($meetingStatus);
-        $meeting->setClientBirthday($data->clientBirthday);
-        $meeting->setAge($data->age);
         $meeting->setConsultant($user);
-        /*if ($data->assistant) {
-            $assistant = $em->getRepository('User')->findBy(array(''));
-        }*/
+        if ($data->assistant) {
+            /** @var User $assistant */
+            $assistant = $em->getRepository('User')->find($data->$assistant);
+            $meeting->setAssistant($assistant);
+        }
         $meeting->setEmploymentType($employmentType);
-        $meeting->setPayDate($data->payDate);
-        $meeting->setYears($data->years);
-        $meeting->setPrice($data->price);
         /*
          * Working month
          */
@@ -212,9 +212,10 @@ class Meeting
         $meeting->setClientBirthday($data->clientBirthday->date);
         $meeting->setCredentials($data->credentials);
         $meeting->setStatus($status);
-        /*
-         * $meeting->setAssistant();
-         */
+        if ($data->$assistant) {
+            $assistant = $em->getRepository('Sl24Bundle:User')->find($data->assistant);
+            $meeting->setAssistant($assistant);
+        }
         $meeting->setEmploymentType($employmentType);
         $meeting->setDate($data->date);
         $meeting->setPrice($data->price);

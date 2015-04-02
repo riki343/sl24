@@ -13,14 +13,45 @@
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="add_meeting_credentials">П.І.Б Клієнта:</label>
-                                <input type="text" id="add_meeting_credentials" ng-model="meeting.credentials" pattern="[0-9A-Za-z .]{1,50}" class="form-control" required>
+                                <input type="text" id="add_meeting_credentials" ng-model="meetingForAdd.credentials" class="form-control" required>
                             </div>
-                            <div class="form-group">
-                                <label>Асистент:</label>
-                                --====----====---
+
+                            <div class="form-group" ng-if="meetingsInfo.assistants.length > 0">
+                                <label for="add_meeting_assistant">Структурний:</label>
+                                <select ng-model="meetingForAdd.assistant" id="add_meeting_assistant" class="form-control">
+                                    <option ng-repeat="assistant in meetingsInfo.assistants" value="[[ assistant.id ]]">
+                                        [[ assistant.name + ' ' + assistant.surname ]]
+                                    </option>
+                                </select>
                             </div>
+
+                            <div class="form-group" ng-if="meetingsInfo.statuses.length > 0">
+                                <label for="add_meeting_status">Статус зустрічі:</label>
+                                <select ng-model="meetingForAdd.status" id="add_meeting_status" class="form-control">
+                                    <option ng-repeat="status in meetingsInfo.statuses" value="[[ status.id ]]">
+                                        [[ status.label ]]
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" ng-if="meetingsInfo.employmentTypes.length > 0">
+                                <label for="add_meeting_employment_type">Вид зайнятості клієнта:</label>
+                                <select ng-model="meetingForAdd.employmentType" id="add_meeting_employment_type" class="form-control">
+                                    <option ng-repeat="type in meetingsInfo.employmentTypes" value="[[ type.id ]]">
+                                        [[ type.label ]]
+                                    </option>
+                                </select>
+                            </div>
+
                             <div class="form-group">
-                                <a class="btn btn-danger" ng-click="addNewMeeting(meeting)">Додати</a>
+                                <label for="add_meeting_date">Дата зустрічі:</label>
+                                <input type="date" id="add_meeting_date" ng-model="meetingForAdd.date" class="form-control" required>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <a class="btn btn-danger" ng-click="addNewMeeting(meetingForAdd)">Додати</a>
                                 <a class="btn btn-default" data-dismiss="modal">Закрити</a>
                             </div>
                         </form>

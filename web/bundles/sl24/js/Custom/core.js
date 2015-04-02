@@ -15,6 +15,10 @@ Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locati
                 templateUrl: TEMPLATES.meetings,
                 controller: 'MeetingController'
             })
+            .when('/meeting/{meeting_id}', {
+                templateUrl: TEMPLATES.meeting,
+                controller: 'MeetingController'
+            })
             .when('/tasks', {
                 templateUrl: TEMPLATES.tasks,
                 controller: 'TaskController'

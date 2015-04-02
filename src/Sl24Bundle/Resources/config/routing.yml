@@ -17,8 +17,16 @@ sl24_getMeetings:
     pattern: /user/{user_id}/meetings
     defaults: { _controller: Sl24Bundle:Meeting:getMeetings }
 
+sl24_getMeeting:
+    pattern: /meeting/{meeting_id}
+    defaults: { _controller: Sl24Bundle:Meeting:getMeeting }
+
+sl24_addMeeting:
+    path: /meetings/add
+    defaults: { _controller: Sl24Bundle:Meeting:addNewMeeting }
+
 sl24_getMeetingsInfo:
-    pattern: /meetings/getmeetingsInfo
+    path: /meetings/getmeetingsInfo
     defaults: { _controller: Sl24Bundle:Meeting:getMeetingsInfo }
 
 sl_24_get_tasks:
