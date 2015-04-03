@@ -9,11 +9,23 @@ use Sl24Bundle\Entity\Functions;
 use Sl24Bundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class RegistrationController extends Controller
 {
-    public function registrationAction()
+    public function registrationAction(Request $request)
     {
-        return new JsonResponse('success!');
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($request->getMethod() == 'POST' && $user->getLevel() >= 3) {
+            $data = json_decode($request->getContent(), true);
+            $data = (object)$data['info'];
+            $em = $this->getDoctrine()->getManager();
+
+            //User::addNewUser($em, $data);
+            return new JsonResponse(true);
+        } else {
+            return new JsonResponse(false);
+        }
     }
 }
