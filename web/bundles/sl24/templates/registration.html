@@ -6,21 +6,19 @@
     <div ng-messages="addNewUserForm.name.$error" style="color: red; display: inline-block;">
         <span ng-message="required">*</span>
         <span ng-message="pattern">Формат: "A-Z,a-z,А-Я,а-я"</span>
-        <span ng-if="addNewUserForm.login.$valid">
+        <span ng-if="addNewUserForm.name.$valid">
             <i style="color: greenyellow;" class="fa fa-check"></i>
         </span>
     </div><br/>
 
     <label style="display: inline-block;">
-        Логін:
-        <input type="text" id="surname" name="surname" pattern="[A-Za-zА-Яа-я]{1,}" ng-minlength="4" ng-maxlength="16" ng-model="addUser.login" required/>
+        Прізвище:
+        <input type="text" id="surname" name="surname" pattern="[A-Za-zА-Яа-я]{1,}" ng-minlength="4" ng-maxlength="16" ng-model="addUser.surname" required/>
     </label>
-    <div ng-messages="addNewUserForm.login.$error" style="color: red; display: inline-block;">
+    <div ng-messages="addNewUserForm.surname.$error" style="color: red; display: inline-block;">
         <span ng-message="required">*</span>
-        <span ng-message="pattern">Формат: "A-Z,a-z,0-9,."</span>
-        <span ng-message="minlength">Мінімальна довжина логіну 4 символи</span>
-        <span ng-message="maxlength">Максимальна довжина логіну 16 символів</span>
-        <span ng-if="addNewUserForm.login.$valid">
+        <span ng-message="pattern">Формат: "A-Z,a-z,А-Я,а-я"</span>
+        <span ng-if="addNewUserForm.surname.$valid">
             <i style="color: greenyellow;" class="fa fa-check"></i>
         </span>
     </div><br/>
