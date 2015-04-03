@@ -8,6 +8,9 @@
         <span ng-message="pattern">Формат: "A-Z,a-z,0-9,."</span>
         <span ng-message="minlength">Мінімальна довжина логіну 4 символи</span>
         <span ng-message="maxlength">Максимальна довжина логіну 16 символів</span>
+        <span ng-if="addNewUserForm.login.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
     </div><br/>
     <label>
         Пароль:
@@ -17,20 +20,29 @@
         <span ng-message="required">*</span>
         <span ng-message="minlength">Мінімальна довжина паролю 5 символів</span>
         <span ng-message="maxlength">Максимальна довжина паролю 30 символів</span>
+        <span ng-if="addNewUserForm.pass.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
     </div><br/>
     <label>
         Повторіть Пароль:
-        <input type="password" name="rpass" id="rpass" ng-model="addUser.rpass" required/>
+        <input type="password" name="rpass" ng-minlength="5" ng-maxlength="30" id="rpass" ng-model="addUser.rpass" required/>
     </label>
     <div ng-messages="addNewUserForm.rpass.$error" style="color: red; display: inline-block;">
         <span ng-message="required">*</span>
         <span ng-message="minlength">Мінімальна довжина паролю 5 символів</span>
         <span ng-message="maxlength">Максимальна довжина паролю 30 символів</span>
+        <span ng-if="addNewUserForm.rpass.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
     </div><br/>
     <div ng-if="addNewUserForm.pass.$viewValue != addNewUserForm.rpass.$viewValue" style="color:maroon">
         Паролі не співпадають<br/>
     </div>
-    <label>Email: <input type="email" id="email" ng-model="addUser.email" required/></label><br/>
+    <label>Email: <input type="email" name="email" id="email" ng-model="addUser.email" required/></label>
+    <span ng-if="addNewUserForm.email.$valid">
+        <i style="color: greenyellow;" class="fa fa-check"></i>
+    </span><br/>
     <label>SL номер: <input type="number" id="slNumber" ng-model="addUser.slNumber" required/></label><br/>
     <label>Очки: <input type="number" id="score" ng-model="addUser.score" required/></label><br/>
     <label>Командні очки: <input type="number" id="teamScore" ng-model="addUser.teamScore" required/></label><br/>

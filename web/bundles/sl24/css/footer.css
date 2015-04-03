@@ -1,0 +1,45 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 72px;
+}
+.footer {
+  border-top: solid 1px #EAEAEA;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 72px;
+  background-image: url("../img/bg.png");
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  max-width: 100%;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+.hrfooter{
+    margin-top: -11px;
+    margin-bottom: 5px;
+    border-width: 10px 0px 0px;
+    border-style: solid none none;
+    border-color: #C62828 -moz-use-text-color -moz-use-text-color;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+}

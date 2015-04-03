@@ -6,39 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta itemprop="name" content="{% block item_name %}{% endblock %}">
-    <meta itemprop="description" content="{% block item_description %}{% endblock %}">
-    <meta itemprop="image" content="{% block item_image %}{% endblock %}">
+    <meta itemprop="name" content="">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="">
 
-    <meta prefix="og: http://ogp.me/ns#" property="og:site_name" content="{% block og_meta_site_name %}{% endblock %}" />
-    <meta prefix="og: http://ogp.me/ns#" property="og:title" content="{% block og_meta_title %}{% endblock %}" />
+    <meta prefix="og: http://ogp.me/ns#" property="og:site_name" content="" />
+    <meta prefix="og: http://ogp.me/ns#" property="og:title" content="" />
     <meta prefix="og: http://ogp.me/ns#" property="og:type" content="article" />
-    <meta prefix="og: http://ogp.me/ns#" property="og:description" content="{% block og_meta_description %}{% endblock %}" />
-    <meta prefix="og: http://ogp.me/ns#" property="og:url" content="{% block og_meta_url %}{% endblock %}" />
-    <meta prefix="og: http://ogp.me/ns#" property="og:image" content="{% block og_meta_image %}{% endblock %}" />
+    <meta prefix="og: http://ogp.me/ns#" property="og:description" content="" />
+    <meta prefix="og: http://ogp.me/ns#" property="og:url" content="" />
+    <meta prefix="og: http://ogp.me/ns#" property="og:image" content="" />
 
-    <meta name="title" content="{% block meta_title %}{% endblock %}" />
+    <meta name="title" content="" />
     <meta name="description" content="{% block description %}{% endblock %}" />
 
     <title>{% block title %}{% endblock %}</title>
 
     {% block StyleSheets %}
-        <link href="{{ asset('bundles/sl24/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('bundles/sl24/css/font-awesome.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('bundles/sl24/css/zabuto_calendar.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('bundles/sl24/css/jquery.gritter.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('bundles/sl24/css/lineicons.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('bundles/sl24/css/style.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('bundles/sl24/css/style-responsive.css') }}" rel="stylesheet" type="text/css">
+
+        
+        <link href="{{ asset('bundles/sl24/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/sl24/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/sl24/css/sitebar.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/sl24/css/main.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/sl24/css/footer.css') }}" rel="stylesheet" type="text/css">
+
 
         <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     {% endblock %}
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     {% block base %}{% endblock %}
 </head>
@@ -51,16 +46,21 @@
         {% endblock %}
 
         {% block footer %}
-            <section id="footer">
-                <footer class="site-footer">
-                    <div class="text-center">
-                        STAR LIFE 24
-                        {#<a href="#" class="go-top">
-                            <i class="fa fa-angle-up"></i>
-                        </a>#}
+
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <img src="{{ asset('bundles/sl24/img/logo.svg') }}" height="72px;" style="margin-top:-30px;">
+                        </div>
+                        <div class="col-md-4 pull-right" style="margin-right: -30px;">
+                            <hr class="hrfooter">
+                            <h4 style="color: #353535;">just up the stars!</h4>
+                        </div>
                     </div>
-                </footer>
-            </section>
+                </div>
+            </footer>
+
         {% endblock %}
 
     {% endblock %}
@@ -73,17 +73,6 @@
         <script src="{{ asset('bundles/sl24/js/AngularJS/angular-sanitize.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/sl24/js/AngularJS/angular-animate.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/sl24/js/AngularJS/angular-messages.min.js') }}" type="text/javascript"></script>
-
-        <script src="{{ asset('bundles/sl24/js/jQuery/jquery.dcjqaccordion.2.7.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sl24/js/jQuery/jquery.scrollTo.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sl24/js/jQuery/jquery.nicescroll.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sl24/js/jQuery/jquery.sparkline.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sl24/js/jquery.gritter.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sl24/js/gritter-conf.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sl24/js/Chart.js') }}" type="text/javascript"></script>
-
-        <script src="{{ asset('bundles/sl24/js/sparkline-chart.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/sl24/js/zabuto_calendar.js') }}" type="text/javascript"></script>
 
         <script src="{{ asset('bundles/sl24/js/Custom/core.js') }}" type="text/javascript"></script>
 
