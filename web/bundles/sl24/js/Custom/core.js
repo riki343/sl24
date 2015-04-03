@@ -27,6 +27,10 @@ Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locati
                 templateUrl: TEMPLATES.team,
                 controller: 'TeamController'
             })
+            .when('/register', {
+                templateUrl: TEMPLATES.registration,
+                controller: 'RegistrationController'
+            })
             .otherwise({
                 redirectTo: '/'
             });

@@ -37,6 +37,10 @@ sl_24_get_team:
     path: /getTeam
     defaults: { _controller: Sl24Bundle:Team:GetTeams }
 
+sl_24_registration:
+    path: /register_new_user
+    defaults: { _controller: Sl24Bundle:Registration:registration }
+
 
 #############################################################
 ################### Default Routes Block ####################

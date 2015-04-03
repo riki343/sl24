@@ -25,7 +25,7 @@
                                 <p class="green">You have 4 pending tasks</p>
                             </li>
                             <li>
-                                <a href="index.html#">
+                                <a>
                                     <div class="task-info">
                                         <div class="desc">DashGum Admin Panel</div>
                                         <div class="percent">40%</div>
@@ -189,6 +189,14 @@
                             <span>Команда</span>
                         </a>
                     </li>
+                    {% if app.user.level >= 3 %}
+                    <li class="sub-menu">
+                        <a href="/register" >
+                            <i class="fa fa-users"></i>
+                            <span>Додати користувача</span>
+                        </a>
+                    </li>
+                    {% endif %}
                     <hr>
                     <li class="sub-menu">
                         <a href="javascript:;" >
