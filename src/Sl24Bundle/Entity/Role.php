@@ -42,6 +42,14 @@ class Role implements RoleInterface
     }
 
     /**
+     * @param EntityManager $em
+     * @return Role
+     */
+    public static function getUserRole(EntityManager $em) {
+        return $em->getRepository('Sl24Bundle:Role')->find(2);
+    }
+
+    /**
      * Get id
      *
      * @return integer

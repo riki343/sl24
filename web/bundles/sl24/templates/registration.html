@@ -1,9 +1,46 @@
-<label>Логін: <input type="text" ng-model="addUser.login" required/></label><br/>
-<label>Пароль: <input type="password" ng-model="addUser.pass" required/></label><br/>
-<label>Повторіть Пароль: <input type="password" ng-model="addUser.rpass" required/></label><br/>
-<label>Email: <input type="email" ng-model="addUser.email" required/></label><br/>
-<label>SL номер: <input type="number" ng-model="addUser.slNumber" required/></label><br/>
-<button type="button" ng-click="register(addUser)">Додати</button>
+<form name="addNewUserForm">
+    <label style="display: inline-block;">
+        Логін:
+        <input type="text" id="login" name="login" pattern="[A-Za-z0-9.]{1,}" ng-minlength="4" ng-maxlength="16" ng-model="addUser.login" required/>
+    </label>
+    <div ng-messages="addNewUserForm.login.$error" style="color: red; display: inline-block;">
+        <span ng-message="required">*</span>
+        <span ng-message="pattern">Формат: "A-Z,a-z,0-9,."</span>
+        <span ng-message="minlength">Мінімальна довжина логіну 4 символи</span>
+        <span ng-message="maxlength">Максимальна довжина логіну 16 символів</span>
+    </div><br/>
+    <label>
+        Пароль:
+        <input type="password" name="pass" ng-minlength="5" ng-maxlength="30" id="pass" ng-model="addUser.pass" required/>
+    </label>
+    <div ng-messages="addNewUserForm.pass.$error" style="color: red; display: inline-block;">
+        <span ng-message="required">*</span>
+        <span ng-message="minlength">Мінімальна довжина паролю 5 символів</span>
+        <span ng-message="maxlength">Максимальна довжина паролю 30 символів</span>
+    </div><br/>
+    <label>
+        Повторіть Пароль:
+        <input type="password" name="rpass" id="rpass" ng-model="addUser.rpass" required/>
+    </label>
+    <div ng-messages="addNewUserForm.rpass.$error" style="color: red; display: inline-block;">
+        <span ng-message="required">*</span>
+        <span ng-message="minlength">Мінімальна довжина паролю 5 символів</span>
+        <span ng-message="maxlength">Максимальна довжина паролю 30 символів</span>
+    </div><br/>
+    <div ng-if="addNewUserForm.pass.$viewValue != addNewUserForm.rpass.$viewValue" style="color:maroon">
+        Паролі не співпадають<br/>
+    </div>
+    <label>Email: <input type="email" id="email" ng-model="addUser.email" required/></label><br/>
+    <label>SL номер: <input type="number" id="slNumber" ng-model="addUser.slNumber" required/></label><br/>
+    <label>Очки: <input type="number" id="score" ng-model="addUser.score" required/></label><br/>
+    <label>Командні очки: <input type="number" id="teamScore" ng-model="addUser.teamScore" required/></label><br/>
+    <label>Дирекція: <input type="number" id="directorNumber" ng-model="addUser.director" required/></label><br/>
+    <label><input type="checkbox" id="parker" ng-model="addUser.parker" />Паркер</label><br/>
+    <label><input type="checkbox" id="diary" ng-model="addUser.diary" />Щоденник</label><br/>
+    <label><input type="checkbox" id="cufflinks" ng-model="addUser.cufflinks" />Запонки</label><br/>
+    <label><input type="checkbox" id="watches" ng-model="addUser.watches" />Годинник</label><br/>
+    <button type="submit" ng-click="register(addUser)">Додати</button>
+</form>
 
 <div class="modal fade" id="add_new_user" tabindex="-1">
     <div class="modal-dialog">

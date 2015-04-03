@@ -237,17 +237,58 @@ class User implements UserInterface, \Serializable
      */
     public static function childsRecursion($array) {
         $jsonArray = array();
+        /** @var User $item */
         foreach ($array as $item) {
             $jsonArray[] = $item->getChildsListInArray();
         }
         return $jsonArray;
     }
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->active = true;
         $this->salt = md5(uniqid(null, true));
         $this->roles = new ArrayCollection();
+        $this->cufflinks = false;
+        $this->diary = false;
+        $this->watches = false;
+        $this->parker = false;
+        $this->score = 0;
+        $this->teamScore = 0;
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param EncoderFactory $encoderFactory
+     * @param object $parameters
+     * @return User
+     */
+    public static function addUser($em, $encoderFactory, $parameters)
+    {
+        /** @var User $parent */
+        $parent = $em->getRepository('Sl24Bundle:User')
+            ->findOneBy(array('directorNumber' => $parameters->directorNumber));
+        /** @var User $user */
+        $user = new User();
+        $encoder = $encoderFactory->getEncoder($user);
+        $user->setName($parameters->name);
+        $user->setSurname($parameters->surname);
+        $user->setEmail($parameters->email);
+        $user->setUsername($parameters->username);
+        $user->setPassword($encoder->encodePassword($parameters->password, $user->getSalt()));
+        $user->setRegistered(new \DateTime());
+        $user->setLastActive(new \DateTime());
+        $user->addRole(Role::getUserRole($em));
+        $user->setDiary($parameters->diary);
+        $user->setCufflinks($parameters->cufflinks);
+        $user->setWatches($parameters->watches);
+        $user->setParker($parameters->parker);
+        if ($parent) {
+            $user->setParent($parent);
+        }
+        $em->persist($user);
+
+        $em->flush();
+        return $user;
     }
 
     /**

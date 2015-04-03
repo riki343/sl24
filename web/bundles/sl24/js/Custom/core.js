@@ -1,4 +1,4 @@
-var Sl24 = angular.module('Sl24', ['ngRoute', 'ngAnimate']);
+var Sl24 = angular.module('Sl24', ['ngRoute', 'ngAnimate', 'ngMessages']);
 
 Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locationProvider',
     function ($interpolateProvider, $httpProvider, $routeProvider, $locationProvider) {

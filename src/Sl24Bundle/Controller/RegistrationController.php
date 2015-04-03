@@ -19,10 +19,10 @@ class RegistrationController extends Controller
         $user = $this->getUser();
         if ($request->getMethod() == 'POST' && $user->getLevel() >= 3) {
             $data = json_decode($request->getContent(), true);
-            $data = (object)$data['info'];
+            $parameters = (object)$data['info'];
             $em = $this->getDoctrine()->getManager();
-
-            //User::addNewUser($em, $data);
+            $encoderFactory = $this->get('security.encoder_factory');
+            User::addUser($em, $encoderFactory, $parameters);
             return new JsonResponse(true);
         } else {
             return new JsonResponse(false);
