@@ -113,8 +113,8 @@
                             <h3 class="clock">20:24<sup>58</sup></h3>
                         </li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </nav>
     {% endblock %}
 
@@ -123,18 +123,23 @@
             <div class="col-md-2 left-sitebar">
                 <ul class="sidebar-menu">
                     <li>
-                        <i class="fa fa-pencil" style="font-size: 22px;"></i>
-                        <i class="fa fa-book" style="font-size: 22px;"></i>
-                        <i class="fa fa-diamond" style="font-size: 22px;"></i>
-                        <i class="fa fa-clock-o" style="font-size: 22px;"></i>
-
                         <p class="text-center">
                             <img class="img-circle" width="60" src="{{ asset('bundles/sl24/img/friends/fr-01.jpg') }}" />
                         </p>
 
                         <h5 class="text-center">
-                            Нікіта Ляшенко
+                            {{ app.user.name ~ ' ' ~ app.user.surname }}
                         </h5>
+                        <p align="center">
+                            <i class="fa fa-pencil" style="font-size: 22px;"></i>
+                            <i class="fa fa-book" style="font-size: 22px;"></i>
+                            <i class="fa fa-diamond" style="font-size: 22px;"></i>
+                            <i class="fa fa-clock-o" style="font-size: 22px;"></i>
+                        </p>
+                    </li>
+
+                    <li>
+                        <hr style="margin: 0;"/>
                     </li>
 
                     <li class="sub-menu">

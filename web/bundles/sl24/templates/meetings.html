@@ -25,7 +25,7 @@
                 <tbody>
                 <tr ng-repeat="meeting in meetings">
                     <td class="col-md-1">[[ $index + 1 ]]</td>
-                    <td class="col-md-3">[[ meeting.credentials ]]</td>
+                    <td class="col-md-3"><a ng-href="/meeting/[[ meeting.id ]]">[[ meeting.credentials ]]</a></td>
                     <td class="col-md-2">[[ meeting.consultant.name + ' ' + meeting.consultant.surname ]]</td>
                     <td class="col-md-2">[[ meeting.status.label ]]</td>
                     <td class="col-md-2">[[ meeting.date ]]</td>

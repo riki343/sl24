@@ -123,6 +123,20 @@
     <label><input type="checkbox" id="diary" ng-model="addUser.diary" />Щоденник</label><br/>
     <label><input type="checkbox" id="cufflinks" ng-model="addUser.cufflinks" />Запонки</label><br/>
     <label><input type="checkbox" id="watches" ng-model="addUser.watches" />Годинник</label><br/>
+
+    <label>
+        Рівень працівника:
+        <select name="level" id="level" ng-model="addUser.level" required>
+            <option ng-repeat="i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]" value="[[ i ]]">[[ i ]]</option>
+        </select>
+    </label>
+    <div ng-messages="addNewUserForm.level.$error" style="color: red; display: inline-block;">
+        <span ng-message="required">*</span>
+        <span ng-if="addNewUserForm.level.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
+    </div><br/>
+
     <button type="button" ng-click="register(addUser)">Додати</button>
 </form>
 
