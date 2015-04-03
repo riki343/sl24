@@ -182,7 +182,7 @@ class Meeting
         $meeting->setConsultant($user);
         if ($data->assistant) {
             /** @var User $assistant */
-            $assistant = $em->getRepository('User')->find($data->$assistant);
+            $assistant = $em->getRepository('Sl24Bundle:User')->find($data->assistant);
             $meeting->setAssistant($assistant);
         }
         $meeting->setEmploymentType($employmentType);

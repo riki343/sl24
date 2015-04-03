@@ -9,15 +9,18 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
 
         $scope.getMeeting = function (meeting_id) {
             var meetingUrl = $scope.urlGetMeeting.replace('meeting_id', meeting_id);
-            $http.get(meetingUrl)
+            $scope.meetingPromise = $http.get(meetingUrl)
                 .success(function (response) {
                     $scope.meeting = response;
                 }
             );
+            $scope.meetingPromise.then(function () {
+                $scope.getMeetingsInfo();
+            });
         };
 
         $scope.getMeetingsInfo = function () {
-            $scope.meetingPromise = $http.get($scope.urlGetMeetingsInfo)
+            $http.get($scope.urlGetMeetingsInfo)
                 .success(function (response) {
                     $scope.meetingsInfo = response;
 
@@ -32,10 +35,6 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
                     }
                 }
             );
-            
-            $scope.meetingPromise.then(function () {
-                $scope.getMeetingsInfo();
-            });
         };
 
         $scope.getMeeting($scope.meeting_id);

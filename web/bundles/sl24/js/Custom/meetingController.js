@@ -47,6 +47,7 @@ Sl24.controller('MeetingController', ['$scope', '$http',
             $('#add_new_meeting').modal('hide');
             $http.post($scope.urlAddNewMeeting, { 'meeting': meeting })
                 .success(function (response) {
+                    console.log(response);
                     if (response == 'success') {
                         $scope.getMeetings($scope.userID);
                     }
