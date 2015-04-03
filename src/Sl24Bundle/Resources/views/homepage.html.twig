@@ -16,7 +16,11 @@
             'main': "{{ asset('bundles/sl24/templates/main.html') }}",
             'tasks': "{{ asset('bundles/sl24/templates/tasks.html') }}",
             'team': "{{ asset('bundles/sl24/templates/team.html') }}",
-            'registration': "{{ asset('bundles/sl24/templates/registration.html') }}"
+            'registration': "{{ asset('bundles/sl24/templates/registration.html') }}",
+            'taskTable': "{{ asset('bundles/sl24/templates/task-table.html') }}",
+            'taskAgile': "{{ asset('bundles/sl24/templates/task-agile.html') }}",
+            'taskAdd': "{{ asset('bundles/sl24/templates/taskAdd.html') }}",
+            'taskDelete': "{{ asset('bundles/sl24/templates/taskDelete.html') }}"
         };
 
         URLS.getMeetings = "{{ path('sl24_getMeetings', { 'user_id': 'user_id' }) }}";

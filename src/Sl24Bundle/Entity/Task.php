@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sl24Bundle\Entity\TaskStatus;
 use Sl24Bundle\Entity\User;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Task
@@ -306,13 +307,47 @@ class Task
             'id' => $this->getId(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
-            'date' => $this->getDate(),
+            'date' => $this->getDate()->format('Y-m-d'),
             'statusID' => $this->getStatusID(),
-            'status' => $this->getStatus(),
+            'status' => $this->getStatus()->getInArray(),
             'ownerID' => $this->getOwnerID(),
-            'owner' => $this->getOwner(),
+            'owner' => $this->getOwner()->getInArray(),
             'assignedID' => $this->getAssignedID(),
             'assigned' => $this->getAssigned(),
         );
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param User $user
+     * @param $parameters
+     * @return Task
+     */
+    public static function addTask($em, $user, $parameters)
+    {
+        $task = new Task();
+        $task->setName($parameters['name']);
+        $task->setDescription($parameters['description']);
+        $task->setDate(new \DateTime());
+        $task->setStatus($em->getRepository('Sl24Bundle:TaskStatus')->find(1));
+        $task->setOwner($user);
+        $task->setAssigned($user);
+
+        $em->persist($task);
+        $em->flush();
+
+        return $task;
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param $task_id
+     */
+    public static function deleteTask($em, $task_id)
+    {
+        $task = $em->getRepository('Sl24Bundle:Task')->find($task_id);
+
+        $em->remove($task);
+        $em->flush();
     }
 }
