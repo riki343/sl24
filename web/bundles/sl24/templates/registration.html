@@ -40,18 +40,51 @@
         Паролі не співпадають<br/>
     </div>
     <label>Email: <input type="email" name="email" id="email" ng-model="addUser.email" required/></label>
-    <span ng-if="addNewUserForm.email.$valid">
-        <i style="color: greenyellow;" class="fa fa-check"></i>
-    </span><br/>
-    <label>SL номер: <input type="number" id="slNumber" ng-model="addUser.slNumber" required/></label><br/>
-    <label>Очки: <input type="number" id="score" ng-model="addUser.score" required/></label><br/>
-    <label>Командні очки: <input type="number" id="teamScore" ng-model="addUser.teamScore" required/></label><br/>
-    <label>Дирекція: <input type="number" id="directorNumber" ng-model="addUser.director" required/></label><br/>
+    <div ng-messages="addNewUserForm.email.$error" style="color: red; display: inline-block;">
+        <span ng-message="required">*</span>
+        <span ng-if="addNewUserForm.email.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
+    </div><br/>
+    <label>
+        SL номер:
+        <input type="number" name="slNumber" id="slNumber" ng-minlength="6" ng-maxlength="6" ng-model="addUser.slNumber" required/>
+    </label>
+    <div ng-messages="addNewUserForm.slNumber.$error" style="color: red; display: inline-block;">
+        <span ng-message="required">*</span>
+        <span ng-message="number">Дозволено вводити лише цифри</span>
+        <span ng-message="minlength">Довжина номеру має складати 6 символів</span>
+        <span ng-message="maxlength">Довжина номеру має складати 6 символів</span>
+        <span ng-if="addNewUserForm.slNumber.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
+    </div><br/>
+    <label>
+        Очки:
+        <input type="number" id="score" ng-model="addUser.score" />
+    </label><br/>
+    <label>
+        Командні очки:
+        <input type="number" id="teamScore" ng-model="addUser.teamScore" />
+    </label><br/>
+    <label>
+        Дирекція:
+        <input type="number" name="directorNumber" ng-maxlength="4" ng-minlength="4" id="directorNumber" ng-model="addUser.director" required/>
+    </label>
+    <div ng-messages="addNewUserForm.directorNumber.$error" style="color: red; display: inline-block;">
+        <span ng-message="required">*</span>
+        <span ng-message="number">Дозволено вводити лише цифри</span>
+        <span ng-message="minlength">Довжина номеру має складати 4 символи</span>
+        <span ng-message="maxlength">Довжина номеру має складати 4 символи</span>
+        <span ng-if="addNewUserForm.directorNumber.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
+    </div><br/>
     <label><input type="checkbox" id="parker" ng-model="addUser.parker" />Паркер</label><br/>
     <label><input type="checkbox" id="diary" ng-model="addUser.diary" />Щоденник</label><br/>
     <label><input type="checkbox" id="cufflinks" ng-model="addUser.cufflinks" />Запонки</label><br/>
     <label><input type="checkbox" id="watches" ng-model="addUser.watches" />Годинник</label><br/>
-    <button type="submit" ng-click="register(addUser)">Додати</button>
+    <button type="button" ng-click="register(addUser)">Додати</button>
 </form>
 
 <div class="modal fade" id="add_new_user" tabindex="-1">
