@@ -2,6 +2,7 @@
 
 namespace Sl24Bundle\Controller;
 
+use Sl24Bundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -17,7 +18,14 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('Sl24Bundle::homepage.html.twig');
+        $parents = [];
+        /** @var User $user */
+        $user = $this->getUser();
+        while ($user->getParent()) {
+            $parents[] = $user->getParent()->getInArray();
+            $user = $user->getParent();
+        }
+        return $this->render('Sl24Bundle::homepage.html.twig', array('parents' => $parents));
     }
 
     /**

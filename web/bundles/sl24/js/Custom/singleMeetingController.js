@@ -17,7 +17,7 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
         };
 
         $scope.getMeetingsInfo = function () {
-            $http.get($scope.urlGetMeetingsInfo)
+            $scope.meetingPromise = $http.get($scope.urlGetMeetingsInfo)
                 .success(function (response) {
                     $scope.meetingsInfo = response;
 
@@ -32,9 +32,12 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
                     }
                 }
             );
+            
+            $scope.meetingPromise.then(function () {
+                $scope.getMeetingsInfo();
+            });
         };
 
         $scope.getMeeting($scope.meeting_id);
-        $scope.getMeetingsInfo();
     }
 ]);
