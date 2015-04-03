@@ -68,38 +68,32 @@
                         <li id="fat-menu" class="dropdown">
                             <a id="drop3" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{ asset('bundles/sl24/img/friends/fr-01.jpg') }}" height="20px">
-                                Нікіта Ляшенко
+                                {{ app.user.name ~ ' ' ~ app.user.surname }}
                                 <span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="drop3" role="menu">
+                            <ul class="dropdown-menu">
 
                                 <li role="presentation">
-                                    <a href="https://twitter.com/fat" tabindex="-1" role="menuitem">
+                                    <a href="https://twitter.com/fat" tabindex="-1">
 
                                         Action
 
                                     </a>
                                 </li>
                                 <li role="presentation">
-                                    <a href="https://twitter.com/fat" tabindex="-1" role="menuitem">
+                                    <a href="/" tabindex="-1">
 
                                         Another action
 
                                     </a>
                                 </li>
                                 <li role="presentation">
-                                    <a href="https://twitter.com/fat" tabindex="-1" role="menuitem">
-
-                                        Something else here
-
-                                    </a>
+                                    <a href="/" tabindex="-1">bla bla bla</a>
                                 </li>
-                                <li class="divider" role="presentation"></li>
-                                <li role="presentation">
-                                    <a href="https://twitter.com/fat" tabindex="-1" role="menuitem">
-
-                                        Separated link
-
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ path('sl24_logout') }}" tabindex="-1" target="_self">
+                                        Вихід
                                     </a>
                                 </li>
                             </ul>
@@ -228,18 +222,20 @@
                 <div class="row">
                     <h3>Мої структурні</h3>
                     <div class="desc">
-                        <a href="#" style="display: block;">
-                            <div class="thumb">
-                                <img class="img-circle" src="{{ asset('bundles/sl24/img/ui-divya.jpg') }}" width="35px" height="35px" align="">
-                            </div>
-                            <div class="details">
-                                <p>
-                                    <br>Нікіта Ляшенко<br/>
-                                    <muted>I am Busy</muted>
-                                </p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </a>
+                        {% for parent in parents %}
+                            <a style="display: block;">
+                                <div class="thumb">
+                                    <img class="img-circle" src="{{ asset('bundles/sl24/img/ui-divya.jpg') }}" width="35px" height="35px">
+                                </div>
+                                <div class="details">
+                                    <p>
+                                        <br>{{ parent.name ~ ' ' ~ parent.surname }}<br/>
+                                        <muted>I am Busy</muted>
+                                    </p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
                 <h3>Цитата</h3>
