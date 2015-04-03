@@ -83,14 +83,6 @@
         </span>
     </div><br/>
     <label>
-        Очки:
-        <input type="number" id="score" ng-model="addUser.score" />
-    </label><br/>
-    <label>
-        Командні очки:
-        <input type="number" id="teamScore" ng-model="addUser.teamScore" />
-    </label><br/>
-    <label>
         Дирекція:
         <input type="number" name="directorNumber" ng-maxlength="4" ng-minlength="4" id="directorNumber" ng-model="addUser.director" required/>
     </label>
@@ -103,6 +95,30 @@
             <i style="color: greenyellow;" class="fa fa-check"></i>
         </span>
     </div><br/>
+
+    <label>
+        Керівник:
+        <input type="number" name="parent" ng-maxlength="6" ng-minlength="6" id="parent" ng-model="addUser.parent" required/>
+    </label>
+    <div ng-messages="addNewUserForm.parent.$error" style="color: red; display: inline-block;">
+        <span ng-message="required">*</span>
+        <span ng-message="number">Дозволено вводити лише цифри</span>
+        <span ng-message="minlength">Довжина номеру має складати 6 символів</span>
+        <span ng-message="maxlength">Довжина номеру має складати 6 символів</span>
+        <span ng-if="addNewUserForm.parent.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
+    </div><br/>
+
+    <label>
+        Очки:
+        <input type="number" id="score" ng-model="addUser.score" />
+    </label><br/>
+    <label>
+        Командні очки:
+        <input type="number" id="teamScore" ng-model="addUser.teamScore" />
+    </label><br/>
+
     <label><input type="checkbox" id="parker" ng-model="addUser.parker" />Паркер</label><br/>
     <label><input type="checkbox" id="diary" ng-model="addUser.diary" />Щоденник</label><br/>
     <label><input type="checkbox" id="cufflinks" ng-model="addUser.cufflinks" />Запонки</label><br/>

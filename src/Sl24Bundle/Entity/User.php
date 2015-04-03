@@ -128,13 +128,13 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="deal_date", type="date")
+     * @ORM\Column(name="deal_date", type="date", nullable=true, options={"default"=null})
      */
     private $dealDate;
 
     /**
-     * @var @var \DateTime
-     * @ORM\Column(name="first_seminar", type="date")
+     * @var \DateTime
+     * @ORM\Column(name="first_seminar", type="date", nullable=true, options={"default"=null})
      */
     private $firstSeminar;
 
@@ -152,7 +152,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var int
-     * @ORM\Column(name="level", type="integer")
+     * @ORM\Column(name="level", type="integer", nullable=true, options={"default"=null})
      */
     private $level;
 
@@ -182,7 +182,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var int
-     * @ORM\Column(name="director_number", type="integer")
+     * @ORM\Column(name="director_number", type="integer", nullable=true, options={"default"=null})
      */
     private $directorNumber;
 
@@ -273,8 +273,8 @@ class User implements UserInterface, \Serializable
         $user->setName($parameters->name);
         $user->setSurname($parameters->surname);
         $user->setEmail($parameters->email);
-        $user->setUsername($parameters->username);
-        $user->setPassword($encoder->encodePassword($parameters->password, $user->getSalt()));
+        $user->setUsername($parameters->login);
+        $user->setPassword($encoder->encodePassword($parameters->pass, $user->getSalt()));
         $user->setRegistered(new \DateTime());
         $user->setLastActive(new \DateTime());
         $user->addRole(Role::getUserRole($em));
@@ -282,6 +282,7 @@ class User implements UserInterface, \Serializable
         $user->setCufflinks($parameters->cufflinks);
         $user->setWatches($parameters->watches);
         $user->setParker($parameters->parker);
+        $user->setSlNumber($parameters->slNumber);
         if ($parent) {
             $user->setParent($parent);
         }

@@ -15,11 +15,13 @@ class RegistrationController extends Controller
 {
     public function registrationAction(Request $request)
     {
+        $data = json_decode($request->getContent(), true);
+        $parameters = (object)$data['info'];
         /** @var User $user */
         $user = $this->getUser();
-        if ($request->getMethod() == 'POST' && $user->getLevel() >= 3) {
-            $data = json_decode($request->getContent(), true);
-            $parameters = (object)$data['info'];
+        if ($request->getMethod() == 'POST' && $user->getLevel() >= 3
+            && $parameters->pass == $parameters->rpass) {
+            /** @var EntityManager $em */
             $em = $this->getDoctrine()->getManager();
             $encoderFactory = $this->get('security.encoder_factory');
             User::addUser($em, $encoderFactory, $parameters);
