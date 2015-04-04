@@ -16,10 +16,15 @@ Sl24.controller('TaskController', ['$scope', '$http',
             'description': null
         };
 
+        $scope.todoTasks = [];
+        $scope.inProgresTasks = [];
+        $scope.doneTasks = [];
+
         $scope.getTasks = function () {
             $scope.promise = $http.get($scope.urlGetTasks)
                 .success(function (response) {
                     $scope.tasks = response;
+                    separationTasksByStatus(response);
                 }
             );
 
@@ -52,6 +57,29 @@ Sl24.controller('TaskController', ['$scope', '$http',
         $scope.addDeleteTaskId = function (task_id) {
             $scope.taskModel.id = task_id;
         };
+
+        function separationTasksByStatus(tasks)
+        {
+            $scope.storyTasks = [] ;
+            $scope.todoTasks = [] ;
+            $scope.inProgresTasks = [] ;
+            $scope.doneTasks = [] ;
+
+            for( var i = 0;i < tasks.length; i++ )
+            {
+                switch (tasks[i].status.id) {
+                    case 1:
+                        $scope.todoTasks.push(tasks[i]);
+                        break;
+                    case 2:
+                        $scope.inProgresTasks.push(tasks[i]);
+                        break;
+                    case 3:
+                        $scope.doneTasks.push(tasks[i]);
+                        break;
+                }
+            }
+        }
 
     }
 ]);
