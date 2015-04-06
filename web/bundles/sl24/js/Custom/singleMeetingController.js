@@ -6,37 +6,43 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
 
         $scope.urlGetMeeting = URLS.getMeeting;
         $scope.urlGetMeetingsInfo = URLS.getMeetingsInfo;
+        $scope.urlSaveMeeting = URLS.saveMeeting;
 
         $scope.getMeeting = function (meeting_id) {
             var meetingUrl = $scope.urlGetMeeting.replace('meeting_id', meeting_id);
             $scope.meetingPromise = $http.get(meetingUrl)
                 .success(function (response) {
                     $scope.meeting = response;
+                    $scope.meetingEdit = angular.copy(response);
+                    $scope.meetingEdit.date = new Date($scope.meeting.date);
+                    $scope.meetingEdit.payDate = new Date($scope.meeting.payDate);
+                    $scope.meetingEdit.clientBirthday.date = new Date($scope.meeting.clientBirthday.date);
                 }
             );
-            $scope.meetingPromise.then(function () {
-                $scope.getMeetingsInfo();
-            });
         };
 
         $scope.getMeetingsInfo = function () {
             $http.get($scope.urlGetMeetingsInfo)
                 .success(function (response) {
                     $scope.meetingsInfo = response;
-
-                    if ($scope.meetingsInfo.statuses.length > 0) {
-                        $scope.meetingForAdd.status = $scope.meetingsInfo.statuses[0].id;
-                    }
-                    if ($scope.meetingsInfo.assistants.length > 0) {
-                        $scope.meetingForAdd.assistants = $scope.meetingsInfo.assistants[0].id;
-                    }
-                    if ($scope.meetingsInfo.employmentTypes.length > 0) {
-                        $scope.meetingForAdd.employmentType = $scope.meetingsInfo.employmentTypes[0].id;
-                    }
                 }
             );
         };
 
-        $scope.getMeeting($scope.meeting_id);
+        $scope.saveMeeting = function (meeting) {
+            var saveMeetingUrl = $scope.urlSaveMeeting.replace('meeting_id', meeting.id);
+            $http.post(saveMeetingUrl, { 'meeting': meeting })
+                .success(function (response) {
+                    if (response) {
+                        $scope.modalHeader = 'Успішно';
+                        $scope.modalBody = 'Інформація про зустріч успішно збережена.';
+                    } else {
+                        $scope.modalHeader = 'Помилка';
+                        $scope.modalBody = 'Невідома помилка.';
+                    }
+                    $('#edit_meeting').modal('show');
+                }
+            );
+        };
     }
 ]);

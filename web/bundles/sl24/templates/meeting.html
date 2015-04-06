@@ -1,62 +1,21 @@
-<label>
-    П.І.Б Клієнта
-    <input type="text" value="[[meeting.credentials]]"/>
-</label><br>
+<ol class="breadcrumb">
+    <li><a ng-href="/meetings">Зустрічі</a></li>
+    <li class="active">[[ meeting.credentials ]]</li>
+</ol>
 
-<label>
-    Дирекція
-    <select ng-model="meeting.assistant">
-        <option ng-repeat="assistant in meetingsInfo.assistants" value="[[ assistant.id ]]">[[ assistant.username ]]</option>
-    </select>
-</label><br>
+<div ng-init="getMeeting(meeting_id)"></div>
 
-<label>
-    Статус зустрічі
-    <select ng-model="meeting.status.id">
-        <option ng-repeat="status in meetingsInfo.statuses" value="[[ status.id ]]">[[ status.label ]]</option>
-    </select>
-</label><br>
+<b>П.І.Б Клієнта</b>: [[ meeting.credentials ]]<br/>
+<b>Дирекція</b>: [[ meeting.assistant.name ]]<br/>
+<b>Статус зустрічі</b>: [[ meeting.status.label ]]<br/>
+<b>Вид зайнятості клієнта</b>: [[ meeting.employmentType.name ]]<br/>
+<b>Вік клієнта</b>: [[ meeting.age ]]<br/>
+<b>Дата народження клієнта</b>: [[ meeting.clientBirthday.date ]]<br/>
+<b>Дата зустрічі</b>: [[ meeting.date ]]<br/>
+<b>Ціна контракту</b>: [[ meeting.price ]]<br/>
+<b>Дата оплати</b>: [[ meeting.payDate ]]<br/>
+<b>Срок контракту</b>: [[ meeting.years ]]<br/>
+<b>Прогрес зустрічі</b>: [[ meeting.progress ]]<br/>
 
-<label>
-    Вид зайнятості клієнта
-    <select ng-model="meeting.employmentType.id">
-        <option ng-repeat="type in meetingsInfo.employmentTypes" value="[[ type.id ]]">[[ type.label ]]</option>
-    </select>
-</label><br>
-
-<label>
-    Вік клієнта
-    <input type="text" value="[[meeting.age]]"/>
-</label><br>
-
-<label>
-    Дата народження клієнта
-    <input type="date" value="[[meeting.clientBirtday]]"/>
-</label><br>
-
-<label>
-    Дата зустрічі
-    <input type="date" value="[[meeting.date]]"/>
-</label><br>
-
-<label>
-    Ціна контракту
-    <input type="text" value="[[meeting.price]]"/>
-</label><br>
-
-<label>
-    Дата оплати
-    <input type="date" value="[[meeting.payDate]]"/>
-</label><br>
-
-<label>
-    Срок контракту
-    <input type="text" value="[[meeting.years]]"/>
-</label><br>
-
-<label>
-    Прогрес зустрічі
-    <select ng-model="meeting.progress">
-        <option ng-repeat="i in [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]" value="[[ status.id ]]">[[ i ]]%</option>
-    </select>
-</label><br>
+<a ng-href="/meeting/edit/[[ meeting.id ]]">Редагувати</a><br/>
+<a ng-href="/meetings">Повернутись</a><br/>

@@ -25,6 +25,10 @@ sl24_addMeeting:
     path: /meetings/add
     defaults: { _controller: Sl24Bundle:Meeting:addNewMeeting }
 
+sl24_saveMeeting:
+    pattern: /meeting/save/{meeting_id}
+    defaults: { _controller: Sl24Bundle:Meeting:editMeeting }
+
 sl24_getMeetingsInfo:
     path: /meetings/getmeetingsInfo
     defaults: { _controller: Sl24Bundle:Meeting:getMeetingsInfo }
@@ -46,27 +50,52 @@ sl_24_registration:
 ################### Default Routes Block ####################
 ##### Please add your SHIT code ABOVE this block, thx... ####
 #############################################################
-                                                            #
-sl24_default:                                               #
-    pattern: /{some}                                        #
-    defaults: { _controller: Sl24Bundle:Index:index }       #
-                                                            #
-sl24_default_2level:                                        #
-    pattern: /{some}/{some1}                                #
-    defaults: { _controller: Sl24Bundle:Index:index }       #
-                                                            #
-sl24_default_3level:                                        #
-    pattern: /{some}/{some1}/{some2}                        #
-    defaults: { _controller: Sl24Bundle:Index:index }       #
-                                                            #
-sl24_default_4level:                                        #
-    pattern: /{some}/{some1}/{some2}/{some3}                #
-    defaults: { _controller: Sl24Bundle:Index:index }       #
-                                                            #
-sl24_default_5level:                                        #
-    pattern: /{some}/{some1}/{some2}/{some3}/{some4}        #
-    defaults: { _controller: Sl24Bundle:Index:index }       #
-                                                            #
+
+sl24_default:
+    pattern: /{some}
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_default_2level:
+    pattern: /{some}/{some1}
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_default_3level:
+    pattern: /{some}/{some1}/{some2}
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_default_4level:
+    pattern: /{some}/{some1}/{some2}/{some3}
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_default_5level:
+    pattern: /{some}/{some1}/{some2}/{some3}/{some4}
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_default_6level:
+    pattern: /{some}/{some1}/{some2}/{some3}/{some4}/{some5}
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+#############################################################
+
+sl24_default_2_level:
+    pattern: /{some}/
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_default_3_level:
+    pattern: /{some}/{some1}/
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_default_4_level:
+    pattern: /{some}/{some1}/{some2}/
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_default_5_level:
+    pattern: /{some}/{some1}/{some2}/{some3}/
+    defaults: { _controller: Sl24Bundle:Index:index }
+
+sl24_default_6_level:
+    pattern: /{some}/{some1}/{some2}/{some3}/{some4}/
+    defaults: { _controller: Sl24Bundle:Index:index }
 #############################################################
 #############################################################
 #############################################################

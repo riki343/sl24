@@ -3,7 +3,7 @@
 {% block title %}StarLife 24{% endblock %}
 
 {% block body %}
-    <div ng-view></div>
+    <div ng-cloak ng-view></div>
 {% endblock %}
 
 {% block JavaScripts %}
@@ -12,6 +12,7 @@
         var TEMPLATES = {
             'meetings': "{{ asset('bundles/sl24/templates/meetings.html') }}",
             'meeting': "{{ asset('bundles/sl24/templates/meeting.html') }}",
+            'meetingEdit': "{{ asset('bundles/sl24/templates/meetingEdit.html') }}",
             'meetingsAddNew': "{{ asset('bundles/sl24/templates/meetingsAddNew.html') }}",
             'main': "{{ asset('bundles/sl24/templates/main.html') }}",
             'tasks': "{{ asset('bundles/sl24/templates/tasks.html') }}",
@@ -21,6 +22,7 @@
 
         URLS.getMeetings = "{{ path('sl24_getMeetings', { 'user_id': 'user_id' }) }}";
         URLS.getMeeting = "{{ path('sl24_getMeeting', { 'meeting_id': 'meeting_id' }) }}";
+        URLS.saveMeeting = "{{ path('sl24_saveMeeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.getMeetingsInfo = "{{ path('sl24_getMeetingsInfo') }}";
         URLS.addNewMeeting = "{{ path('sl24_addMeeting') }}";
         URLS.addNewUser = "{{ path('sl_24_registration') }}";

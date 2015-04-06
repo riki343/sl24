@@ -155,14 +155,21 @@ class Meeting
                 ? $this->getPayDate()->format('Y-m-d')
                 : null,
             'workingMonthID' => $this->getWorkingMonthID(),
-            'clientBirthday' => ($this->getClientBirthday())
-                ? array(
-                    'year' => $this->getClientBirthday()->format('Y'),
-                    'month' => $this->getClientBirthday()->format('m'),
-                    'day' => $this->getClientBirthday()->format('d'),
-                    'date' => $this->getClientBirthday()->format('Y-m-d'),
-                )
-                : null,
+            'clientBirthday' =>
+                array(
+                    'year' => ($this->getClientBirthday())
+                        ? $this->getClientBirthday()->format('Y')
+                        :null,
+                    'month' => ($this->getClientBirthday())
+                        ? $this->getClientBirthday()->format('m')
+                        : null,
+                    'day' => ($this->getClientBirthday())
+                        ? $this->getClientBirthday()->format('d')
+                        : null,
+                    'date' => ($this->getClientBirthday())
+                        ? $this->getClientBirthday()->format('Y-m-d')
+                        : null,
+                ),
         );
     }
 
@@ -204,27 +211,35 @@ class Meeting
     public static function editInfo(EntityManager $em, $meeting_id, $data) {
         $meeting = $em->getRepository('Sl24Bundle:Meeting')->find($meeting_id);
         $status = $em->getRepository('Sl24Bundle:MeetingStatus')
-            ->find($data->status->id);
+            ->find($data->status['id']);
         $employmentType = $em->getRepository('Sl24Bundle:EmploymentType')
-            ->find($data->employmentType->id);
+            ->find($data->employmentType['id']);
 
         $meeting->setAge($data->age);
-        $meeting->setClientBirthday($data->clientBirthday->date);
+        if ($data->clientBirthday['date'])
+        $meeting->setClientBirthday(\DateTime::createFromFormat('Y-m-d',
+            date('Y-m-d', strtotime($data->clientBirthday['date']))));
         $meeting->setCredentials($data->credentials);
         $meeting->setStatus($status);
-        if ($data->$assistant) {
+        if ($data->assistant) {
             $assistant = $em->getRepository('Sl24Bundle:User')->find($data->assistant);
             $meeting->setAssistant($assistant);
         }
         $meeting->setEmploymentType($employmentType);
-        $meeting->setDate($data->date);
+        if ($data->date) {
+            $meeting->setDate(\DateTime::createFromFormat('Y-m-d',
+                date('Y-m-d', strtotime($data->date))));
+        }
         $meeting->setPrice($data->price);
         $meeting->setYears($data->years);
         $meeting->setProgress($data->progress);
         /*
          * working Month
          */
-        $meeting->setPayDate($data->payDate);
+        if ($data->payDate) {
+            $meeting->setPayDate(\DateTime::createFromFormat('Y-m-d',
+                date('Y-m-d', strtotime($data->payDate))));
+        }
 
         $em->persist($meeting);
         $em->flush();

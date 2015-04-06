@@ -1,7 +1,7 @@
 <form name="addNewUserForm">
     <label style="display: inline-block;">
         Ім’я:
-        <input type="text" id="name" name="name" pattern="[A-Za-zА-Яа-я]{1,}" ng-model="addUser.name" required/>
+        <input type="text" id="name" ng-minlength="1" name="name" pattern="[A-Za-zА-Яа-я]{1,}" ng-model="addUser.name" required/>
     </label>
     <div ng-messages="addNewUserForm.name.$error" style="color: red; display: inline-block;">
         <span ng-message="required">*</span>
@@ -13,7 +13,7 @@
 
     <label style="display: inline-block;">
         Прізвище:
-        <input type="text" id="surname" name="surname" pattern="[A-Za-zА-Яа-я]{1,}" ng-minlength="4" ng-maxlength="16" ng-model="addUser.surname" required/>
+        <input type="text" id="surname" name="surname" pattern="[A-Za-zА-Яа-я]{1,}" ng-minlength="1" ng-model="addUser.surname" required/>
     </label>
     <div ng-messages="addNewUserForm.surname.$error" style="color: red; display: inline-block;">
         <span ng-message="required">*</span>
@@ -97,7 +97,7 @@
     </div><br/>
 
     <label>
-        Керівник:
+        Керівник(SL-номер):
         <input type="number" name="parent" ng-maxlength="6" ng-minlength="6" id="parent" ng-model="addUser.parent" required/>
     </label>
     <div ng-messages="addNewUserForm.parent.$error" style="color: red; display: inline-block;">
