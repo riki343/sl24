@@ -313,7 +313,7 @@ class Task
             'ownerID' => $this->getOwnerID(),
             'owner' => $this->getOwner()->getInArray(),
             'assignedID' => $this->getAssignedID(),
-            'assigned' => $this->getAssigned(),
+            'assigned' => $this->getAssigned()->getInArray(),
         );
     }
 
@@ -336,6 +336,31 @@ class Task
         $em->persist($task);
         $em->flush();
 
+        return $task;
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param $parameters
+     * @return mixed
+     */
+    public static function editTask($em, $parameters)
+    {
+        $task = $em->getRepository('Sl24Bundle:Task')->find($parameters['id']);
+
+        if ($parameters['name'] != $task->getName())
+            $task->setName($parameters['name']);
+
+        if ($parameters['statusID'] != $task->getStatusID()){
+            $status = $em->getRepository('Sl24Bundle:TaskStatus')->find($parameters['statusID']);
+            $task->setStatus($status);
+        }
+
+        if ($parameters['description'] != $task->getDescription())
+            $task->setDescription($parameters['description']);
+
+        $em->persist($task);
+        $em->flush();
         return $task;
     }
 

@@ -27,6 +27,10 @@ Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locati
                 templateUrl: TEMPLATES.tasks,
                 controller: 'TaskController'
             })
+            .when('/task/:task_id', {
+                templateUrl: TEMPLATES.task,
+                controller: 'SingleTaskController'
+            })
             .when('/team', {
                 templateUrl: TEMPLATES.team,
                 controller: 'TeamController'

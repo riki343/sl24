@@ -10,7 +10,7 @@
             <div class="list-group">
                 <div class="row" ng-repeat="task in todoTasks">
                     <div class="col-md-12">
-                        <a class="list-group-item local-blue" style="margin-bottom: 5px;">
+                        <a ng-href="/task/[[ task.id ]]" class="list-group-item local-blue" style="margin-bottom: 5px;">
                             <h4 class="list-group-item-heading" style="word-wrap: break-word">
                                 [[ task.name ]]
                             </h4>
@@ -28,7 +28,7 @@
             <div class="list-group">
                 <div class="row" ng-repeat="task in inProgresTasks">
                     <div class="col-md-12">
-                        <a class="list-group-item local-violet" style="margin-bottom: 5px;">
+                        <a ng-href="/task/[[ task.id ]]" class="list-group-item local-violet" style="margin-bottom: 5px;">
                             <h4 class="list-group-item-heading" style="word-wrap: break-word">
                                 [[ task.name ]]
                             </h4>
@@ -46,7 +46,7 @@
             <div class="list-group">
                 <div class="row" ng-repeat="task in doneTasks">
                     <div class="col-md-12">
-                        <a class="list-group-item local-green" style="margin-bottom: 5px;">
+                        <a ng-href="/task/[[ task.id ]]" class="list-group-item local-green" style="margin-bottom: 5px;">
                             <h4 class="list-group-item-heading" style="word-wrap: break-word">
                                 [[ task.name ]]
                             </h4>
