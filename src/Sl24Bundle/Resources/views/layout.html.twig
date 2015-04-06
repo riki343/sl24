@@ -50,6 +50,7 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <img src="{{ asset('bundles/sl24/img/logo.svg') }}" height="72px;" style="margin-top:-30px;">
+
                         </div>
                         <div class="col-md-4 pull-right" style="margin-right: -30px;">
                             <hr class="hrfooter">
@@ -94,6 +95,13 @@
                 'urlDeleteTask': "{{ path('sl_24_delete_task') }}"
             };
         </script>
+        <script>
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+        </script>
+
     {% endblock %}
 </body>
 </html>

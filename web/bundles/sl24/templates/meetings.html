@@ -1,16 +1,17 @@
-<ol class="breadcrumb">
-    <li class="active">Зустрічі</li>
-</ol>
+
 
 <div class="row">
     <div class="meeting-header">
-        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#add_new_meeting" ng-click="getMeetingsInfo();">Додати зустріч</button>
+        <a class="meeting-header-nav" style="padding: 4px 8px;" data-toggle="modal" data-target="#add_new_meeting" ng-click="getMeetingsInfo();">Додати зустріч</a>
+        
+
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12">
         <h1 class="page-header">Зустрічі</h1>
+
 
         <div ng-init="getMeetings(userID);">
 
