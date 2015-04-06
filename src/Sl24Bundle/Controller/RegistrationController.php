@@ -13,18 +13,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RegistrationController extends Controller
 {
-    public function registrationAction(Request $request)
-    {
+    public function registrationAction(Request $request) {
         $data = json_decode($request->getContent(), true);
         $parameters = (object)$data['info'];
         /** @var User $user */
         $user = $this->getUser();
-        if ($request->getMethod() == 'POST' && $user->getLevel() >= 3
-            && $parameters->pass == $parameters->rpass) {
+        if ($user->getLevel() >= 3 && $parameters->pass == $parameters->rpass) {
             /** @var EntityManager $em */
             $em = $this->getDoctrine()->getManager();
             $encoderFactory = $this->get('security.encoder_factory');
-            User::addUser($em, $encoderFactory, $parameters);
+            try {
+                User::addUser($em, $encoderFactory, $parameters);
+            } catch (\Exception $ex) {
+                return new JsonResponse(false);
+            }
             return new JsonResponse(true);
         } else {
             return new JsonResponse(false);
