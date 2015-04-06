@@ -1,0 +1,38 @@
+<!-- Begin of Add Task Modal -->
+<div class="modal fade" id="add_new_task" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header label-primary" style="background-color: #c62828 !important;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel" style="color: #f5f5f5;">
+                    Нове завдання
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="add_task_name" class="control-label">Ім’я завдання:</label>
+                                <input type="text" id="add_task_name" class="form-control" name="name" ng-model="taskModel.name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="add_task_description" class="control-label">Опис:</label>
+                                <textarea id="add_task_description" class="form-control" name="description" ng-model="taskModel.description" required style="height: 100px;"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" style="background-color: #c62828 !important;" ng-click="addTask(taskModel)">Додати</button>
+                                <a class="btn btn-default" data-dismiss="modal" aria-hidden="true">Закрити</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End of Add Task Modal -->

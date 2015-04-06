@@ -1,10 +1,10 @@
 <!-- Begin of Tasks -->
 <div class="row" ng-controller="TaskController">
     <div class="col-md-12" ng-init="getTasks()">
-        <div class="panel panel-default list-group">
+        <div class="panel panel-default list-group" style="margin-top: 30px;">
             <div class="list-group-item" style="background:#ddedf4; color:#606060;">
                 <i class="fa fa-tasks"></i>
-                <strong>Tasks</strong>
+                <strong>Завдання</strong>
             </div>
 
             <div class="panel-body">
@@ -14,13 +14,13 @@
 
                     <ul id="task-view-tabs" class="nav nav-tabs" role="tablist">
                         <li data-toggle="tooltip" data-placement="top" title="Table view" role="presentation" class="active">
-                            <a data-toggle="tab" id="task-view-table" class="btn" href="#table-view" aria-controls="table-view" role="tab" aria-expanded="true">
+                            <a data-toggle="tab" id="task-view-table" class="btn" data-target="#table-view" aria-controls="table-view" role="tab" aria-expanded="true">
                                 <i class="fa fa-table fa-2x"></i>
                             </a>
                         </li>
 
                         <li data-toggle="tooltip" data-placement="top" title="Agile view" role="presentation">
-                            <a data-toggle="tab" id="task-view-agile"  class="btn" href="#agile-view" aria-controls="agile-view" role="tab" aria-expanded="false">
+                            <a data-toggle="tab" id="task-view-agile"  class="btn" data-target="#agile-view" aria-controls="agile-view" role="tab" aria-expanded="false">
                                 <i class="fa fa-th fa-2x"></i>
                             </a>
                         </li>
@@ -39,20 +39,24 @@
                 <div id="tasks-tab-content" class="tab-content">
 
                     <!-- Table View -->
-                    <div id="table-view" style="min-height: 300px;" class="tab-pane fade in active" aria-labelledby="task-view-table" role="tabpanel">
-                        <ng-include src="{{ '\'' ~ asset('bundles/sl24/templates/task-table.html') ~ '\'' }}"></ng-include>
+                    <div id="table-view" style="min-height: 350px;" class="tab-pane fade in active" role="tabpanel">
+                        <div ng-include="taskTable"></div>
                     </div>
                     <!-- End Table View -->
 
                     <!-- Agile View -->
-                    <div id="agile-view" class="tab-pane fade" aria-labelledby="task-view-agile" role="tabpanel">
-                        <div ng-include=""></div>
+                    <div id="agile-view" style="min-height: 350px;" class="tab-pane fade" role="tabpanel">
+                        <div ng-include="taskAgile"></div>
                     </div>
                     <!-- End Agile View -->
                 </div>
             </div>
         </div>
     </div>
+
+    <div ng-include="taskAdd"></div>
+
+    <div ng-include="taskDelete"></div>
 
 </div>
 <!-- End of Tasks -->
