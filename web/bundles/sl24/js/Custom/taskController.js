@@ -5,6 +5,7 @@ Sl24.controller('TaskController', ['$scope', '$http',
         $scope.urlGetTasks = URLS.getTasks;
         $scope.urlAddTask = URLS.urlAddTask;
         $scope.urlDeleteTask = URLS.urlDeleteTask;
+
         $scope.taskTable = TEMPLATES.taskTable;
         $scope.taskAgile = TEMPLATES.taskAgile;
         $scope.taskAdd = TEMPLATES.taskAdd;

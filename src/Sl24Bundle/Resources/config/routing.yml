@@ -37,6 +37,18 @@ sl_24_get_tasks:
     path: /getTasks
     defaults: { _controller: Sl24Bundle:Task:getTasks }
 
+sl_24_get_task:
+    path: /getTask/{task_id}
+    defaults: { _controller: Sl24Bundle:Task:getTask }
+
+sl_24_get_statuses:
+    path: /getStatuses
+    defaults: { _controller: Sl24Bundle:Task:getStatuses }
+
+sl_24_save_task_info:
+    path: /saveTaskInfo
+    defaults: { _controller: Sl24Bundle:Task:saveTaskInfo }
+
 sl_24_add_task:
     path: /addTask
     defaults: { _controller: Sl24Bundle:Task:addTask }

@@ -1,0 +1,92 @@
+<div class="row" ng-init="getTask(task_id)">
+    <div class="col-xs-12">
+
+        <div class="page-header" style="margin-top: 20px;">
+            <span style="font-size: 20px;  color: #337ab7;">Інформація про завдання</span>
+        </div>
+
+        <!-- Begin of Task NAME Edit -->
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <label class="text-muted form-control-static" style="  color: #777;font-weight: 300;">Ім’я:</label>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="input-group" style="width: 100%;">
+                    <input type="text" name="name" style="border: none; font-weight: bold;" ng-model="taskInfoEdit.name" class="form-control btn-group-justified" value="[[ task.name ]]">
+                </div>
+
+            </div>
+        </div>
+        <!-- End of Task NAME Edit -->
+
+        <!-- Begin Of Task OWNER Details -->
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <label class="text-muted form-control-static" style="  color: #777;font-weight: 300;">Власник:</label>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="input-group">
+                    <a style="font-weight: bold;" class="btn form-control-static text-info">
+                        [[ task.owner.name + ' ' + task.owner.surname + ' (' + task.owner.username + ')']]
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- End Of Task OWNER Details -->
+
+        <!-- Begin of Task STATUS Select -->
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <label class="text-muted form-control-static" style="  color: #777; font-weight: 300;">Статус:</label>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="input-group" style="width: 100%;">
+                    <select class="form-control" name="status" ng-model="taskInfoEdit.status.id" style="border: none; font-weight: bold;">
+                        <option ng-repeat="status in taskStatuses" ng-selected="status.id == task.status.id" style="color: [[status.color]]" value="[[ status.id ]]">
+                            [[ status.label ]]
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- End of Task STATUS Select -->
+
+        <!-- Begin of Desciption Section -->
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-md-3" style="border: 0;">
+                <div class="input-group">
+                    <label class="text-muted form-control-static" style="  color: #777; font-weight: 300;">Опис:</label>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="input-group" style="width: 100%;">
+                    <textarea class="form-control" name="description" ng-model="taskInfoEdit.description" style="border: none; height: 85px; resize: none;font-weight: bold;">[[ task.description ]]</textarea>
+                </div>
+            </div>
+        </div>
+        <!-- End of Desciption Section -->
+
+        <!-- SAVE BUTTON -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <button type="button" ng-click="saveTaskInfo(taskInfoEdit);" class="btn btn-default btn-primary">
+                        Зберегти
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- SAVE BUTTON -->
+
+    </div>
+</div>

@@ -35,6 +35,48 @@ class TaskController extends Controller
         return new JsonResponse($tasks);
     }
 
+
+    /**
+     * @param $task_id
+     * @return JsonResponse
+     */
+    public function getTaskAction($task_id)
+    {
+        $task = $this->getDoctrine()->getRepository('Sl24Bundle:Task')->find($task_id);
+        return new JsonResponse($task->getInArray());
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function getStatusesAction()
+    {
+        $temp = $this->getDoctrine()->getRepository('Sl24Bundle:TaskStatus')->findAll();
+        $taskStatuses = Functions::arrayToJson($temp);
+        return new JsonResponse($taskStatuses);
+    }
+
+    public function saveTaskInfoAction(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+        $data = (object) $data['task'];
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
+        $parameters = array(
+            'id' => $data->id,
+            'name' => $data->name,
+            'statusID' => $data->status['id'],
+            'description' => $data->description
+        );
+
+        $task = Task::editTask($em, $parameters);
+
+        $response = new Response(json_encode(array('task' => $task)));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -68,9 +110,6 @@ class TaskController extends Controller
     {
         $data = json_decode($request->getContent(), true);
         $data = (object) $data;
-
-        /** @var User $user */
-        $user = $this->getUser();
 
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
