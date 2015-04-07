@@ -202,6 +202,7 @@
         {% block rightSidebar %}
             <div class="col-md-3 right-sitebar">
                 <div class="row">
+                    {% if parents | length > 0 %}
                     <h3>Мої структурні</h3>
                     <div class="desc">
                         {% for parent in parents %}
@@ -219,6 +220,7 @@
                             </a>
                         {% endfor %}
                     </div>
+                    {% endif %}
                 </div>
                 <div class="row">
                     <h3>Цитата</h3>
