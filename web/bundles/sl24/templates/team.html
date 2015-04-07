@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table"  ng-init="GetTeam()" >
     <thead>
     <tr>
         <th  class="col-md-3"> Ім'я: </th>
@@ -13,9 +13,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td><i class="fa fa-plus plus-team"></i>Андрій</td>
-        <td>Всьоо!!</td>
+    <tr >
+        <td><i ng-if="Team.childs != 0 " class="fa fa-plus plus-team" ng-click="showChildForTeam(Team,Team.lvl)"></i> [[ Team.name ]]</td>
+        <td> [[Team.lvl]]</td>
         <td>міліон</td>
         <td>Вообще нич</td>
         <td>та фіг його знає</td>
@@ -24,5 +24,17 @@
         <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
         <td style="text-align: center;"><i style="color: red;" class="fa fa-times"></i></td>
     </tr>
+    <tr ng-repeat="child in childs" ng-if="child.visibleelem == true">
+        <td><i ng-if="child.childs != 0 " class="fa fa-plus plus-team" ng-click="showChildForTeam(child,child.lvl)"></i> [[ child.name ]]</td>
+        <td> [[child.lvl]]</td>
+        <td>міліон</td>
+        <td>Вообще нич</td>
+        <td>та фіг його знає</td>
+        <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
+        <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
+        <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
+        <td style="text-align: center;"><i style="color: red;" class="fa fa-times"></i></td>
+    </tr>
+
     </tbody>
 </table>
