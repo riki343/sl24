@@ -3,38 +3,43 @@
 <div class="row">
     <div class="meeting-header">
         <a class="meeting-header-nav" style="padding: 4px 8px;" data-toggle="modal" data-target="#add_new_meeting" ng-click="getMeetingsInfo();">Додати зустріч</a>
-        
+        <a class="meeting-header-nav" style="padding: 4px 8px; margin-left: 5px" data-toggle="modal" data-target="#history" ng-click="getMeetingsInfo();">Історія</a>
 
     </div>
 </div>
 
 <div class="row">
+
+
+
+
     <div class="col-md-12">
-        <h1 class="page-header">Зустрічі</h1>
+        <h1 class="page-header" style="margin: 15px 0px 20px">Зустрічі</h1>
+
 
 
         <div ng-init="getMeetings(userID);">
 
             <table class="table table-striped">
-                <thead>
+                <thead class="table-bordered" style="background-color: #fbfbfb; color: #262626;">
                 <tr>
-                    <th class="col-md-1">№</th>
-                    <th class="col-md-3">П.І.Б</th>
-                    <th class="col-md-2">Консультант</th>
-                    <th class="col-md-2">Статус</th>
-                    <th class="col-md-2">Дата Зустрічі</th>
-                    <th class="col-md-2">Прогрес</th>
+                    <th class="col-md-1 table-bordered text-center">№</th>
+                    <th class="col-md-4 table-bordered">П.І.Б</th>
+                    <th class="col-md-2 table-bordered">Консультант</th>
+                    <th class="col-md-2 table-bordered text-center">Статус</th>
+                    <th class="col-md-2 table-bordered text-center">Дата Зустрічі</th>
+                    <th class="col-md-1 table-bordered">Прогрес</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 <tr ng-repeat="meeting in meetings">
-                    <td class="col-md-1">[[ $index + 1 ]]</td>
+                    <td class="col-md-1 text-center">[[ $index + 1 ]]</td>
                     <td class="col-md-3"><a ng-href="/meeting/[[ meeting.id ]]">[[ meeting.credentials ]]</a></td>
                     <td class="col-md-2">[[ meeting.consultant.name + ' ' + meeting.consultant.surname ]]</td>
                     <td class="col-md-2">[[ meeting.status.label ]]</td>
-                    <td class="col-md-2">[[ meeting.date ]]</td>
-                    <td class="col-md-2">[[ meeting.progress ]]%</td>
+                    <td class="col-md-2 text-center">[[ meeting.date ]]</td>
+                    <td class="col-md-2 text-center">[[ meeting.progress ]]%</td>
                 </tr>
                 </tbody>
             </table>
