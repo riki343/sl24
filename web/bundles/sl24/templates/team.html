@@ -14,26 +14,58 @@
     </thead>
     <tbody>
     <tr >
-        <td><i ng-if="Team.childs != 0 " class="fa fa-plus plus-team" ng-click="showChildForTeam(Team,Team.lvl)"></i> [[ Team.name ]]</td>
+        <td style="padding-left:[[Team.marginrigth]]px ;">
+            <i ng-if="Team.childs != 0 && Team.visible == false" class="fa fa-plus plus-team" ng-click="showChildForTeam(Team,Team.lvl)"></i>
+            <i class="fa fa-minus plus-team" ng-if="Team.visible == true" ng-click="removeChildForTeam(Team,Team.lvl)"></i>
+            [[ Team.name ]]
+        </td>
         <td> [[Team.lvl]]</td>
-        <td>міліон</td>
-        <td>Вообще нич</td>
-        <td>та фіг його знає</td>
-        <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
-        <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
-        <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
-        <td style="text-align: center;"><i style="color: red;" class="fa fa-times"></i></td>
+        <td>[[Team.score]]</td>
+        <td>[[Team.teamScore]]</td>
+        <td>[[Team.meetings]]</td>
+        <td style="text-align: center;">
+            <i ng-if="Team.parker == 1 " style="color: #28a025;" class="fa fa-check"></i>
+            <i ng-if="Team.parker == 0 " style="color: #AA1818;" class="fa fa-times"></i>
+        </td>
+        <td style="text-align: center;">
+            <i ng-if="Team.diary == 1 " style="color: #28a025;" class="fa fa-check"></i>
+            <i ng-if="Team.diary == 0 " style="color: #AA1818;" class="fa fa-times"></i>
+        </td>
+        <td style="text-align: center;">
+            <i ng-if="Team.cufflinks == 1 " style="color: #28a025;" class="fa fa-check"></i>
+            <i ng-if="Team.cufflinks == 0 " style="color: #AA1818;" class="fa fa-times"></i>
+        </td>
+        <td style="text-align: center;">
+            <i ng-if="Team.watches == 1 " style="color: #28a025;" class="fa fa-check"></i>
+            <i ng-if="Team.watches == 0 " style="color: #AA1818;" class="fa fa-times"></i>
+        </td>
     </tr>
-    <tr ng-repeat="child in childs" ng-if="child.visibleelem == true">
-        <td><i ng-if="child.childs != 0 " class="fa fa-plus plus-team" ng-click="showChildForTeam(child,child.lvl)"></i> [[ child.name ]]</td>
+    <tr  ng-repeat="child in childs" ng-if="child.visibleelem == true" >
+        <td style="padding-left:[[child.marginrigth]]px ;">
+            <i ng-if="child.childs != 0  && child.visible == false" class="fa fa-plus plus-team" ng-click="showChildForTeam(child,child.lvl)"></i>
+            <i class="fa fa-minus plus-team" ng-if="child.visible == true" ng-click="removeChildForTeam(child,child.lvl)"></i>
+            [[ child.name ]]
+        </td>
         <td> [[child.lvl]]</td>
-        <td>міліон</td>
-        <td>Вообще нич</td>
-        <td>та фіг його знає</td>
-        <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
-        <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
-        <td style="text-align: center;"><i style="color: greenyellow;" class="fa fa-check"></i></td>
-        <td style="text-align: center;"><i style="color: red;" class="fa fa-times"></i></td>
+        <td>[[child.score]]</td>
+        <td>[[child.teamScore]]</td>
+        <td>[[child.meetings]]</td>
+        <td style="text-align: center;">
+            <i ng-if="child.parker == 1 " style="color: #28a025;" class="fa fa-check"></i>
+            <i ng-if="child.parker == 0 " style="color: #AA1818;" class="fa fa-times"></i>
+        </td>
+        <td style="text-align: center;">
+            <i ng-if="child.diary == 1 " style="color: #28a025;" class="fa fa-check"></i>
+            <i ng-if="child.diary == 0 " style="color: #AA1818;" class="fa fa-times"></i>
+        </td>
+        <td style="text-align: center;">
+            <i ng-if="child.cufflinks == 1 " style="color: #28a025;" class="fa fa-check"></i>
+            <i ng-if="child.cufflinks == 0 " style="color: #AA1818;" class="fa fa-times"></i>
+        </td>
+        <td style="text-align: center;">
+            <i ng-if="child.watches == 1 " style="color: #28a025;" class="fa fa-check"></i>
+            <i ng-if="child.watches == 0 " style="color: #AA1818;" class="fa fa-times"></i>
+        </td>
     </tr>
 
     </tbody>
