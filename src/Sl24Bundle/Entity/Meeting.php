@@ -60,7 +60,7 @@ class Meeting
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="meetings")
      * @ORM\JoinColumn(name="consultant_id", referencedColumnName="id")
      */
     private $consultant;

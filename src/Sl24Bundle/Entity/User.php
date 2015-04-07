@@ -51,6 +51,12 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Meeting", mappedBy="consultant")
+     */
+    private $meetings;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -919,5 +925,38 @@ class User implements UserInterface, \Serializable
     public function getChilds()
     {
         return $this->childs;
+    }
+
+    /**
+     * Add meetings
+     *
+     * @param \Sl24Bundle\Entity\Meeting $meetings
+     * @return User
+     */
+    public function addMeeting(\Sl24Bundle\Entity\Meeting $meetings)
+    {
+        $this->meetings[] = $meetings;
+
+        return $this;
+    }
+
+    /**
+     * Remove meetings
+     *
+     * @param \Sl24Bundle\Entity\Meeting $meetings
+     */
+    public function removeMeeting(\Sl24Bundle\Entity\Meeting $meetings)
+    {
+        $this->meetings->removeElement($meetings);
+    }
+
+    /**
+     * Get meetings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMeetings()
+    {
+        return $this->meetings;
     }
 }
