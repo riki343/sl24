@@ -234,6 +234,7 @@ class User implements UserInterface, \Serializable
             'parker' => $this->getParker(),
             'firstSeminar' => $this->getFirstSeminar()->format('Y-m-d'),
             'childs' => User::childsRecursion($this->getChilds()),
+            'meetingsCount' => count($this->getMeetings()),
         );
     }
 
