@@ -25,6 +25,10 @@ sl24_addMeeting:
     path: /meetings/add
     defaults: { _controller: Sl24Bundle:Meeting:addNewMeeting }
 
+sl24_addMounth:
+    path: /mounth/add
+    defaults: { _controller: Sl24Bundle:Mounth:addMounth }
+
 sl24_saveMeeting:
     pattern: /meeting/save/{meeting_id}
     defaults: { _controller: Sl24Bundle:Meeting:editMeeting }

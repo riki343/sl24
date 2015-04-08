@@ -5,6 +5,7 @@ namespace Sl24Bundle\Entity;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sl24Bundle\Controller\MounthController;
 use Sl24Bundle\Entity\User;
 
 /**
@@ -120,5 +121,21 @@ class WorkingMonth
     public function getEndDate()
     {
         return $this->endDate;
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param $data
+     */
+    public static function addMounth($em, $data)
+    {
+        $mounth = new WorkingMonth();
+
+        $mounth->setName($data->name);
+        $mounth->setStartDate(\DateTime::createFromFormat('Y-m-d', date('Y-m-d', strtotime($data->startDate))));
+        $mounth->setEndDate(\DateTime::createFromFormat('Y-m-d', date('Y-m-d', strtotime($data->endDate))));
+
+        $em->persist($mounth);
+        $em->flush();
     }
 }

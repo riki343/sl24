@@ -2,6 +2,7 @@
 
 <div class="row">
     <div class="meeting-header">
+        <a class="meeting-header-nav" style="padding: 4px 8px; margin-right: 5px" data-toggle="modal" data-target="#add_new_work_mounth">Додати робочий місяць</a>
         <a class="meeting-header-nav" style="padding: 4px 8px;" data-toggle="modal" data-target="#add_new_meeting" ng-click="getMeetingsInfo();">Додати зустріч</a>
         <a class="meeting-header-nav" style="padding: 4px 8px; margin-left: 5px" data-toggle="modal" data-target="#history" ng-click="getMeetingsInfo();">Історія</a>
 
@@ -10,13 +11,9 @@
 
 <div class="row">
 
-
-
-
     <div class="col-md-12">
+
         <h1 class="page-header" style="margin: 15px 0px 20px">Зустрічі</h1>
-
-
 
         <div ng-init="getMeetings(userID);">
 
@@ -45,6 +42,7 @@
             </table>
 
             <div ng-include="templateMeetingsAddNew"></div>
+            <div ng-include="templateMounthAddNew"></div>
         </div>
     </div>
 </div>

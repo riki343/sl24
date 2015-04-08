@@ -10,11 +10,19 @@ Sl24.controller('MeetingController', ['$scope', '$http',
             'employmentType': null
         };
 
+        $scope.mounthForAdd = {
+            'name': null,
+            'startDate': null,
+            'endDate': null
+        };
+
         $scope.urlGetMeetings = URLS.getMeetings;
         $scope.urlGetMeetingsInfo = URLS.getMeetingsInfo;
         $scope.urlAddNewMeeting = URLS.addNewMeeting;
+        $scope.urlAddNewMounth = URLS.addNewMounth;
 
         $scope.templateMeetingsAddNew = TEMPLATES.meetingsAddNew;
+        $scope.templateMounthAddNew = TEMPLATES.mounthAddNew;
 
         $scope.getMeetings = function (user_id) {
             var meetingsUrl = $scope.urlGetMeetings.replace('user_id', user_id);
@@ -53,6 +61,25 @@ Sl24.controller('MeetingController', ['$scope', '$http',
                     }
                 }
             );
+        };
+
+        $scope.addMounth = function (mounth) {
+            if ($scope.mounthForAdd.name != null && $scope.mounthForAdd.startDate != null && $scope.mounthForAdd.endDate != null)
+            {
+                $('#add_new_work_mounth').modal('hide');
+                $http.post($scope.urlAddNewMounth, { 'mounth': mounth })
+                    .success(function (response) {
+                        if (response) {
+                            $scope.modalHeader = 'Успішно';
+                            $scope.modalBody = 'Новий робочий місяць додано.';
+                        } else {
+                            $scope.modalHeader = 'Помилка';
+                            $scope.modalBody = 'Невідома помилка.';
+                        }
+                        $('#new_mounth').modal('show');
+                    }
+                );
+            }
         };
     }
 ]);

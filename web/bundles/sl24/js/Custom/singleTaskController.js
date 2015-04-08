@@ -32,12 +32,12 @@ Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams',
                 .success(function (response) {
                     if (response) {
                         $scope.modalHeader = 'Успішно';
-                        $scope.modalBody = 'Інформація про зустріч успішно збережена.';
+                        $scope.modalBody = 'Інформація про завдання успішно збережена.';
                     } else {
                         $scope.modalHeader = 'Помилка';
                         $scope.modalBody = 'Невідома помилка.';
                     }
-                    $('#edit_meeting').modal('show');
+                    $('#edit_task').modal('show');
                 });
         };
 

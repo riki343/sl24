@@ -14,6 +14,7 @@
             'meeting': "{{ asset('bundles/sl24/templates/meeting.html') }}",
             'meetingEdit': "{{ asset('bundles/sl24/templates/meetingEdit.html') }}",
             'meetingsAddNew': "{{ asset('bundles/sl24/templates/meetingsAddNew.html') }}",
+            'mounthAddNew': "{{ asset('bundles/sl24/templates/addNewWorkMonths.html') }}",
             'main': "{{ asset('bundles/sl24/templates/main.html') }}",
             'tasks': "{{ asset('bundles/sl24/templates/tasks.html') }}",
             'task': "{{ asset('bundles/sl24/templates/taskPage.html') }}",
@@ -31,6 +32,7 @@
         URLS.saveMeeting = "{{ path('sl24_saveMeeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.getMeetingsInfo = "{{ path('sl24_getMeetingsInfo') }}";
         URLS.addNewMeeting = "{{ path('sl24_addMeeting') }}";
+        URLS.addNewMounth = "{{ path('sl24_addMounth') }}";
         URLS.addNewUser = "{{ path('sl_24_registration') }}";
         URLS.urlGetTeam = "{{ path('sl_24_get_team') }}";
 
