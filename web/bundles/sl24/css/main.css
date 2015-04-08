@@ -268,5 +268,17 @@ ul.sidebar-menu li a.active i {
 
 .history {
  margin-top: 20px;
-
+}
+.right-sitebar:hover{
+    -webkit-box-shadow: -4px 0px 14px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -4px 0px 14px 0px rgba(0,0,0,0.75);
+    box-shadow: -4px 0px 14px 0px rgba(0,0,0,0.75);
+}
+.main-content:hover{
+    -moz-box-shadow: 0 4px 12px rgba(0,0,0,.5);-webkit-box-shadow: 0 4px 12px rgba(0,0,0,.5);box-shadow: 0 4px 12px rgba(0,0,0,.5);
+}
+.left-sitebar:hover{
+    -webkit-box-shadow: 3px 0px 14px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 0px 14px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 0px 14px 0px rgba(0,0,0,0.75);
 }

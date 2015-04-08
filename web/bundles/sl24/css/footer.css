@@ -17,8 +17,11 @@ body {
   height: 72px;
   background-image: url("../img/bg.png");
 }
-
-
+.footer:hover{
+-webkit-box-shadow: -1px -4px 14px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -1px -4px 14px 0px rgba(0,0,0,0.75);
+box-shadow: -1px -4px 14px 0px rgba(0,0,0,0.75);
+}
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
