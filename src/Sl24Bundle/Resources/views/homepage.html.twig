@@ -22,7 +22,8 @@
             'taskTable': "{{ asset('bundles/sl24/templates/task-table.html') }}",
             'taskAgile': "{{ asset('bundles/sl24/templates/task-agile.html') }}",
             'taskAdd': "{{ asset('bundles/sl24/templates/taskAdd.html') }}",
-            'taskDelete': "{{ asset('bundles/sl24/templates/taskDelete.html') }}"
+            'taskDelete': "{{ asset('bundles/sl24/templates/taskDelete.html') }}",
+            'article': "{{ asset('bundles/sl24/templates/article.html') }}"
         };
 
         URLS.getMeetings = "{{ path('sl24_getMeetings', { 'user_id': 'user_id' }) }}";
@@ -44,4 +45,5 @@
     <script src="{{ asset('bundles/sl24/js/Custom/singleTaskController.js') }}"></script>
     <script src="{{ asset('bundles/sl24/js/Custom/teamController.js') }}"></script>
     <script src="{{ asset('bundles/sl24/js/Custom/registrationController.js') }}"></script>
+    <script src="{{ asset('bundles/sl24/js/Custom/articleController.js') }}"></script>
 {% endblock %}

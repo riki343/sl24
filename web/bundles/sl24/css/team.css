@@ -1,4 +1,9 @@
 .plus-team:hover
 {
+    margin-right: 10px;
     color:#AA1818;
+}
+.plus-team
+{
+    margin-right: 10px;
 }
