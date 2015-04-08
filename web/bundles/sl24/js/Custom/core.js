@@ -39,6 +39,10 @@ Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locati
                 templateUrl: TEMPLATES.registration,
                 controller: 'RegistrationController'
             })
+            .when('/article', {
+                templateUrl: TEMPLATES.article,
+                controller: 'ArticleController'
+            })
             .otherwise({
                 redirectTo: '/'
             });

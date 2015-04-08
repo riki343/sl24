@@ -15,9 +15,9 @@
     <tbody>
     <tr >
         <td style="padding-left:[[Team.marginrigth]]px ;">
-            <i ng-if="Team.childs != 0 && Team.visible == false" class="fa fa-plus plus-team" ng-click="showChildForTeam(Team,Team.lvl)"></i>
-            <i class="fa fa-minus plus-team" ng-if="Team.visible == true" ng-click="removeChildForTeam(Team,Team.lvl)"></i>
-            [[ Team.name ]] ([[Team.slNumber]])
+            <i ng-if="Team.childs != 0 && Team.visible == false" class="fa fa-plus plus-team" ng-click="showChildForTeam(Team,Team.lvl,Team.id)"></i>
+            <i class="fa fa-minus plus-team" ng-if="Team.visible == true" ng-click="removeChildForTeam(Team,Team.lvl,Team.id)"></i>
+           [[Team.surname]] [[ Team.name ]] ([[Team.slNumber]])
         </td>
         <td> [[Team.lvl]]</td>
         <td>[[Team.score]]</td>
@@ -42,9 +42,9 @@
     </tr>
     <tr  ng-repeat="child in childs" ng-if="child.visibleelem == true" >
         <td style="padding-left:[[child.marginrigth]]px ;">
-            <i ng-if="child.childs != 0  && child.visible == false" class="fa fa-plus plus-team" ng-click="showChildForTeam(child,child.lvl)"></i>
-            <i class="fa fa-minus plus-team" ng-if="child.visible == true" ng-click="removeChildForTeam(child,child.lvl)"></i>
-            [[ child.name ]]([[child.slNumber]])
+            <i ng-if="child.childs != 0  && child.visible == false" class="fa fa-plus plus-team" ng-click="showChildForTeam(child,child.lvl,child.id)"></i>
+            <i class="fa fa-minus plus-team" ng-if="child.visible == true" ng-click="removeChildForTeam(child,child.lvl,child.id)"></i>
+            [[child.surname]] [[ child.name ]]([[child.slNumber]])
         </td>
         <td> [[child.lvl]]</td>
         <td>[[child.score]]</td>
