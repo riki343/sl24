@@ -28,7 +28,17 @@ Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams',
         };
 
         $scope.saveTaskInfo = function (task) {
-            $scope.taskPromise = $http.post($scope.urlSaveTaskInfo, { 'task': task });
+            $scope.taskPromise = $http.post($scope.urlSaveTaskInfo, { 'task': task })
+                .success(function (response) {
+                    if (response) {
+                        $scope.modalHeader = 'Успішно';
+                        $scope.modalBody = 'Інформація про зустріч успішно збережена.';
+                    } else {
+                        $scope.modalHeader = 'Помилка';
+                        $scope.modalBody = 'Невідома помилка.';
+                    }
+                    $('#edit_meeting').modal('show');
+                });
         };
 
     }
