@@ -86,16 +86,23 @@ class Article
         srand((new \DateTime())->format('s'));
         $fs = new Filesystem();
         $random = null;
-        /** @var UploadedFile $article_img */
-        $article_img = $params['img'];
         while (true) {
             $random = rand(0, 9999999);
             if (!$fs->exists($random . 'jpg')) {
                 break;
             }
         }
-        $article_img->move(__DIR__ . '/../../../web/documents/', $random . '.jpg');
-        $article->setArticleImg('documents/'. $random . '.jpg');
+        /** @var UploadedFile $article_img */
+        if($params['img'] == null)
+        {
+            $article->setArticleImg('notimg');
+        }
+        else {
+            $article_img = $params['img'];
+
+            $article_img->move(__DIR__ . '/../../../web/documents/', $random . '.jpg');
+            $article->setArticleImg('documents/' . $random . '.jpg');
+        }
         $em->persist($article);
         $em->flush();
 

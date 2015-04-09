@@ -22,8 +22,11 @@ class ArticleController extends Controller
     public function getArticlesAction()
     {
         $articles = $this->getDoctrine()->getRepository('Sl24Bundle:Article')->findAll();
-        $articlesToJson = Functions::arrayToJson($articles);
-        return new JsonResponse($articlesToJson);
+
+        return new JsonResponse(array(
+            'articles' => Functions::arrayToJson($articles),
+            'user' => $this->getUser()->getInArray()
+        ));
     }
 
     public function addArticlesAction(Request $request)
