@@ -12,10 +12,11 @@
 
 <div class="col-md-12" ng-init="GetArticle()">
     <div class="row" ng-repeat="article in Articles">
-        <div class="col-md-2" style="margin-top: 26px;">
+        <div class="col-md-2 hidden-xs hidden-sm" style="margin-top: 26px;">
             <p class="text-center">
 
                 <img class="img-circle" width="60" src="/bundles/sl24/img/friends/fr-01.jpg"></img>
+<br>
                 <a href="#">Нікіта Ляшенко</a>
 
             </p>
@@ -23,7 +24,7 @@
         <div class="col-md-10 article-content">
             <a href="#"><h2>[[ article.articleTitle ]]</h2></a>
                 <div ng-if=" article.articleImg != 'notimg'">
-                    <img ng-src="[[asset + article.articleImg ]]" style="max-height: 420px;">
+                    <img ng-src="[[asset + article.articleImg ]]" style="max-height: 420px; max-width: 630px;">
                 </div>
             <p> [[ article.articleText ]]</p>
              <hr>

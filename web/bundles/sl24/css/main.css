@@ -292,3 +292,9 @@ ul.sidebar-menu li a.active i {
     font-size: 1.1em;
 }
 
+.meetings-info{
+ background-color: #fbfbfb;
+padding: 7px 0px 1px 13px;
+color: #B5B5B5;
+    border-bottom: 1px solid #DDD;
+}
