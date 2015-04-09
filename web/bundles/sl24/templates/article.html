@@ -1,4 +1,4 @@
-    <div ng-if="">
+    <div >
         <a class="btn btn-default"  data-toggle="modal" data-target="#add_new_article" >Додати Статтю </a>
     </div>
     <div class="modal fade" id="add_new_article" tabindex="-1">
@@ -39,11 +39,7 @@
                 <div>
                     <h4> [[ article.articleTitle ]]</h4>
                 </div>
-                <div>
-                    <p>
-                        <i> [[ article.articleText ]] </i>
-                    </p>
-                </div>
+                <div ng-bind-html="article.articleText"></div>
             </div>
         </div>
     </div>
