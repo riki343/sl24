@@ -7,3 +7,6 @@
 {
     margin-right: 10px;
 }
+.team-table i{
+    cursor: pointer;
+}

@@ -1,13 +1,17 @@
 <!-- Begin of Tasks -->
-<div class="row">
-    <div class="col-md-12" ng-init="getTasks()">
-        <div class="panel panel-default list-group" style="margin-top: 30px;">
-            <div class="list-group-item" style="background:#ddedf4; color:#606060;">
-                <i class="fa fa-tasks"></i>
-                <strong>Завдання</strong>
-            </div>
 
-            <div class="panel-body">
+
+<div class="row">
+    <div class="meeting-header">
+        <a class="meeting-header-nav" style="padding: 4px 8px;" data-toggle="modal" data-target="#add_new_task" ng-click="getMeetingsInfo();">Додати завдання</a>
+
+
+    </div>
+</div>
+
+
+    <div class="col-md-12" ng-init="getTasks()">
+        <h1 class="page-header" style="margin: 15px 0px 20px">Завдання</h1>
 
                 <!-- Begin of Task Nav Tabs -->
                 <div class="row">
@@ -25,11 +29,6 @@
                             </a>
                         </li>
 
-                        <li data-toggle="tooltip" data-placement="top" title="Add new task" role="presentation">
-                            <a id="add_new_task_btn" style="cursor: pointer" data-toggle="modal" data-target="#add_new_task">
-                                <i class="fa fa-plus fa-2x"></i>
-                            </a>
-                        </li>
 
                     </ul>
 
@@ -50,13 +49,13 @@
                     </div>
                     <!-- End Agile View -->
                 </div>
-            </div>
-        </div>
+
+
     </div>
 
     <div ng-include="taskAdd"></div>
 
     <div ng-include="taskDelete"></div>
 
-</div>
+
 <!-- End of Tasks -->

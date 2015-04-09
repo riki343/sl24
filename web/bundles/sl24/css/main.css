@@ -269,16 +269,26 @@ ul.sidebar-menu li a.active i {
 .history {
  margin-top: 20px;
 }
-.right-sitebar:hover{
-    -webkit-box-shadow: -4px 0px 14px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: -4px 0px 14px 0px rgba(0,0,0,0.75);
-    box-shadow: -4px 0px 14px 0px rgba(0,0,0,0.75);
-}
-.main-content:hover{
+
+.main-content{
+    min-height: 662px;
     -moz-box-shadow: 0 4px 12px rgba(0,0,0,.5);-webkit-box-shadow: 0 4px 12px rgba(0,0,0,.5);box-shadow: 0 4px 12px rgba(0,0,0,.5);
 }
-.left-sitebar:hover{
-    -webkit-box-shadow: 3px 0px 14px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 3px 0px 14px 0px rgba(0,0,0,0.75);
-    box-shadow: 3px 0px 14px 0px rgba(0,0,0,0.75);
+.article-content h2{
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-weight: bold;
 }
+.article-content a{
+     color: #000000;
+ }
+.article-content a:hover{
+    text-decoration: none;
+    color: #b71c1c;
+}
+
+.article-content p{
+    font-family: "Open Sans",Verdana,Tahoma,sans-serif;
+    color: #000;
+    font-size: 1.1em;
+}
+

@@ -1,51 +1,69 @@
-    <div ng-if="user.level > 3">
-        <a class="btn btn-default"  data-toggle="modal" data-target="#add_new_article" >Додати Статтю </a>
+<div class="row">
+    <div class="meeting-header" ng-if="user.level > 3">
+        <a class="meeting-header-nav" data-toggle="modal" data-target="#add_new_article" style="margin-left: 8px; padding: 4px 8px;">Додати Статтю </a>
+
+
     </div>
-    <div class="modal fade" id="add_new_article" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header label-danger">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" style="color: #f5f5f5;" align="center">
-                        Додати Статтю
-                    </h4>
+
+
+</div>
+
+
+
+<div class="col-md-12" ng-init="GetArticle()">
+    <div class="row" ng-repeat="article in Articles">
+        <div class="col-md-2" style="margin-top: 26px;">
+            <p class="text-center">
+
+                <img class="img-circle" width="60" src="/bundles/sl24/img/friends/fr-01.jpg"></img>
+                <a href="#">Нікіта Ляшенко</a>
+
+            </p>
+        </div>
+        <div class="col-md-10 article-content">
+            <a href="#"><h2>[[ article.articleTitle ]]</h2></a>
+                <div ng-if=" article.articleImg != 'notimg'">
+                    <img ng-src="[[asset + article.articleImg ]]" style="max-height: 420px;">
                 </div>
-                <form  method="post" action="[[urlAddArticle]]" enctype="multipart/form-data" target="_self">
-                    <div style="display: block;">
-                       <label>Заголовок:</label>
-                        <input type="text" name="article_title" >
-                    </div>
-                    <br>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-                    <input type="file" name="article_img" accept="image/*">
-                    <br>
-                    <div style="display: block;text-align: center;">
-                        <label>Стаття:</label>
-                        <i>
-                            <textarea name="article_text" style="height: 200px;width:100%;"></textarea>
-                        </i>
-                    </div>
-                    <button type="submit">Додати Статтю </button>
-                </form>
+            <p> [[ article.articleText ]]</p>
+             <hr>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="add_new_article" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header label-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="color: #f5f5f5;" align="center">
+                    Додати Статтю
+                </h4>
             </div>
+            <form  method="post" action="[[urlAddArticle]]" enctype="multipart/form-data" target="_self">
+                <div style="display: block;">
+                    <label>Заголовок:</label>
+                    <input type="text" name="article_title" >
+                </div>
+                <br>
+                <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+                <input type="file" name="article_img" accept="image/*">
+                <br>
+                <div style="display: block;text-align: center;">
+                    <label>Стаття:</label>
+                    <i>
+                        <textarea name="article_text" style="height: 200px;width:100%;"></textarea>
+                    </i>
+                </div>
+                <button type="submit">Додати Статтю </button>
+            </form>
         </div>
     </div>
-    <div class="col-md-12" style="height: 250px;margin-top: 25px;" ng-init="GetArticle()">
-        <div class="row" ng-repeat="article in Articles">
-            <div ng-if=" article.articleImg != 'notimg'" class="col-md-4" style="border: 1px solid blue;height: 250px;">
-               <img ng-src="[[asset + article.articleImg ]]" style="width: 100%; height:100%;">
-            </div>
-            <div class="col-md-8" style="border: 1px solid #ffff00; height: 250px;" >
-                <div>
-                    <h4> [[ article.articleTitle ]]</h4>
-                </div>
-                <div style="width: 100%;height: 100%;" >
-                    <p>
-                        <i>
-                            [[ article.articleText ]]
-                        </i>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>

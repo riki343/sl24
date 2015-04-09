@@ -1,15 +1,27 @@
-<table class="table"  ng-init="GetTeam()" >
-    <thead>
+
+<div class="row">
+    <div class="meeting-header">
+        <a class="meeting-header-nav" href="register" style="padding: 4px 8px;">Додати консультанта</a>
+    </div>
+</div>
+
+
+<h1 class="page-header" style="margin: 15px 0px 20px">Команда</h1>
+
+<div class="col-md-12">
+    <div class="row">
+<table class="table team-table table-striped"  ng-init="GetTeam()" >
+    <thead style="background-color: #fbfbfb; color: #262626;">
     <tr>
-        <th  class="col-md-3"> Ім'я: </th>
-        <th class="col-md-1">  Ціль на місяць: </th>
-        <th class="col-md-1"> Особисті одиниці: </th>
-        <th class="col-md-1"> Командні одиниці: </th>
-        <th class="col-md-1"> Зустрічі: </th>
-        <th style="text-align: center;" class="col-md-1"> Ручка </th>
-        <th style="text-align: center;" class="col-md-1"> Щоденник </th>
-        <th style="text-align: center;" class="col-md-1"> Запонки </th>
-        <th style="text-align: center;" class="col-md-1"> Годинник </th>
+        <th  class="col-md-3 table-bordered"> Ім'я: </th>
+        <th class="col-md-1 table-bordered">  Ціль </th>
+        <th class="col-md-1 table-bordered"> Особисті: </th>
+        <th class="col-md-1 table-bordered"> Командні: </th>
+        <th class="col-md-1 table-bordered"> Зустрічі: </th>
+        <th style="text-align: center;" class="col-md-1 table-bordered"> Ручка </th>
+        <th style="text-align: center;" class="col-md-1 table-bordered"> Щоденник </th>
+        <th style="text-align: center;" class="col-md-1 table-bordered"> Запонки </th>
+        <th style="text-align: center;" class="col-md-1 table-bordered"> Годинник </th>
     </tr>
     </thead>
     <tbody>
@@ -70,3 +82,5 @@
 
     </tbody>
 </table>
+    </div>
+</div>
