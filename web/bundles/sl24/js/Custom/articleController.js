@@ -1,11 +1,12 @@
-Sl24.controller('ArticleController', ['$scope', '$http', '$sce',
-    function ($scope, $http, $sce) {
+Sl24.controller('ArticleController', ['$scope', '$http', '$sce', '$routeParams',
+    function ($scope, $http, $sce, $routeParams) {
         $scope.urlGetArticle = URLS.urlGetArticle;
         $scope.urlAddArticle = URLS.urlAddArticle;
         $scope.Articles = [];
         $scope.user = [];
         $scope.img = null;
         $scope.asset = URLS.asset;
+        $scope.article_id = $routeParams.article_id;
 
         $scope.GetArticle = function () {
             $http.get($scope.urlGetArticle)
@@ -18,6 +19,13 @@ Sl24.controller('ArticleController', ['$scope', '$http', '$sce',
                         }
 
                 });
+        };
+
+        $scope.ShowFullArticle = function (id) {
+
+           var index = $.inArray(id,$scope.Articles);
+            console.log(id);
+            console.log($scope.Articles[index]);
         };
 
         console.log('ArticleController was loaded!!!')

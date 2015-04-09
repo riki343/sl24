@@ -35,12 +35,13 @@ class ArticleController extends Controller
             'title' => $request->request->get('article_title'),
             'text' => $request->request->get('article_text'),
             'img' => $request->files->get('article_img'),
+            'subtitle' => $request->request->get('article_sub_title'),
         );
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         /** @var User $user */
         $user = $this->getUser();
-        if($params['title'] != null or $params['text'] != null)
+        if($params['title'] != null or $params['text'] != null or $params['subtitle'] != null)
         {
         $article = Article::addNewArticle($em, $user->getId(), $params);
         }

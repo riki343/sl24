@@ -61,6 +61,12 @@ class Article
 
     /**
      * @var string
+     * @ORM\Column(name="article_sub_title", type="string", length=255)
+     */
+    private $articleSubTitle;
+
+    /**
+     * @var string
      * @ORM\Column(name="key_words", type="string", length=255, nullable=true, options={"default" = null})
      */
     private $keyWords;
@@ -81,6 +87,7 @@ class Article
         $article = new Article();
         $article->setArticleText($params['text']);
         $article->setArticleTitle($params['title']);
+        $article->setArticleSubTitle($params['subtitle']);
         $article->setUser($user);
 
         srand((new \DateTime())->format('s'));
@@ -112,11 +119,12 @@ class Article
     public function getInArray() {
         return array(
             'id' => $this->getId(),
-            'userID'=>$this->getUserID(),
+            'user'=>$this->getUser()->getInArray(),
             'created' => $this->getCreated()->format('Y-m-d'),
             'articleText' => $this->getArticleText(),
             'articleImg' => $this->getArticleImg(),
             'articleTitle' => $this->getArticleTitle(),
+            'articleSubTitle' => $this->getArticleSubTitle(),
             'keyWords' => $this->getKeyWords(),
         );
     }
@@ -290,5 +298,28 @@ class Article
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set articleSubTitle
+     *
+     * @param string $articleSubTitle
+     * @return Article
+     */
+    public function setArticleSubTitle($articleSubTitle)
+    {
+        $this->articleSubTitle = $articleSubTitle;
+    
+        return $this;
+    }
+
+    /**
+     * Get articleSubTitle
+     *
+     * @return string 
+     */
+    public function getArticleSubTitle()
+    {
+        return $this->articleSubTitle;
     }
 }
