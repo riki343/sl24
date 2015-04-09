@@ -69,6 +69,18 @@ sl_24_registration:
     path: /register_new_user
     defaults: { _controller: Sl24Bundle:Registration:registration }
 
+sl_24_get_article:
+    path: /article/get
+    defaults: { _controller: Sl24Bundle:Article:getArticles }
+
+sl_24_add_article:
+    path: /article/add
+    defaults: { _controller: Sl24Bundle:Article:addArticles }
+
+sl_24_get_articles_page:
+    path: /article
+    defaults: { _controller: Sl24Bundle:Index:index }
+
 
 #############################################################
 ################### Default Routes Block ####################

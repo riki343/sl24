@@ -1,7 +1,10 @@
 <?php
 
 namespace Sl24Bundle\Entity;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class Article
@@ -46,7 +49,7 @@ class Article
 
     /**
      * @var string
-     * @ORM\Column(name="article_img", type="string", length=255)
+     * @ORM\Column(name="article_img", type="string", length=255, nullable=true, options={"default" = null})
      */
     private $articleImg;
 
@@ -58,10 +61,58 @@ class Article
 
     /**
      * @var string
-     * @ORM\Column(name="key_words", type="string", length=255)
+     * @ORM\Column(name="key_words", type="string", length=255, nullable=true, options={"default" = null})
      */
     private $keyWords;
 
+    public function __construct() {
+        $this->created = new \DateTime();
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param int $user_id
+     * @param array $params
+     * @return Article
+     */
+    public static function addNewArticle(EntityManager $em, $user_id, $params)
+    {
+        $user = $em->getRepository('Sl24Bundle:User')->find($user_id);
+        $article = new Article();
+        $article->setArticleText($params['text']);
+        $article->setArticleTitle($params['title']);
+        $article->setUser($user);
+
+        srand((new \DateTime())->format('s'));
+        $fs = new Filesystem();
+        $random = null;
+        /** @var UploadedFile $article_img */
+        $article_img = $params['img'];
+        while (true) {
+            $random = rand(0, 9999999);
+            if (!$fs->exists($random . 'jpg')) {
+                break;
+            }
+        }
+        $article_img->move(__DIR__ . '/../../../web/documents/', $random . '.jpg');
+        $article->setArticleImg('documents/'. $random . '.jpg');
+        $em->persist($article);
+        $em->flush();
+
+        return $article;
+    }
+
+    public function getInArray() {
+        return array(
+            'id' => $this->getId(),
+            'userID'=>$this->getUserID(),
+            'created' => $this->getCreated()->format('Y-m-d'),
+            'articleText' => $this->getArticleText(),
+            'articleImg' => $this->getArticleImg(),
+            'articleTitle' => $this->getArticleTitle(),
+            'keyWords' => $this->getKeyWords(),
+        );
+    }
 
     /**
      * Get id
