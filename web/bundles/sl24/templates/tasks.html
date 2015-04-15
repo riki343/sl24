@@ -1,61 +1,57 @@
-<!-- Begin of Tasks -->
-
 
 <div class="row">
     <div class="meeting-header">
-        <a class="meeting-header-nav" style="padding: 4px 8px;" data-toggle="modal" data-target="#add_new_task" ng-click="getMeetingsInfo();">Додати завдання</a>
-
-
+        <a class="meeting-header-nav" style="padding: 4px 8px; margin-right: 5px" data-toggle="modal" data-target="#add_new_task">Додати завдання</a>
     </div>
 </div>
 
+<!-- Begin of Tasks -->
 
-    <div class="col-md-12" ng-init="getTasks()">
-        <h1 class="page-header" style="margin: 15px 0px 20px">Завдання</h1>
+<div class="col-md-12" ng-init="getTasks()">
+    <h1 class="page-header" style="margin: 15px 0 20px">Завдання</h1>
 
-                <!-- Begin of Task Nav Tabs -->
-                <div class="row">
+    <!-- Begin of Task Nav Tabs -->
+    <div class="row">
 
-                    <ul id="task-view-tabs" class="nav nav-tabs" role="tablist">
-                        <li data-toggle="tooltip" data-placement="top" title="Table view" role="presentation" class="active">
-                            <a data-toggle="tab" id="task-view-table" class="btn" data-target="#table-view" aria-controls="table-view" role="tab" aria-expanded="true">
-                                <i class="fa fa-table fa-2x"></i>
-                            </a>
-                        </li>
+        <ul id="task-view-tabs" class="nav nav-tabs" role="tablist">
+            <li data-toggle="tooltip" data-placement="top" title="Table view" role="presentation" class="active">
+                <a data-toggle="tab" id="task-view-table" class="btn" data-target="#table-view" aria-controls="table-view" role="tab" aria-expanded="true">
+                    <i class="fa fa-table fa-2x"></i>
+                </a>
+            </li>
 
-                        <li data-toggle="tooltip" data-placement="top" title="Agile view" role="presentation">
-                            <a data-toggle="tab" id="task-view-agile"  class="btn" data-target="#agile-view" aria-controls="agile-view" role="tab" aria-expanded="false">
-                                <i class="fa fa-th fa-2x"></i>
-                            </a>
-                        </li>
+            <li data-toggle="tooltip" data-placement="top" title="Agile view" role="presentation">
+                <a data-toggle="tab" id="task-view-agile"  class="btn" data-target="#agile-view" aria-controls="agile-view" role="tab" aria-expanded="false">
+                    <i class="fa fa-th fa-2x"></i>
+                </a>
+            </li>
 
+        </ul>
 
-                    </ul>
+        <!-- End of Task Nav Tabs -->
 
-                </div>
-                <!-- End of Task Nav Tabs -->
+        <div id="tasks-tab-content" class="tab-content">
 
-                <div id="tasks-tab-content" class="tab-content">
+            <!-- Table View -->
+            <div id="table-view" style="min-height: 350px;" class="tab-pane fade in active" role="tabpanel">
+                <div ng-include="taskTable"></div>
+            </div>
+            <!-- End Table View -->
 
-                    <!-- Table View -->
-                    <div id="table-view" style="min-height: 350px;" class="tab-pane fade in active" role="tabpanel">
-                        <div ng-include="taskTable"></div>
-                    </div>
-                    <!-- End Table View -->
-
-                    <!-- Agile View -->
-                    <div id="agile-view" style="min-height: 350px;" class="tab-pane fade" role="tabpanel">
-                        <div ng-include="taskAgile"></div>
-                    </div>
-                    <!-- End Agile View -->
-                </div>
-
-
+            <!-- Agile View -->
+            <div id="agile-view" style="min-height: 350px;" class="tab-pane fade" role="tabpanel">
+                <div ng-include="taskAgile"></div>
+            </div>
+            <!-- End Agile View -->
+        </div>
     </div>
 
-    <div ng-include="taskAdd"></div>
 
-    <div ng-include="taskDelete"></div>
+</div>
+
+<div ng-include="taskAdd"></div>
+
+<div ng-include="taskDelete"></div>
 
 
 <!-- End of Tasks -->
