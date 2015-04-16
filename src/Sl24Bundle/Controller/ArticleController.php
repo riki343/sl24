@@ -29,6 +29,16 @@ class ArticleController extends Controller
         ));
     }
 
+    public function getFullArticlesAction($id)
+    {
+        $articles = $this->getDoctrine()->getRepository('Sl24Bundle:Article')->find($id);
+    var_dump($articles);
+        return new JsonResponse(array(
+            'article' => Functions::arrayToJson($articles),
+            'user' => $this->getUser()->getInArray()
+        ));
+    }
+
     public function addArticlesAction(Request $request)
     {
         $params = array(

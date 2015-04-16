@@ -7,6 +7,7 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
         $scope.urlGetMeeting = URLS.getMeeting;
         $scope.urlGetMeetingsInfo = URLS.getMeetingsInfo;
         $scope.urlSaveMeeting = URLS.saveMeeting;
+        $scope.urlRemoveMeeting =  URLS.removeMeeting;
 
         $scope.getMeeting = function (meeting_id) {
             var meetingUrl = $scope.urlGetMeeting.replace('meeting_id', meeting_id);
@@ -44,5 +45,17 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
                 }
             );
         };
+        $scope.removeMeeting = function (id) {
+            var removeMeetingUrl = $scope.urlRemoveMeeting.replace('meeting_id', id);
+            $http.get(removeMeetingUrl)
+                .success(function (response) {
+                    if(response)
+                    {
+                        location.href = '/meetings'
+                    }
+                }
+            );
+        }
+
     }
 ]);

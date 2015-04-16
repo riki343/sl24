@@ -1,35 +1,24 @@
 
 <div class="row">
+    <div class="meeting-header">
+        <a class="meeting-header-nav" ng-href="/meeting/[[ meetingEdit.id ]]"><i class="fa fa-angle-left"></i></a>
+        <div class="breadcrumb-bg">
+            <i class="fa fa-globe"></i> |
+            <a ng-href="/meetings"> Зустрічі</a>
+            <i class="fa fa-angle-right" style="color: #337AB7;"></i>
+            <a ng-href="/meeting/[[ meetingEdit.id ]]"> [[ meeting.credentials ]]</a>
+            <i class="fa fa-angle-right" style="color: #337AB7;"></i>
+            Редагування
 
-<div class="meeting-header">
-    <a class="meeting-header-nav" ng-href="/meeting/[[ meetingEdit.id ]]"><i class="fa fa-angle-left"></i></a>
-
-    <div class="breadcrumb-bg">
-        <i class="fa fa-globe"></i> |
-        <a ng-href="/meetings"> Зустрічі</a>
-        <i class="fa fa-angle-right" style="color: #337AB7;"></i>
-        <a ng-href="/meeting/[[ meetingEdit.id ]]"> [[ meeting.credentials ]]</a>
-        <i class="fa fa-angle-right" style="color: #337AB7;"></i>
-        Редагування
-
+        </div>
     </div>
-
 </div>
-
-</div>
-
-
-
-
 <div ng-init="getMeetingsInfo(); getMeeting(meeting_id)"></div>
-
-
 <br>
-
 
 <form class="form-horizontal">
     <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label"">П.І.Б Клієнта</label>
+        <label class="col-sm-2 control-label">П.І.Б Клієнта</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" ng-model="meetingEdit.credentials"/>
         </div>
@@ -151,13 +140,12 @@
             <span class="sr-only">40% Complete (success)</span>
         </div>
     </div>
-
-
 </form>
 
-
-<button type="button" ng-click="saveMeeting(meetingEdit);">Зберегти</button><br/>
-
+<div class="btn-group">
+    <button type="button" class="btn btn-default btn-success" ng-click="saveMeeting(meetingEdit);">Зберегти</button>
+    <button type="button" class="btn btn-default btn-danger" ng-click="removeMeeting(meetingEdit.id);">Видалити</button>
+</div>
 
 <div class="modal fade" id="edit_meeting" tabindex="-1">
     <div class="modal-dialog">

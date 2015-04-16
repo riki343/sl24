@@ -31,12 +31,14 @@
         URLS.getMeetings = "{{ path('sl24_getMeetings', { 'user_id': 'user_id' }) }}";
         URLS.getMeeting = "{{ path('sl24_getMeeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.saveMeeting = "{{ path('sl24_saveMeeting', { 'meeting_id': 'meeting_id' }) }}";
+        URLS.removeMeeting = "{{ path('sl24_removeMeeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.getMeetingsInfo = "{{ path('sl24_getMeetingsInfo') }}";
         URLS.addNewMeeting = "{{ path('sl24_addMeeting') }}";
         URLS.addNewMounth = "{{ path('sl24_addMounth') }}";
         URLS.addNewUser = "{{ path('sl_24_registration') }}";
         URLS.urlGetTeam = "{{ path('sl_24_get_team') }}";
         URLS.urlGetArticle = "{{ path('sl_24_get_article') }}";
+        URLS.urlGetFullArticle = "{{ path('sl_24_get_full_article', { 'id': 0 }) }}";
         URLS.urlAddArticle = "{{ path('sl_24_add_article') }}";
 
         var USER_ID = {{ app.user.id }};

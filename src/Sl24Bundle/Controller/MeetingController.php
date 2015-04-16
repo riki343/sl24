@@ -76,6 +76,15 @@ class MeetingController extends Controller
         return new JsonResponse($meeting->getInArray());
     }
 
+    public function removeMeetingAction(Request $request, $meeting_id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $meeting = $em->find('Sl24Bundle:Meeting', $meeting_id);
+        $em->remove($meeting);
+        $em->flush();
+        return new JsonResponse(true);
+    }
+
     /**
      * @Security("has_role('ROLE_USER')")
      * @return JsonResponse

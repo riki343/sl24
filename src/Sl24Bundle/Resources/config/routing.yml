@@ -33,6 +33,10 @@ sl24_saveMeeting:
     pattern: /meeting/save/{meeting_id}
     defaults: { _controller: Sl24Bundle:Meeting:editMeeting }
 
+sl24_removeMeeting:
+    pattern: /meeting/remove/{meeting_id}
+    defaults: { _controller: Sl24Bundle:Meeting:removeMeeting }
+
 sl24_getMeetingsInfo:
     path: /meetings/getmeetingsInfo
     defaults: { _controller: Sl24Bundle:Meeting:getMeetingsInfo }
@@ -72,6 +76,11 @@ sl_24_registration:
 sl_24_get_article:
     path: /article/get
     defaults: { _controller: Sl24Bundle:Article:getArticles }
+
+
+sl_24_get_full_article:
+    path: /article/getfull/{id}
+    defaults: { _controller: Sl24Bundle:Article:getFullArticles }
 
 sl_24_add_article:
     path: /article/add
