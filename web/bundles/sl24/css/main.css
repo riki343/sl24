@@ -298,3 +298,6 @@ padding: 7px 0px 1px 13px;
 color: #B5B5B5;
     border-bottom: 1px solid #DDD;
 }
+.meetings-info li{
+    border-right: 1px solid #dddddd ;
+}

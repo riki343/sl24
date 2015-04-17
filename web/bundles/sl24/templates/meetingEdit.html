@@ -1,7 +1,8 @@
-
 <div class="row">
+
     <div class="meeting-header">
         <a class="meeting-header-nav" ng-href="/meeting/[[ meetingEdit.id ]]"><i class="fa fa-angle-left"></i></a>
+
         <div class="breadcrumb-bg">
             <i class="fa fa-globe"></i> |
             <a ng-href="/meetings"> Зустрічі</a>
@@ -11,25 +12,44 @@
             Редагування
 
         </div>
+
     </div>
+
 </div>
+
+
+
+
 <div ng-init="getMeetingsInfo(); getMeeting(meeting_id)"></div>
+
+
 <br>
 
+
+
+
+
 <form class="form-horizontal">
+    <h4>Основна інформація</h4>
+    <hr>
     <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">П.І.Б Клієнта</label>
+        <label class="col-sm-2 control-label"">П.І.Б Клієнта</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" ng-model="meetingEdit.credentials"/>
         </div>
     </div>
 
     <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">Дирекція</label>
+        <label class="col-sm-2 control-label"">П.І.Б Партнера</label>
         <div class="col-sm-10">
-            <select class="form-control" ng-model="meetingEdit.assistant">
-                <option ng-repeat="assistant in meetingsInfo.assistants" value="[[ assistant.id ]]">[[ assistant.username ]]</option>
-            </select>
+            <input type="text" class="form-control" ng-model="meetingEdit.credentials"/>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Дата зустрічі</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="date" ng-model="meetingEdit.date"/>
         </div>
     </div>
 
@@ -43,29 +63,54 @@
     </div>
 
 
+
     <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">Вид зайнятості</label>
+        <label class="col-sm-2 control-label">Прогрес зустрічі</label>
         <div class="col-sm-10">
-            <select class="form-control" ng-model="meetingEdit.employmentType.id">
-                <option ng-repeat="type in meetingsInfo.employmentTypes" value="[[ type.id ]]">[[ type.label ]]</option>
-            </select>
+
+            <div class="col-sm-10" style="padding-top: 10px">
+                <div class="row">
+                    <div class="progress form-group-sm" style="height: 30px;">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                            <span class="sr-only">40% Complete (success)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2" style="padding-top: 10px">
+
+                <select class="form-control" ng-model="meetingEdit.progress">
+                    <option value="0">0%</option>
+                    <option value="10">10%</option>
+                    <option value="20">20%</option>
+                    <option value="30">30%</option>
+                    <option value="40">40%</option>
+                    <option value="50">50%</option>
+                    <option value="60">60%</option>
+                    <option value="70">70%</option>
+                    <option value="80">80%</option>
+                    <option value="90">90%</option>
+                    <option value="100">100%</option>
+                </select>
+
+            </div>
+
+
         </div>
     </div>
 
 
-        <div class="form-group form-group-sm">
-            <label class="col-sm-2 control-label">Вік клієнта</label>
-            <div class="col-sm-10">
-                <input class="form-control" type="number" ng-model="meetingEdit.age"/>
-            </div>
-        </div>
 
-        <div class="form-group form-group-sm">
-            <label class="col-sm-2 control-label">Вік клієнта</label>
-            <div class="col-sm-10">
-                <input class="form-control" type="number" ng-model="meetingEdit.age"/>
-            </div>
-        </div>
+
+
+    <div class="col-sm-12" style="border-bottom: 1px solid #EEE; padding: 0px 0px 10px 0px;">
+        <h4>Додаткова Інформація</h4>
+    </div>
+
+
+
+    <br><br><br><br>
 
     <div class="form-group form-group-sm">
         <label class="col-sm-2 control-label">Дата народження клієнта</label>
@@ -75,30 +120,52 @@
     </div>
 
     <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">Дата зустрічі</label>
+        <label class="col-sm-2 control-label">Вік клієнта</label>
         <div class="col-sm-10">
-            <input class="form-control" type="date" ng-model="meetingEdit.date"/>
+            <input class="form-control" type="number" ng-model="meetingEdit.age"/>
         </div>
     </div>
 
     <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">Ціна контракту</label>
+        <label class="col-sm-2 control-label">Вид зайнятості</label>
         <div class="col-sm-10">
-            <input class="form-control" type="text" ng-model="meetingEdit.price"/>
+            <select class="form-control" ng-model="meetingEdit.employmentType.id">
+                <option ng-repeat="type in meetingsInfo.employmentTypes" value="[[ type.id ]]">[[ type.label ]]</option>
+            </select>
         </div>
     </div>
 
-    <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">Ціна контракту</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="text" ng-model="meetingEdit.price"/>
-        </div>
+    <!--<div class="form-group form-group-sm">-->
+    <!--<label class="col-sm-2 control-label">Дирекція</label>-->
+    <!--<div class="col-sm-10">-->
+    <!--<select class="form-control" ng-model="meetingEdit.assistant">-->
+    <!--<option ng-repeat="assistant in meetingsInfo.assistants" value="[[ assistant.id ]]">[[ assistant.username ]]</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+
+
+    <div class="col-sm-12" style="border-bottom: 1px solid #EEE; padding: 0px 0px 10px 0px;">
+        <h4>Контракт</h4>
     </div>
+
+    <br><br><br><br>
+
+
 
     <div class="form-group form-group-sm">
         <label class="col-sm-2 control-label">Дата оплати</label>
         <div class="col-sm-10">
             <input class="form-control" type="date" ng-model="meetingEdit.payDate"/>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Ціна контракту</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" ng-model="meetingEdit.price"/>
         </div>
     </div>
 
@@ -109,43 +176,25 @@
         </div>
     </div>
 
-    <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">Дата оплати</label>
-        <div class="col-sm-10">
-            <input class="form-control" type="date" ng-model="meetingEdit.payDate"/>
-        </div>
+
+
+
+
+
+
+
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-default btn-success" ng-click="saveMeeting(meetingEdit);">Зберегти</button>
+        <button type="button" class="btn btn-default btn-danger" ng-click="removeMeeting(meetingEdit.id);">Видалити</button>
     </div>
 
-    <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">Прогрес зустрічі</label>
-        <div class="col-sm-10">
-            <select class="form-control" ng-model="meetingEdit.progress">
-                <option value="0">0%</option>
-                <option value="10">10%</option>
-                <option value="20">20%</option>
-                <option value="30">30%</option>
-                <option value="40">40%</option>
-                <option value="50">50%</option>
-                <option value="60">60%</option>
-                <option value="70">70%</option>
-                <option value="80">80%</option>
-                <option value="90">90%</option>
-                <option value="100">100%</option>
-            </select>
-        </div>
-    </div>
 
-    <div class="progress form-group-sm">
-        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-            <span class="sr-only">40% Complete (success)</span>
-        </div>
-    </div>
+
 </form>
 
-<div class="btn-group">
-    <button type="button" class="btn btn-default btn-success" ng-click="saveMeeting(meetingEdit);">Зберегти</button>
-    <button type="button" class="btn btn-default btn-danger" ng-click="removeMeeting(meetingEdit.id);">Видалити</button>
-</div>
+<br/>
+
 
 <div class="modal fade" id="edit_meeting" tabindex="-1">
     <div class="modal-dialog">

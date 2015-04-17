@@ -24,7 +24,8 @@
         <div class="col-md-10 article-content">
             <a href="/fullArticle/[[ article.id ]]"><h2>[[ article.articleTitle ]]</h2></a>
                 <div ng-if=" article.articleImg != 'notimg'">
-                    <img ng-src="[[asset + article.articleImg ]]" style="max-height: 420px; max-width: 630px;">
+                    <img class="hidden-xs" ng-src="[[asset + article.articleImg ]]" style="max-height: 420px; max-width: 630px;">
+                    <img class="visible-xs" ng-src="[[asset + article.articleImg ]]" style="max-height: 420px; max-width: 300px;">
                 </div>
             <p> [[ article.articleSubTitle ]]</p>
              <hr>

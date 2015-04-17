@@ -18,9 +18,9 @@
 
 <div ng-init="getMeeting(meeting_id)"></div>
 
-<h1 class="page-header" style="margin: 15px 0px 20px">Зустріч з Нікіта Ляшенко</h1>
+<h1 class="page-header" style="margin: 15px 0px 20px">[[ meeting.credentials ]]</h1>
 
-<div class="col-lg-offset-3 col-md-offset-4 col-sm-offset-4">
+<div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4">
     <div class="table-user-kleint">
         <a href="#" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
             <img class="img-circle"  src="bundles/sl24/img/user.png" height="80px">
@@ -48,18 +48,23 @@
     <img src="/bundles/sl24/img/stol.png">
 </div>
 
-<h3 class="text-center">Інформація</h3>
+<br><br>
+
 
 <div class="col-md-12">
 
+
     <ul class="list-group">
+
+
+
+        <li class="list-group-item">
+            <h4 class="text-center"> Основна інформація</h4>
+        </li>
+
         <li class="list-group-item">
             <span class="badge" >[[ meeting.credentials ]]</span>
             <strong> П.І.Б Клієнта:</strong>
-        </li>
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.assistant.name ]]</span>
-            <strong>Дирекція:</strong>
         </li>
         <li class="list-group-item">
             <span class="badge">[[ meeting.status.label ]]</span>
@@ -74,16 +79,25 @@
             <strong>Вік клієнта:</strong>
         </li>
         <li class="list-group-item">
+            <h5 class="text-center"> Додаткова інформація</h5>
+        </li>
+        <li class="list-group-item">
             <span class="badge">[[ meeting.clientBirthday.date ]]</span>
             <strong>Дата народження клієнта:</strong>
         </li>
         <li class="list-group-item">
             <span class="badge">[[ meeting.date ]]</span>
             <strong>Дата зустрічі:</strong>
-        </li><li class="list-group-item">
-        <span class="badge">[[ meeting.price ]]</span>
-        <strong>Ціна контракту:</strong>
-    </li>
+        </li>
+
+        <li class="list-group-item">
+            <h5 class="text-center"> Контракт</h5>
+        </li>
+        <li class="list-group-item">
+            <span class="badge">[[ meeting.price ]]</span>
+            <strong>Ручна премія:</strong>
+        </li>
+
         <li class="list-group-item">
             <span class="badge">[[ meeting.payDate ]]</span>
             <strong>Дата оплати:</strong>
