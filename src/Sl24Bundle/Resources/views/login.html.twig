@@ -1,8 +1,6 @@
 {% extends '@Sl24/layout.html.twig' %}
 
 {% block body %}
-
-
     <nav class="navbar navbar-default" style="margin-bottom:0;">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -18,56 +16,42 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#">Ввійти</a>
+                        <a href="{{ path('sl24_login') }}">Ввійти</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-
-
     <div class="wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-
-
-                    <div class="col-lg-offset-3" style="margin-top: 50px;">
-                        <iframe class="embed-responsive-item"  width="600" height="400" src="https://www.youtube.com/embed/5Q868tPz0zs" frameborder="0" allowfullscreen></iframe>
-                    </div>
-
-
-
+                <div class="col-xs-10 col-xs-offset-1">
                     <div class="page-header">
                         <h2>Вхід</h2>
                     </div>
-                    <form class="form-horizontal" action="{{ path('sl24_login_check') }}" method="post">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Введіть логін/email" name="_username" value="{{ last_username }}">
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <form class="form-horizontal" action="{{ path('sl24_login_check') }}" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Введіть логін/email" name="_username" value="{{ last_username }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Введіть пароль" name="_password">
+                                </div>
+                                {% if error %}
+                                    <div class="alert alert-danger">
+                                        {{ error.message }}
+                                    </div>
+                                {% endif %}
+
+                                <div class="form-footer">
+                                    <input type="hidden" name="_target_path" value="/user" />
+                                    <button type="submit" class="btn btn-info pull-right btn-submit">Логін</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Введіть пароль" name="_password">
-                        </div>
-                        {% if error %}
-                            <div class="alert alert-danger">
-                                {{ error.message }}
-                            </div>
-                        {% endif %}
-
-                        <div class="form-footer">
-                            <input type="hidden" name="_target_path" value="/" />
-                            <button type="submit" class="btn btn-info pull-right btn-submit">Логін</button>
-                        </div>
-                    </form>
-
-
-
-
-
-
-
-
+                    </div>
                 </div>
             </div>
         </div>

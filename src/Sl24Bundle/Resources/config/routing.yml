@@ -2,6 +2,10 @@ sl24_homepage:
     path: /
     defaults: { _controller: Sl24Bundle:Index:index }
 
+sl24_user_homepage:
+    path: /user
+    defaults: { _controller: Sl24Bundle:Index:user }
+
 sl24_login:
     path: /login
     defaults: { _controller: Sl24Bundle:Index:login }

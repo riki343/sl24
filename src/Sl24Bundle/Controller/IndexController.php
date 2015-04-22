@@ -12,13 +12,22 @@ use Symfony\Component\HttpFoundation\Response;
 class IndexController extends Controller
 {
     /**
-     * @Security("has_role('ROLE_USER')")
      * @Route("/")
      * @return Response
      */
-    public function indexAction()
-    {
-        $parents = [];
+    public function indexAction() {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('sl24_user_homepage');
+        }
+        return $this->render('@Sl24/wellcome.html.twig');
+    }
+
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     * @return Response
+     */
+    public function userAction() {
+        $parents = array();
         /** @var User $user */
         $user = $this->getUser();
         while ($user->getParent()) {
