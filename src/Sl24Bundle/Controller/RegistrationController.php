@@ -16,20 +16,23 @@ class RegistrationController extends Controller
     public function registrationAction(Request $request) {
         $data = json_decode($request->getContent(), true);
         $parameters = (object)$data['info'];
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
         /** @var User $user */
         $user = $this->getUser();
+        $director = $em->getRepository('Sl24Bundle:User')->findOneBy(array('slNumber' => $parameters->parent));
+        if (!$director) return new JsonResponse(-3);
         if ($user->getLevel() >= 3 && $parameters->pass == $parameters->rpass) {
-            /** @var EntityManager $em */
-            $em = $this->getDoctrine()->getManager();
+
             $encoderFactory = $this->get('security.encoder_factory');
             try {
                 User::addUser($em, $encoderFactory, $parameters);
             } catch (\Exception $ex) {
-                return new JsonResponse(false);
+                return new JsonResponse(-1);
             }
-            return new JsonResponse(true);
+            return new JsonResponse(1);
         } else {
-            return new JsonResponse(false);
+            return new JsonResponse(-2);
         }
     }
 }

@@ -36,25 +36,32 @@ Sl24.controller('RegistrationController', ['$scope', '$http',
             }
             $http.post($scope.urlAddNewUser, { 'info': info })
                 .success(function (response) {
-                    if (response) {
-                        $scope.addedUser = $scope.addUser.login;
-                        $scope.modalHeader = "Успішно виконано!";
-                        $scope.modalBody = "Користувач " + $scope.addedUser + " успішно доданий";
+                    switch (response) {
+                        case 1:
+                            $scope.addedUser = $scope.addUser.login;
+                            $scope.modalHeader = "Успішно виконано!";
+                            $scope.modalBody = "Користувач " + $scope.addedUser + " успішно доданий";
 
-                        $scope.addUser.login = null;
-                        $scope.addUser.pass = null;
-                        $scope.addUser.rpass = null;
-                        $scope.addUser.email = null;
-                        $scope.addUser.slNumber = null;
-                        $scope.addUser.score = 0;
-                        $scope.addUser.teamScore = 0;
-                        $scope.addUser.parker = false;
-                        $scope.addUser.diary = false;
-                        $scope.addUser.cufflinks = false;
-                        $scope.addUser.watches = false;
-                    } else {
-                        $scope.modalHeader = "Помилка!";
-                        $scope.modalBody = null;
+                            $scope.addUser.login = null;
+                            $scope.addUser.pass = null;
+                            $scope.addUser.rpass = null;
+                            $scope.addUser.email = null;
+                            $scope.addUser.slNumber = null;
+                            $scope.addUser.score = 0;
+                            $scope.addUser.teamScore = 0;
+                            $scope.addUser.parker = false;
+                            $scope.addUser.diary = false;
+                            $scope.addUser.cufflinks = false;
+                            $scope.addUser.watches = false;
+                            break;
+                        case -1:
+                            $scope.modalHeader = "Помилка!";
+                            $scope.modalBody = null;
+                            break;
+                        case -2:
+                            $scope.modalHeader = "Помилка!";
+                            $scope.modalBody = 'Неправильний Sl-номер керівника';
+                            break;
                     }
 
                     $('#add_new_user').modal('show');

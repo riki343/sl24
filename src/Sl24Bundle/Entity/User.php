@@ -273,7 +273,7 @@ class User implements UserInterface, \Serializable
     {
         /** @var User $parent */
         $parent = $em->getRepository('Sl24Bundle:User')
-            ->findOneBy(array('directorNumber' => $parameters->directorNumber));
+            ->findOneBy(array('slNumber' => $parameters->parent));
         /** @var User $user */
         $user = new User();
         $encoder = $encoderFactory->getEncoder($user);
