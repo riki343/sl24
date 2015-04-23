@@ -1,5 +1,8 @@
-<div ng-init="ShowFullArticle(article_id)"></div>
+<div ng-init="ShowFullArticle(article_id)">
+    <h2>[[Article.articleTitle ]]</h2>
+    <div ng-if=" Article.articleImg != 'notimg'">
+        <img ng-src="[[asset + Article.articleImg ]]" style="max-height: 420px; max-width: 630px;">
+    </div>
+    <div ng-bind-html=" Article.articleText"> </div>
+</div>
 
-<p></p>
-<p></p>
-<p></p>

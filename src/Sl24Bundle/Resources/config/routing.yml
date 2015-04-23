@@ -83,7 +83,7 @@ sl_24_get_article:
 
 
 sl_24_get_full_article:
-    path: /article/getfull/{id}
+    path: /article/get/full/{id}
     defaults: { _controller: Sl24Bundle:Article:getFullArticles }
 
 sl_24_add_article:

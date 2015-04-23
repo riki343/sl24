@@ -43,7 +43,7 @@ Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locati
                 templateUrl: TEMPLATES.article,
                 controller: 'ArticleController'
             })
-            .when('/fullArticle/:article_id', {
+            .when('/article/getfull/:article_id', {
                 templateUrl: TEMPLATES.fullArticle,
                 controller: 'ArticleController'
             })

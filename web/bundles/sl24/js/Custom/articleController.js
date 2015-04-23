@@ -24,9 +24,11 @@ Sl24.controller('ArticleController', ['$scope', '$http', '$sce', '$routeParams',
         };
 
         $scope.ShowFullArticle = function (id) {
-            $http.get($scope.urlGetFullArticle.replace('0', id))
+            var urlGetFullArticle = $scope.urlGetFullArticle.replace('0', id)
+            $http.get(urlGetFullArticle)
                 .success(function (response){
                     $scope.Article =  response.article ;
+                    $scope.Article.articleText = $sce.trustAsHtml($scope.Article.articleText);
                 }
             );
         };
