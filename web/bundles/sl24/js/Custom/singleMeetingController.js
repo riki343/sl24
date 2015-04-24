@@ -51,7 +51,7 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
                 .success(function (response) {
                     if(response)
                     {
-                        location.href = '/meetings'
+                        location.href = '/consultant/meetings'
                     }
                 }
             );
