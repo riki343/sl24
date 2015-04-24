@@ -14,7 +14,8 @@ Sl24.controller('RegistrationController', ['$scope', '$http',
             'diary': false,
             'cufflinks': false,
             'watches': false,
-            'directorNumber': null
+            'directorNumber': null,
+            'level': 1
         };
 
         $scope.modalHeader = null;

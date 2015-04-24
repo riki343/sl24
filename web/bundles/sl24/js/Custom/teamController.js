@@ -19,14 +19,15 @@ Sl24.controller('TeamController', ['$scope', '$http',
 
         function tree(elem,lvl,marginrigth)
         {
-         for(var i=0;i < elem.childs.length;i++)
-         {
-             elem.childs[i].lvl = lvl + 1;
-             elem.childs[i].visible = false;
-             elem.childs[i].marginrigth = marginrigth + 8;
-             $scope.childs.push(elem.childs[i]) ;
-            tree(elem.childs[i],elem.childs[i].lvl,elem.childs[i].marginrigth) ;
-         }
+             for(var i=0; i < elem.childs.length;i++)
+             {
+                 elem.childs[i].lvl = lvl + 1;
+                 elem.childs[i].visible = false;
+                 elem.childs[i].marginrigth = marginrigth + 8;
+                 $scope.childs.push(elem.childs[i]);
+                 tree(elem.childs[i], elem.childs[i].lvl, elem.childs[i].marginrigth);
+                 $scope.showChildForTeam($scope.Team, 1, $scope.Team.id);
+             }
         }
 
         $scope.showChildForTeam = function(Team,lvl,id)
