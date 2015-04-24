@@ -205,12 +205,15 @@ class User implements UserInterface, \Serializable
             'slNumber' => $this->getSlNumber(),
             'score' => $this->getScore(),
             'teamScore' => $this->getTeamScore(),
-            'dealDate' => $this->getDealDate()->format('Y-m-d'),
-            'cufflinks' => $this->getCufflinks(),
+            'dealDate' => ($this->getDealDate())
+                ? $this->getDealDate()->format('Y-m-d')
+                : null,            'cufflinks' => $this->getCufflinks(),
             'diary' => $this->getDiary(),
             'watches' => $this->getWatches(),
             'parker' => $this->getParker(),
-            'firstSeminar' => $this->getFirstSeminar()->format('Y-m-d'),
+            'firstSeminar' => ($this->getFirstSeminar())
+                ? $this->getFirstSeminar()->format('Y-m-d')
+                : null,
         );
     }
 
@@ -227,12 +230,16 @@ class User implements UserInterface, \Serializable
             'slNumber' => $this->getSlNumber(),
             'score' => $this->getScore(),
             'teamScore' => $this->getTeamScore(),
-            'dealDate' => $this->getDealDate()->format('Y-m-d'),
+            'dealDate' => ($this->getDealDate())
+                ? $this->getDealDate()->format('Y-m-d')
+                : null,
             'cufflinks' => $this->getCufflinks(),
             'diary' => $this->getDiary(),
             'watches' => $this->getWatches(),
             'parker' => $this->getParker(),
-            'firstSeminar' => $this->getFirstSeminar()->format('Y-m-d'),
+            'firstSeminar' => ($this->getFirstSeminar())
+                ? $this->getFirstSeminar()->format('Y-m-d')
+                : null,
             'childs' => User::childsRecursion($this->getChilds()),
             'meetingsCount' => count($this->getMeetings()),
         );

@@ -7,48 +7,48 @@ Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locati
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 
         $routeProvider
-            .when('/', {
+            .when('/consultant/', {
                 templateUrl: TEMPLATES.main,
                 controller: 'HomepageController'
             })
-            .when('/meetings', {
+            .when('/consultant/meetings', {
                 templateUrl: TEMPLATES.meetings,
                 controller: 'MeetingController'
             })
-            .when('/meeting/:meeting_id', {
+            .when('/consultant/meeting/:meeting_id', {
                 templateUrl: TEMPLATES.meeting,
                 controller: 'SingleMeetingController'
             })
-            .when('/meeting/edit/:meeting_id', {
+            .when('/consultant/meeting/edit/:meeting_id', {
                 templateUrl: TEMPLATES.meetingEdit,
                 controller: 'SingleMeetingController'
             })
-            .when('/tasks', {
+            .when('/consultant/tasks', {
                 templateUrl: TEMPLATES.tasks,
                 controller: 'TaskController'
             })
-            .when('/task/:task_id', {
+            .when('/consultant/task/:task_id', {
                 templateUrl: TEMPLATES.task,
                 controller: 'SingleTaskController'
             })
-            .when('/team', {
+            .when('/consultant/team', {
                 templateUrl: TEMPLATES.team,
                 controller: 'TeamController'
             })
-            .when('/register', {
+            .when('/consultant/register', {
                 templateUrl: TEMPLATES.registration,
                 controller: 'RegistrationController'
             })
-            .when('/article', {
+            .when('/consultant/article', {
                 templateUrl: TEMPLATES.article,
                 controller: 'ArticleController'
             })
-            .when('/article/getfull/:article_id', {
+            .when('/consultant/article/getfull/:article_id', {
                 templateUrl: TEMPLATES.fullArticle,
                 controller: 'ArticleController'
             })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/consultant/'
             });
 
         $locationProvider.html5Mode(true);

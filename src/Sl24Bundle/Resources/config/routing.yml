@@ -2,10 +2,6 @@ sl24_homepage:
     path: /
     defaults: { _controller: Sl24Bundle:Index:index }
 
-sl24_user_homepage:
-    path: /user
-    defaults: { _controller: Sl24Bundle:Index:user }
-
 sl24_login:
     path: /login
     defaults: { _controller: Sl24Bundle:Index:login }
@@ -95,55 +91,59 @@ sl_24_get_articles_page:
     defaults: { _controller: Sl24Bundle:Index:index }
 
 
-#############################################################
-################### Default Routes Block ####################
-##### Please add your SHIT code ABOVE this block, thx... ####
-#############################################################
+#############################################################################
+########################### Default Routes Block ############################
+############# Please add your SHIT code ABOVE this block, thx... ############
+#############################################################################
 
 sl24_default:
-    pattern: /{some}
+    pattern: /consultant/{some}
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_2level:
-    pattern: /{some}/{some1}
+    pattern: /consultant/{some}/{some1}
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_3level:
-    pattern: /{some}/{some1}/{some2}
+    pattern: /consultant/{some}/{some1}/{some2}
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_4level:
-    pattern: /{some}/{some1}/{some2}/{some3}
+    pattern: /consultant/{some}/{some1}/{some2}/{some3}
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_5level:
-    pattern: /{some}/{some1}/{some2}/{some3}/{some4}
+    pattern: /consultant/{some}/{some1}/{some2}/{some3}/{some4}
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_6level:
-    pattern: /{some}/{some1}/{some2}/{some3}/{some4}/{some5}
+    pattern: /consultant/{some}/{some1}/{some2}/{some3}/{some4}/{some5}
     defaults: { _controller: Sl24Bundle:Index:index }
 
-#############################################################
+#############################################################################
+
+sl24_default_1_level:
+    pattern: /consultant/
+    defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_2_level:
-    pattern: /{some}/
+    pattern: /consultant/{some}/
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_3_level:
-    pattern: /{some}/{some1}/
+    pattern: /consultant/{some}/{some1}/
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_4_level:
-    pattern: /{some}/{some1}/{some2}/
+    pattern: /consultant/{some}/{some1}/{some2}/
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_5_level:
-    pattern: /{some}/{some1}/{some2}/{some3}/
+    pattern: /consultant/{some}/{some1}/{some2}/{some3}/
     defaults: { _controller: Sl24Bundle:Index:index }
 
 sl24_default_6_level:
-    pattern: /{some}/{some1}/{some2}/{some3}/{some4}/
+    pattern: /consultant/{some}/{some1}/{some2}/{some3}/{some4}/
     defaults: { _controller: Sl24Bundle:Index:index }
 #############################################################
 #############################################################

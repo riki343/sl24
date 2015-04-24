@@ -1,26 +1,20 @@
 <div class="row">
     <div class="meeting-header" ng-if="user.level > 3">
         <a class="meeting-header-nav" data-toggle="modal" data-target="#add_new_article" style="margin-left: 8px; padding: 4px 8px;">Додати Статтю </a>
-
-
     </div>
-
-
 </div>
-
-
 
 <div class="col-md-12" ng-init="GetArticle()">
     <div class="row" ng-repeat="article in Articles">
         <div class="col-md-2 hidden-xs hidden-sm" style="margin-top: 26px;">
             <p class="text-center">
-                <img class="img-circle" width="60" src="/bundles/sl24/img/friends/fr-01.jpg"></img>
+                <img class="img-circle" width="60" src="/bundles/sl24/img/friends/fr-01.jpg" />
                 <br>
                 <a href="#">[[article.user.surname + ' ' + article.user.name]]</a>
             </p>
         </div>
         <div class="col-md-10 article-content">
-            <a href="/article/getfull/[[ article.id ]]"><h2>[[ article.articleTitle ]]</h2></a>
+            <a ng-href="/consultant/article/getfull/[[ article.id ]]"><h2>[[ article.articleTitle ]]</h2></a>
                 <div ng-if=" article.articleImg != 'notimg'">
                     <img class="hidden-xs" ng-src="[[asset + article.articleImg ]]" style="max-height: 420px; max-width: 630px;">
                     <img class="visible-xs" ng-src="[[asset + article.articleImg ]]" style="max-height: 420px; max-width: 300px;">
@@ -28,15 +22,8 @@
             <p> [[ article.articleSubTitle ]]</p>
              <hr>
         </div>
-
     </div>
 </div>
-
-
-
-
-
-
 
 <div class="modal fade" id="add_new_article" tabindex="-1">
     <div class="modal-dialog">

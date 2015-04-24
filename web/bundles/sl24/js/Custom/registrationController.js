@@ -34,6 +34,7 @@ Sl24.controller('RegistrationController', ['$scope', '$http',
                 $('#slNumber');
                 return;
             }
+            info.login = info.slNumber;
             $http.post($scope.urlAddNewUser, { 'info': info })
                 .success(function (response) {
                     switch (response) {

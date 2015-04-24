@@ -17,24 +17,16 @@ class IndexController extends Controller
      */
     public function indexAction() {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('sl24_user_homepage');
+            $parents = array();
+            /** @var User $user */
+            $user = $this->getUser();
+            while ($user->getParent()) {
+                $parents[] = $user->getParent()->getInArray();
+                $user = $user->getParent();
+            }
+            return $this->render('Sl24Bundle::homepage.html.twig', array('parents' => $parents));
         }
         return $this->render('@Sl24/wellcome.html.twig');
-    }
-
-    /**
-     * @Security("is_granted('ROLE_USER')")
-     * @return Response
-     */
-    public function userAction() {
-        $parents = array();
-        /** @var User $user */
-        $user = $this->getUser();
-        while ($user->getParent()) {
-            $parents[] = $user->getParent()->getInArray();
-            $user = $user->getParent();
-        }
-        return $this->render('Sl24Bundle::homepage.html.twig', array('parents' => $parents));
     }
 
     /**
