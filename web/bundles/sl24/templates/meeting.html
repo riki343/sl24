@@ -1,3 +1,4 @@
+<div ng-init="getMeeting(meeting_id); getPosts();"></div>
 
 <div class="row">
     <div class="meeting-header">
@@ -9,16 +10,11 @@
             <a ng-href="/consultant/meetings"> Зустрічі</a>
             <i class="fa fa-angle-right" style="color: #337AB7;"></i>
             [[ meeting.credentials ]]
-
         </div>
-
     </div>
-
 </div>
 
-<div ng-init="getMeeting(meeting_id)"></div>
-
-<h1 class="page-header" style="margin: 15px 0px 20px">[[ meeting.credentials ]]</h1>
+<h1 class="page-header" style="margin: 15px 0 20px">[[ meeting.credentials ]]</h1>
 
 <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4">
     <div class="table-user-kleint">
@@ -44,72 +40,81 @@
             <img class="img-circle" src="bundles/sl24/img/friends/fr-01.jpg" height="70px">
         </a>
     </div>
-
     <img src="/bundles/sl24/img/stol.png">
 </div>
 
 <br><br>
 
 
-<div class="col-md-12">
-    <ul class="list-group">
-        <li class="list-group-item">
-            <h4 class="text-center"> Основна інформація</h4>
-        </li>
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h4 class="text-center"> Основна інформація</h4>
+            </li>
 
-        <li class="list-group-item">
-            <span class="badge" >[[ meeting.credentials ]]</span>
-            <strong> П.І.Б Клієнта:</strong>
-        </li>
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.status.label ]]</span>
-            <strong>Статус зустрічі:</strong>
-        </li>
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.employmentType.name ]]</span>
-            <strong>Вид зайнятості клієнта:</strong>
-        </li>
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.age ]]</span>
-            <strong>Вік клієнта:</strong>
-        </li>
-        <li class="list-group-item">
-            <h5 class="text-center"> Додаткова інформація</h5>
-        </li>
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.clientBirthday.date ]]</span>
-            <strong>Дата народження клієнта:</strong>
-        </li>
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.date ]]</span>
-            <strong>Дата зустрічі:</strong>
-        </li>
 
-        <li class="list-group-item">
-            <h5 class="text-center"> Контракт</h5>
-        </li>
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.price ]]</span>
-            <strong>Ручна премія:</strong>
-        </li>
 
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.payDate ]]</span>
-            <strong>Дата оплати:</strong>
-        </li>
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.years ]]</span>
-            <strong>Срок контракту:</strong>
-        </li>
-        <li class="list-group-item">
-            <span class="badge">[[ meeting.progress ]]</span>
-            <strong>Прогрес зустрічі:</strong>
-        </li>
-    </ul>
+            <!--
+            <li class="list-group-item">
+                <span class="badge" >[[ meeting.credentials ]]</span>
+                <strong> П.І.Б Клієнта:</strong>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">[[ meeting.status.label ]]</span>
+                <strong>Статус зустрічі:</strong>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">[[ meeting.employmentType.name ]]</span>
+                <strong>Вид зайнятості клієнта:</strong>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">[[ meeting.age ]]</span>
+                <strong>Вік клієнта:</strong>
+            </li>
+            <li class="list-group-item">
+                <h5 class="text-center"> Додаткова інформація</h5>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">[[ meeting.clientBirthday.date ]]</span>
+                <strong>Дата народження клієнта:</strong>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">[[ meeting.date ]]</span>
+                <strong>Дата зустрічі:</strong>
+            </li>
+
+            <li class="list-group-item">
+                <h5 class="text-center"> Контракт</h5>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">[[ meeting.price ]]</span>
+                <strong>Річна премія:</strong>
+            </li>
+
+            <li class="list-group-item">
+                <span class="badge">[[ meeting.payDate ]]</span>
+                <strong>Дата оплати:</strong>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">[[ meeting.years ]]</span>
+                <strong>Срок контракту:</strong>
+            </li>
+            <li class="list-group-item">
+                <span class="badge">[[ meeting.progress ]]</span>
+                <strong>Прогрес зустрічі:</strong>
+            </li>-->
+
+            <li class="list-group-item">
+                <form class="input-group input-group-lg">
+                    <textarea id="textarea-post" name="message" class="form-control" rows="3" style="resize: vertical;font-size: 11px; height: 65px;" ng-keypress="enterButton($event)" ng-model="post.message"></textarea>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" name="subscribe" type="button" style="height: 65px; font-size:15px;" ng-click="sendPost(message)">
+                            <span>Відправити</span>
+                        </button>
+                    </span>
+                </form>
+            </li>
+        </ul>
+    </div>
 </div>
-
-
-
-
-
-

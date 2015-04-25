@@ -13,6 +13,10 @@ sl24_login_check:
 sl24_logout:
     path: /logout
 
+#############################################################################
+######################## Begin of Meeting routing ###########################
+#############################################################################
+
 sl24_getMeetings:
     pattern: /user/{user_id}/meetings
     defaults: { _controller: Sl24Bundle:Meeting:getMeetings }
@@ -41,6 +45,27 @@ sl24_getMeetingsInfo:
     path: /meetings/getmeetingsInfo
     defaults: { _controller: Sl24Bundle:Meeting:getMeetingsInfo }
 
+sl_24_get_posts_meetings:
+    pattern: /getMeetingPosts/{meeting_id}
+    defaults: { _controller: Sl24Bundle:MeetingPost:getPosts }
+
+sl_24_add_post_meeting:
+    pattern: /addMeetingPost/{meeting_id}
+    defaults: { _controller: Sl24Bundle:MeetingPost:addPost }
+
+sl_24_edit_post_meeting:
+    pattern: /editMeetingPost/{post_id}
+    defaults: { _controller: Sl24Bundle:MeetingPost:editPost }
+
+#############################################################################
+######################### End of Meeting routing ############################
+#############################################################################
+
+
+#############################################################################
+######################### Begin of Task routing #############################
+#############################################################################
+
 sl_24_get_tasks:
     path: /getTasks
     defaults: { _controller: Sl24Bundle:Task:getTasks }
@@ -64,6 +89,24 @@ sl_24_add_task:
 sl_24_delete_task:
     path: /deleteTask
     defaults: { _controller: Sl24Bundle:Task:deleteTask }
+
+sl_24_get_task_posts:
+    pattern: /getTaskPosts/{task_id}
+    defaults: { _controller: Sl24Bundle:TaskPost:getPosts }
+
+sl_24_add_task_post:
+    pattern: /addTaskPost/{task_id}
+    defaults: { _controller: Sl24Bundle:TaskPost:addPost }
+
+sl_24_edit_task_post:
+    pattern: /editTaskPost/{post_id}
+    defaults: { _controller: Sl24Bundle:TaskPost:editPost }
+
+#############################################################################
+######################### End of Task routing ###############################
+#############################################################################
+
+
 
 sl_24_get_team:
     path: /getTeam
@@ -89,6 +132,8 @@ sl_24_add_article:
 sl_24_get_articles_page:
     path: /article
     defaults: { _controller: Sl24Bundle:Index:index }
+
+
 
 
 #############################################################################
@@ -145,6 +190,6 @@ sl24_default_5_level:
 sl24_default_6_level:
     pattern: /consultant/{some}/{some1}/{some2}/{some3}/{some4}/
     defaults: { _controller: Sl24Bundle:Index:index }
-#############################################################
-#############################################################
-#############################################################
+#############################################################################
+#############################################################################
+#############################################################################

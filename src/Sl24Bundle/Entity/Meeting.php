@@ -133,6 +133,12 @@ class Meeting
      */
     private $clientBirthday;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="MeetingPost", mappedBy="meeting")
+     */
+    private $posts;
+
     public function __construct() {
         $this->setProgress(0);
     }
@@ -679,5 +685,38 @@ class Meeting
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Add posts
+     *
+     * @param \Sl24Bundle\Entity\MeetingPost $posts
+     * @return Meeting
+     */
+    public function addPost(\Sl24Bundle\Entity\MeetingPost $posts)
+    {
+        $this->posts[] = $posts;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param \Sl24Bundle\Entity\MeetingPost $posts
+     */
+    public function removePost(\Sl24Bundle\Entity\MeetingPost $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

@@ -85,6 +85,98 @@ class Task
     private $assigned;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="TaskPost", mappedBy="task")
+     */
+    private $posts;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->posts = new ArrayCollection();
+    }
+
+    public function getInArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'date' => $this->getDate()->format('Y-m-d'),
+            'statusID' => $this->getStatusID(),
+            'status' => $this->getStatus()->getInArray(),
+            'ownerID' => $this->getOwnerID(),
+            'owner' => $this->getOwner()->getInArray(),
+            'assignedID' => $this->getAssignedID(),
+            'assigned' => $this->getAssigned()->getInArray(),
+        );
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param User $user
+     * @param $parameters
+     * @return Task
+     */
+    public static function addTask($em, $user, $parameters)
+    {
+        $task = new Task();
+        $task->setName($parameters['name']);
+        $task->setDescription($parameters['description']);
+        $task->setDate($parameters['date']);
+        $task->setStatus($em->getRepository('Sl24Bundle:TaskStatus')->find(1));
+        $task->setOwner($user);
+        $task->setAssigned($user);
+
+        $em->persist($task);
+        $em->flush();
+
+        return $task;
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param $parameters
+     * @return mixed
+     */
+    public static function editTask($em, $parameters)
+    {
+        $task = $em->getRepository('Sl24Bundle:Task')->find($parameters['id']);
+
+        if ($parameters['name'] != $task->getName())
+            $task->setName($parameters['name']);
+
+        if ($parameters['statusID'] != $task->getStatusID()){
+            $status = $em->getRepository('Sl24Bundle:TaskStatus')->find($parameters['statusID']);
+            $task->setStatus($status);
+        }
+
+        if ($parameters['description'] != $task->getDescription())
+            $task->setDescription($parameters['description']);
+
+        if ($parameters['date'] != $task->getDate()) {
+            $task->setDate($parameters['date']);
+        }
+
+        $em->persist($task);
+        $em->flush();
+        return $task;
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param $task_id
+     */
+    public static function deleteTask($em, $task_id)
+    {
+        $task = $em->getRepository('Sl24Bundle:Task')->find($task_id);
+
+        $em->remove($task);
+        $em->flush();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -301,82 +393,36 @@ class Task
         return $this->assigned;
     }
 
-    public function getInArray()
-    {
-        return array(
-            'id' => $this->getId(),
-            'name' => $this->getName(),
-            'description' => $this->getDescription(),
-            'date' => $this->getDate()->format('Y-m-d'),
-            'statusID' => $this->getStatusID(),
-            'status' => $this->getStatus()->getInArray(),
-            'ownerID' => $this->getOwnerID(),
-            'owner' => $this->getOwner()->getInArray(),
-            'assignedID' => $this->getAssignedID(),
-            'assigned' => $this->getAssigned()->getInArray(),
-        );
-    }
-
     /**
-     * @param EntityManager $em
-     * @param User $user
-     * @param $parameters
+     * Add posts
+     *
+     * @param \Sl24Bundle\Entity\TaskPost $posts
      * @return Task
      */
-    public static function addTask($em, $user, $parameters)
+    public function addPost(\Sl24Bundle\Entity\TaskPost $posts)
     {
-        $task = new Task();
-        $task->setName($parameters['name']);
-        $task->setDescription($parameters['description']);
-        $task->setDate($parameters['date']);
-        $task->setStatus($em->getRepository('Sl24Bundle:TaskStatus')->find(1));
-        $task->setOwner($user);
-        $task->setAssigned($user);
+        $this->posts[] = $posts;
 
-        $em->persist($task);
-        $em->flush();
-
-        return $task;
+        return $this;
     }
 
     /**
-     * @param EntityManager $em
-     * @param $parameters
-     * @return mixed
+     * Remove posts
+     *
+     * @param \Sl24Bundle\Entity\TaskPost $posts
      */
-    public static function editTask($em, $parameters)
+    public function removePost(\Sl24Bundle\Entity\TaskPost $posts)
     {
-        $task = $em->getRepository('Sl24Bundle:Task')->find($parameters['id']);
-
-        if ($parameters['name'] != $task->getName())
-            $task->setName($parameters['name']);
-
-        if ($parameters['statusID'] != $task->getStatusID()){
-            $status = $em->getRepository('Sl24Bundle:TaskStatus')->find($parameters['statusID']);
-            $task->setStatus($status);
-        }
-
-        if ($parameters['description'] != $task->getDescription())
-            $task->setDescription($parameters['description']);
-
-        if ($parameters['date'] != $task->getDate()) {
-            $task->setDate($parameters['date']);
-        }
-
-        $em->persist($task);
-        $em->flush();
-        return $task;
+        $this->posts->removeElement($posts);
     }
 
     /**
-     * @param EntityManager $em
-     * @param $task_id
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public static function deleteTask($em, $task_id)
+    public function getPosts()
     {
-        $task = $em->getRepository('Sl24Bundle:Task')->find($task_id);
-
-        $em->remove($task);
-        $em->flush();
+        return $this->posts;
     }
 }

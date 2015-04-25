@@ -47,7 +47,7 @@ class TaskPost
 
     /**
      * @var Task
-     * @ORM\ManyToOne(targetEntity="Task")
+     * @ORM\ManyToOne(targetEntity="Task", inversedBy="posts")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
      */
     private $task;
@@ -66,6 +66,21 @@ class TaskPost
 
     public function __construct() {
         $this->posted = new \DateTime();
+    }
+
+    /**
+     * @return array
+     */
+    public function getInArray() {
+        return array(
+            'id' => $this->getId(),
+            'user' => $this->getUser()->getInArray(),
+            'taskID' => $this->getTaskID(),
+            'message' => $this->getMessage(),
+            'posted' => ($this->getPosted())
+                ? $this->getPosted()->format('Y-m-d')
+                : null,
+        );
     }
 
     /**

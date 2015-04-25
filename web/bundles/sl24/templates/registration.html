@@ -17,6 +17,55 @@
 
 <form class="form-horizontal" name="addNewUserForm">
     <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">SL номер:</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="number" name="slNumber" id="slNumber" ng-minlength="6" ng-maxlength="6" ng-model="addUser.slNumber" required/>
+        </div>
+        <div class="col-sm-2" ng-messages="addNewUserForm.slNumber.$error" style="color: red; display: inline-block;">
+            <span ng-message="required">*</span>
+            <span ng-message="number">Дозволено вводити лише цифри</span>
+            <span ng-message="minlength">Довжина номеру має складати 6 символів</span>
+            <span ng-message="maxlength">Довжина номеру має складати 6 символів</span>
+        <span ng-if="addNewUserForm.slNumber.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
+        </div>
+    </div>
+
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Дирекція:</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="number" name="directorNumber" ng-maxlength="3" ng-minlength="3" id="directorNumber" ng-model="addUser.director" required/>
+        </div>
+        <div class="col-sm-2" ng-messages="addNewUserForm.directorNumber.$error" style="color: red; display: inline-block;">
+            <span ng-message="required">*</span>
+            <span ng-message="number">Дозволено вводити лише цифри</span>
+            <span ng-message="minlength">Довжина номеру має складати 3 символи</span>
+            <span ng-message="maxlength">Довжина номеру має складати 3 символи</span>
+        <span ng-if="addNewUserForm.directorNumber.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
+        <label class="col-sm-2 control-label">Структурний(SL-номер):</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="number" name="parent" ng-maxlength="6" ng-minlength="6" id="parent" ng-model="addUser.parent" required/>
+        </div>
+        <div class="col-sm-2" ng-messages="addNewUserForm.parent.$error" style="color: red; display: inline-block;">
+            <span ng-message="required">*</span>
+            <span ng-message="number">Дозволено вводити лише цифри</span>
+            <span ng-message="minlength">Довжина номеру має складати 6 символів</span>
+            <span ng-message="maxlength">Довжина номеру має складати 6 символів</span>
+        <span ng-if="addNewUserForm.parent.$valid">
+            <i style="color: greenyellow;" class="fa fa-check"></i>
+        </span>
+        </div>
+    </div>
+
+    <div class="form-group form-group-sm">
         <label class="col-sm-2 control-label">Прізвище</label>
         <div class="col-sm-8">
             <input class="form-control" type="text" id="surname" name="surname" pattern="[A-Za-zА-Яа-яІіЇїЄєҐґ]{1,}" ng-minlength="1" ng-model="addUser.surname" required/>
@@ -96,55 +145,6 @@
             <span ng-if="addNewUserForm.email.$valid">
             <i style="color: greenyellow;" class="fa fa-check"></i>
             </span>
-        </div>
-    </div>
-
-    <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">SL номер:</label>
-        <div class="col-sm-8">
-            <input class="form-control" type="number" name="slNumber" id="slNumber" ng-minlength="6" ng-maxlength="6" ng-model="addUser.slNumber" required/>
-        </div>
-        <div class="col-sm-2" ng-messages="addNewUserForm.slNumber.$error" style="color: red; display: inline-block;">
-            <span ng-message="required">*</span>
-            <span ng-message="number">Дозволено вводити лише цифри</span>
-            <span ng-message="minlength">Довжина номеру має складати 6 символів</span>
-            <span ng-message="maxlength">Довжина номеру має складати 6 символів</span>
-        <span ng-if="addNewUserForm.slNumber.$valid">
-            <i style="color: greenyellow;" class="fa fa-check"></i>
-        </span>
-        </div>
-    </div>
-
-
-    <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">Дирекція:</label>
-        <div class="col-sm-8">
-            <input class="form-control" type="number" name="directorNumber" ng-maxlength="3" ng-minlength="3" id="directorNumber" ng-model="addUser.director" required/>
-        </div>
-        <div class="col-sm-2" ng-messages="addNewUserForm.directorNumber.$error" style="color: red; display: inline-block;">
-            <span ng-message="required">*</span>
-            <span ng-message="number">Дозволено вводити лише цифри</span>
-            <span ng-message="minlength">Довжина номеру має складати 3 символи</span>
-            <span ng-message="maxlength">Довжина номеру має складати 3 символи</span>
-        <span ng-if="addNewUserForm.directorNumber.$valid">
-            <i style="color: greenyellow;" class="fa fa-check"></i>
-        </span>
-        </div>
-    </div>
-
-    <div class="form-group form-group-sm">
-        <label class="col-sm-2 control-label">Керівник(SL-номер):</label>
-        <div class="col-sm-8">
-            <input class="form-control" type="number" name="parent" ng-maxlength="6" ng-minlength="6" id="parent" ng-model="addUser.parent" required/>
-        </div>
-        <div class="col-sm-2" ng-messages="addNewUserForm.parent.$error" style="color: red; display: inline-block;">
-            <span ng-message="required">*</span>
-            <span ng-message="number">Дозволено вводити лише цифри</span>
-            <span ng-message="minlength">Довжина номеру має складати 6 символів</span>
-            <span ng-message="maxlength">Довжина номеру має складати 6 символів</span>
-        <span ng-if="addNewUserForm.parent.$valid">
-            <i style="color: greenyellow;" class="fa fa-check"></i>
-        </span>
         </div>
     </div>
 

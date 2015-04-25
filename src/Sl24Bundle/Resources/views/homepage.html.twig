@@ -3,7 +3,17 @@
 {% block title %}StarLife 24{% endblock %}
 
 {% block body %}
-    <div ng-cloak ng-view></div>
+    <div class="spinner-block" ng-show="spinner">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+
+    <div ng-cloak ng-view ng-hide="spinner"></div>
 {% endblock %}
 
 {% block JavaScripts %}
@@ -28,18 +38,30 @@
             'fullArticle': "{{ asset('bundles/sl24/templates/fullArticle.html') }}"
         };
 
+        //////// BEGIN MEETING URLS \\\\\\\
         URLS.getMeetings = "{{ path('sl24_getMeetings', { 'user_id': 'user_id' }) }}";
         URLS.getMeeting = "{{ path('sl24_getMeeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.saveMeeting = "{{ path('sl24_saveMeeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.removeMeeting = "{{ path('sl24_removeMeeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.getMeetingsInfo = "{{ path('sl24_getMeetingsInfo') }}";
         URLS.addNewMeeting = "{{ path('sl24_addMeeting') }}";
+        URLS.getMeetingPosts = "{{ path('sl_24_get_posts_meetings', { 'meeting_id': 'task_id' }) }}";
+        URLS.addMeetingPost = "{{ path('sl_24_add_post_meeting', { 'meeting_id': 'task_id' }) }}";
+        URLS.editMeetingPost = "{{ path('sl_24_edit_post_meeting', { 'post_id': 'post_id' }) }}";
+        //////// END MEETING URLS  \\\\\\\
+
         URLS.addNewMounth = "{{ path('sl24_addMounth') }}";
         URLS.addNewUser = "{{ path('sl_24_registration') }}";
         URLS.urlGetTeam = "{{ path('sl_24_get_team') }}";
         URLS.urlGetArticle = "{{ path('sl_24_get_article') }}";
         URLS.urlGetFullArticle = "{{ path('sl_24_get_full_article', { 'id': 0 }) }}";
         URLS.urlAddArticle = "{{ path('sl_24_add_article') }}";
+
+        //////// BEGIN TASK URLS \\\\\\\
+        URLS.getTaskPosts = "{{ path('sl_24_get_task_posts', { 'task_id': 'task_id' }) }}";
+        URLS.addTaskPost = "{{ path('sl_24_add_task_post', { 'task_id': 'task_id' }) }}";
+        URLS.editTaskPost = "{{ path('sl_24_edit_task_post', { 'post_id': 'post_id' }) }}";
+        //////// END TASK URLS  \\\\\\\
 
         var USER_ID = {{ app.user.id }};
         var USER_LEVEL = {{ app.user.level }};

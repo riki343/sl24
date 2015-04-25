@@ -46,7 +46,7 @@ class MeetingPost
 
     /**
      * @var Meeting
-     * @ORM\ManyToOne(targetEntity="Meeting")
+     * @ORM\ManyToOne(targetEntity="Meeting", inversedBy="posts")
      * @ORM\JoinColumn(name="meeting_id", referencedColumnName="id")
      */
     private $meeting;
@@ -65,6 +65,21 @@ class MeetingPost
 
     public function __construct() {
         $this->posted = new \DateTime();
+    }
+
+    /**
+     * @return array
+     */
+    public function getInArray() {
+        return array(
+            'id' => $this->getId(),
+            'user' => $this->getUser()->getInArray(),
+            'meetingID' => $this->getMeetingID(),
+            'message' => $this->getMessage(),
+            'posted' => ($this->getPosted())
+                ? $this->getPosted()->format('Y-m-d')
+                : null,
+        );
     }
 
     /**
