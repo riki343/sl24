@@ -328,7 +328,7 @@ class Task
         $task = new Task();
         $task->setName($parameters['name']);
         $task->setDescription($parameters['description']);
-        $task->setDate(new \DateTime());
+        $task->setDate($parameters['date']);
         $task->setStatus($em->getRepository('Sl24Bundle:TaskStatus')->find(1));
         $task->setOwner($user);
         $task->setAssigned($user);
@@ -358,6 +358,10 @@ class Task
 
         if ($parameters['description'] != $task->getDescription())
             $task->setDescription($parameters['description']);
+
+        if ($parameters['date'] != $task->getDate()) {
+            $task->setDate($parameters['date']);
+        }
 
         $em->persist($task);
         $em->flush();

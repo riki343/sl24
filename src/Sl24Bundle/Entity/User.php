@@ -202,6 +202,7 @@ class User implements UserInterface, \Serializable
             'name' => $this->getName(),
             'surname' => $this->getSurname(),
             'username' => $this->getUsername(),
+            'middleName' => $this->getMiddleName(),
             'directorNumber' => $this->getDirectorNumber(),
             'email' => $this->getEmail(),
             'level' => $this->getLevel(),

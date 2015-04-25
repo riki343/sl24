@@ -13,8 +13,9 @@ Sl24.controller('TaskController', ['$scope', '$http',
 
         $scope.taskModel = {
             'id' : null,
-            'name': null,
-            'description': null
+            'name': '',
+            'description': '',
+            'date': new Date()
         };
 
         $scope.todoTasks = [];

@@ -8,16 +8,12 @@
             <a ng-href="/consultant/tasks"> Завдання </a>
             <i class="fa fa-angle-right" style="color: #337AB7;"></i>
             [[ task.name ]]
-
         </div>
-
     </div>
-
 </div>
 
 <div class="row" ng-init="getTask(task_id)">
     <div class="col-xs-12">
-
         <div class="page-header" style="margin-top: 20px;">
             <span style="font-size: 20px;  color: #337ab7;">Інформація про завдання</span>
         </div>
@@ -56,6 +52,22 @@
             </div>
         </div>
         <!-- End of Task NAME Edit -->
+
+        <!-- Begin of Task DATE Edit -->
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <label class="text-muted form-control-static" style="  color: #777;font-weight: 300;">Дата:</label>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="input-group" style="width: 100%;">
+                    <input type="date" name="date" style="border: none; font-weight: bold;" ng-model="taskInfoEdit.date" class="form-control btn-group-justified">
+                </div>
+            </div>
+        </div>
+        <!-- End of Task DATE Edit -->
 
         <!-- Begin of Task STATUS Select -->
         <div class="row" style="margin-bottom: 10px;">

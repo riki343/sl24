@@ -16,15 +16,18 @@ Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams',
                 .success(function (response){
                     $scope.task = response;
                     $scope.taskInfoEdit = response;
+                    $scope.taskInfoEdit.date = new Date($scope.taskInfoEdit.date);
                     getStatuses();
-                })
+                }
+            );
         };
 
         var getStatuses = function () {
             $scope.promiseStatuses = $http.get($scope.urlGetStatuses)
                 .success(function (response) {
                     $scope.taskStatuses = response;
-                })
+                }
+            );
         };
 
         $scope.saveTaskInfo = function (task) {

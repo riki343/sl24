@@ -64,10 +64,10 @@ class TaskController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $parameters = array(
-            'id' => $data->id,
             'name' => $data->name,
             'statusID' => $data->status['id'],
-            'description' => $data->description
+            'description' => $data->description,
+            'date' => \DateTime::createFromFormat('Y-m-d', date('Y-m-d', strtotime($data->date))),
         );
 
         $task = Task::editTask($em, $parameters);
@@ -88,7 +88,8 @@ class TaskController extends Controller
 
         $parameters = array(
             'name' => $data->name,
-            'description' => $data->description
+            'description' => $data->description,
+            'date' => \DateTime::createFromFormat('Y-m-d', date('Y-m-d', strtotime($data->date))),
         );
 
         /** @var User $user */
