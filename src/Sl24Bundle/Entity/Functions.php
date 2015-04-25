@@ -13,8 +13,10 @@ class Functions {
      */
     public static function arrayToJson($array) {
         $jsonArray = array();
-        foreach ($array as $item) {
-            $jsonArray[] = $item->getInArray();
+        if (count($array) > 0) {
+            foreach ($array as $item) {
+                $jsonArray[] = $item->getInArray();
+            }
         }
         return $jsonArray;
     }

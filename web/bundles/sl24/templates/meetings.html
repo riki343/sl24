@@ -3,7 +3,6 @@
         <a class="meeting-header-nav" style="padding: 4px 8px; margin-right: 5px" data-toggle="modal" data-target="#add_new_work_mounth">Додати робочий місяць</a>
         <a class="meeting-header-nav" style="padding: 4px 8px;" data-toggle="modal" data-target="#add_new_meeting" ng-click="getMeetingsInfo();">Додати зустріч</a>
         <a class="meeting-header-nav" style="padding: 4px 8px; margin-left: 5px" data-toggle="modal" data-target="#history" ng-click="getMeetingsInfo();">Історія</a>
-
     </div>
 </div>
 
@@ -42,7 +41,7 @@
                 <tbody>
                 <tr ng-repeat="meeting in meetings">
                     <td class="col-md-1 text-center">[[ $index + 1 ]]</td>
-                    <td class="col-md-3"><a ng-href="/consultant/meeting/[[ meeting.id ]]">[[ meeting.credentials ]]</a></td>
+                    <td class="col-md-3"><a ng-href="/consultant/meeting/[[ meeting.id ]]">[[ meeting.client ]]</a></td>
                     <td class="col-md-2">[[ meeting.consultant.name + ' ' + meeting.consultant.surname ]]</td>
                     <td class="col-md-2">[[ meeting.status.label ]]</td>
                     <td class="col-md-2 text-center">[[ meeting.date ]]</td>

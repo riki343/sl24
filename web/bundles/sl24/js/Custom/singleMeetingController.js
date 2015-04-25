@@ -1,5 +1,5 @@
-Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
-    function ($scope, $http, $routeParams) {
+Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '$rootScope',
+    function ($scope, $http, $routeParams, $rootScope) {
         $scope.meeting = null;
         if (angular.isDefined($routeParams.meeting_id)) {
             $scope.meeting_id = $routeParams.meeting_id;
@@ -13,7 +13,8 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
             'user': null,
             'meetingID': null,
             'message': '',
-            'posted': null
+            'posted': null,
+            'edit': false
         };
 
         $scope.urlGetMeeting = URLS.getMeeting;
@@ -25,6 +26,7 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
         $scope.urlEditMeetingPost = URLS.editMeetingPost;
 
         $scope.getMeeting = function (meeting_id) {
+            $rootScope.spinner = true;
             var meetingUrl = $scope.urlGetMeeting.replace('meeting_id', meeting_id);
             $scope.meetingPromise = $http.get(meetingUrl)
                 .success(function (response) {
@@ -33,6 +35,8 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
                     $scope.meetingEdit.date = new Date($scope.meeting.date);
                     $scope.meetingEdit.payDate = new Date($scope.meeting.payDate);
                     $scope.meetingEdit.clientBirthday.date = new Date($scope.meeting.clientBirthday.date);
+                    $scope.meetingEdit.meetingDate = new Date($scope.meetingEdit.meetingDate);
+                    $rootScope.spinner = false;
                 }
             );
         };
@@ -46,17 +50,11 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
         };
 
         $scope.saveMeeting = function (meeting) {
+            $rootScope.spinner = true;
             var saveMeetingUrl = $scope.urlSaveMeeting.replace('meeting_id', meeting.id);
             $http.post(saveMeetingUrl, { 'meeting': meeting })
                 .success(function (response) {
-                    if (response) {
-                        $scope.modalHeader = 'Успішно';
-                        $scope.modalBody = 'Інформація про зустріч успішно збережена.';
-                    } else {
-                        $scope.modalHeader = 'Помилка';
-                        $scope.modalBody = 'Невідома помилка.';
-                    }
-                    $('#edit_meeting').modal('show');
+                    $rootScope.spinner = false;
                 }
             );
         };
@@ -81,30 +79,35 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams',
         }
 
         $scope.getPosts = function () {
+            $rootScope.spinner = true;
             $scope.meetingPromise = $http
                 .get($scope.urlGetMeetingPosts.replace('meeting_id', $scope.meeting_id))
                 .success(function (response) {
                     $scope.posts = preparePosts(response);
+                    $rootScope.spinner = false;
                 }
             );
         };
 
         function addPost(post) {
+            $rootScope.spinner = true;
             $scope.meetingPromise = $http
-                .post($scope.urlAddMeetingPost.replace('meeting_id', $scope.meeting_id, { 'post': post }))
+                .post($scope.urlAddMeetingPost.replace('meeting_id', $scope.meeting_id), { 'post': post })
                 .success(function (response) {
                     if (!$scope.posts) {
                         $scope.posts = [];
                     }
+                    $scope.post.message = "";
                     response.edit = false;
                     $scope.posts.push(response);
+                    $rootScope.spinner = false;
                 }
             );
         }
 
         function editPost(post) {
             $scope.meetingPromise = $http
-                .post($scope.urlEditMeetingPost.replace('post_id', post.id, { 'post': post }))
+                .post($scope.urlEditMeetingPost.replace('post_id', post.id), { 'post': post })
                 .success(function (response) {
                     response.edit = false;
                     for (var i = 0; i < $scope.post.length; i++) {

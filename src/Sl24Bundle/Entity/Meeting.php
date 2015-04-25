@@ -28,10 +28,51 @@ class Meeting
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="credentials", type="string", length=512)
+     * @ORM\Column(name="client", type="string", length=512)
      */
-    private $credentials;
+    private $client;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="client_sex", type="boolean", options={"default" = false})
+     */
+    private $clientSex;
+
+    /**
+     * @var string
+     * @ORM\Column(name="client_partner", type="string", nullable=true, options={"default" = null})
+     */
+    private $clientPartner;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="client_partner_sex", type="boolean", options={"default" = false})
+     */
+    private $clientPartnerSex;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="maried", type="boolean", options={"default" = false})
+     */
+    private $maried;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="children", type="boolean", options={"default" = false})
+     */
+    private $children;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="in_time", type="boolean", options={"default" = true})
+     */
+    private $inTime;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="meeting_date", type="datetime", nullable=true)
+     */
+    private $meetingDate;
 
     /**
      * @var int
@@ -141,16 +182,33 @@ class Meeting
 
     public function __construct() {
         $this->setProgress(0);
+        $this->meetingDate = null;
+        $this->clientPartner = null;
+        $this->clientPartnerSex = false;
+        $this->clientSex = false;
+        $this->maried = false;
+        $this->children = false;
     }
 
     public function getInArray() {
         return array(
             'id' => $this->getId(),
-            'credentials' => $this->getCredentials(),
             'consultantID' => $this->getConsultantID(),
             'consultant' => $this->getConsultant()->getInArray(),
-            'assistant' => $this->getAssistantID(),
+            'assistant' => ($this->getAssistant())
+                ? $this->getAssistant()->getInArray()
+                : null,
             'status' => $this->getStatus()->getInArray(),
+            'client' => $this->getClient(),
+            'clientSex' => ($this->getClientSex()) ? '1' : '0',
+            'maried' => $this->getMaried(),
+            'partner' => $this->getClientPartner(),
+            'partnerSex' => ($this->getClientPartnerSex()) ? '1' : '0',
+            'children' => $this->getChildren(),
+            'inTime' => $this->getInTime(),
+            'meetingDate' => ($this->getMeetingDate())
+                ? $this->getMeetingDate()->format('Y-m-d')
+                :null,
             'employmentType' => $this->getEmploymentType()->getInArray(),
             'date' => $this->getDate()->format('Y-m-d'),
             'price' => $this->getPrice(),
@@ -189,7 +247,7 @@ class Meeting
         $meetingStatus = $em->getRepository('Sl24Bundle:MeetingStatus')->find($data->status);
         $employmentType = $em->getRepository('Sl24Bundle:EmploymentType')->find($data->employmentType);
         $meeting = new Meeting();
-        $meeting->setCredentials($data->credentials);
+        $meeting->setClient($data->credentials);
         $meeting->setDate(\DateTime::createFromFormat('Y-m-d', date('Y-m-d', strtotime($data->date))));
         $meeting->setStatus($meetingStatus);
         $meeting->setConsultant($user);
@@ -225,7 +283,7 @@ class Meeting
         if ($data->clientBirthday['date'])
         $meeting->setClientBirthday(\DateTime::createFromFormat('Y-m-d',
             date('Y-m-d', strtotime($data->clientBirthday['date']))));
-        $meeting->setCredentials($data->credentials);
+        $meeting->setClient($data->client);
         $meeting->setStatus($status);
         if ($data->assistant) {
             $assistant = $em->getRepository('Sl24Bundle:User')->find($data->assistant);
@@ -239,9 +297,20 @@ class Meeting
         $meeting->setPrice($data->price);
         $meeting->setYears($data->years);
         $meeting->setProgress($data->progress);
-        /*
-         * working Month
-         */
+
+        $meeting->setClientPartner($data->partner);
+        $meeting->setClientPartnerSex($data->partnerSex);
+        $meeting->setClientSex($data->clientSex);
+        $meeting->setInTime($data->inTime);
+        if ($data->meetingDate) {
+            $meeting->setMeetingDate(\DateTime::createFromFormat('Y-m-d',
+                date('Y-m-d', strtotime($data->meetingDate))));
+        }
+
+        $meeting->setMaried($data->maried);
+        $meeting->setChildren($data->children);
+
+
         if ($data->payDate) {
             $meeting->setPayDate(\DateTime::createFromFormat('Y-m-d',
                 date('Y-m-d', strtotime($data->payDate))));
@@ -294,29 +363,6 @@ class Meeting
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set credentials
-     *
-     * @param string $credentials
-     * @return Meeting
-     */
-    public function setCredentials($credentials)
-    {
-        $this->credentials = $credentials;
-
-        return $this;
-    }
-
-    /**
-     * Get credentials
-     *
-     * @return string 
-     */
-    public function getCredentials()
-    {
-        return $this->credentials;
     }
 
     /**
@@ -718,5 +764,189 @@ class Meeting
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * Set client
+     *
+     * @param string $client
+     * @return Meeting
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return string 
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set clientSex
+     *
+     * @param boolean $clientSex
+     * @return Meeting
+     */
+    public function setClientSex($clientSex)
+    {
+        $this->clientSex = $clientSex;
+
+        return $this;
+    }
+
+    /**
+     * Get clientSex
+     *
+     * @return boolean 
+     */
+    public function getClientSex()
+    {
+        return $this->clientSex;
+    }
+
+    /**
+     * Set clientPartner
+     *
+     * @param string $clientPartner
+     * @return Meeting
+     */
+    public function setClientPartner($clientPartner)
+    {
+        $this->clientPartner = $clientPartner;
+
+        return $this;
+    }
+
+    /**
+     * Get clientPartner
+     *
+     * @return string 
+     */
+    public function getClientPartner()
+    {
+        return $this->clientPartner;
+    }
+
+    /**
+     * Set clientPartnerSex
+     *
+     * @param boolean $clientPartnerSex
+     * @return Meeting
+     */
+    public function setClientPartnerSex($clientPartnerSex)
+    {
+        $this->clientPartnerSex = $clientPartnerSex;
+
+        return $this;
+    }
+
+    /**
+     * Get clientPartnerSex
+     *
+     * @return boolean 
+     */
+    public function getClientPartnerSex()
+    {
+        return $this->clientPartnerSex;
+    }
+
+    /**
+     * Set maried
+     *
+     * @param boolean $maried
+     * @return Meeting
+     */
+    public function setMaried($maried)
+    {
+        $this->maried = $maried;
+
+        return $this;
+    }
+
+    /**
+     * Get maried
+     *
+     * @return boolean 
+     */
+    public function getMaried()
+    {
+        return $this->maried;
+    }
+
+    /**
+     * Set children
+     *
+     * @param boolean $children
+     * @return Meeting
+     */
+    public function setChildren($children)
+    {
+        $this->children = $children;
+
+        return $this;
+    }
+
+    /**
+     * Get children
+     *
+     * @return boolean 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set inTime
+     *
+     * @param boolean $inTime
+     * @return Meeting
+     */
+    public function setInTime($inTime)
+    {
+        $this->inTime = $inTime;
+
+        return $this;
+    }
+
+    /**
+     * Get inTime
+     *
+     * @return boolean 
+     */
+    public function getInTime()
+    {
+        return $this->inTime;
+    }
+
+    /**
+     * Set meetingDate
+     *
+     * @param \DateTime $meetingDate
+     * @return Meeting
+     */
+    public function setMeetingDate($meetingDate)
+    {
+        $this->meetingDate = $meetingDate;
+
+        return $this;
+    }
+
+    /**
+     * Get meetingDate
+     *
+     * @return \DateTime 
+     */
+    public function getMeetingDate()
+    {
+        return $this->meetingDate;
     }
 }

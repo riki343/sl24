@@ -68,8 +68,9 @@ class MeetingController extends Controller
         $data = (object)$data['meeting'];
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
+        $meeting = Meeting::editInfo($em, $meeting_id, $data);
         try {
-            $meeting = Meeting::editInfo($em, $meeting_id, $data);
+
         } catch (\Exception $ex) {
             return new JsonResponse(false);
         }
