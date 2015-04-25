@@ -58,17 +58,21 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
-     *
      * @ORM\Column(name="surname", type="string", length=255)
      */
     private $surname;
+
+    /**
+     * @var string
+     * @ORM\Column(name="middle_name", type="string", length=255)
+     */
+    private $middleName;
 
     /**
      * @var \DateTime
@@ -297,6 +301,13 @@ class User implements UserInterface, \Serializable
         $user->setWatches($parameters->watches);
         $user->setParker($parameters->parker);
         $user->setSlNumber($parameters->slNumber);
+
+        $user->setDirectorNumber($parameters->director);
+        $user->setMiddleName($parameters->middleName);
+        $user->setScore($parameters->score);
+        $user->setTeamScore($parameters->teamScore);
+        $user->setLevel($parameters->level);
+
         if ($parent) {
             $user->setParent($parent);
         }
@@ -966,5 +977,28 @@ class User implements UserInterface, \Serializable
     public function getMeetings()
     {
         return $this->meetings;
+    }
+
+    /**
+     * Set middleName
+     *
+     * @param string $middleName
+     * @return User
+     */
+    public function setMiddleName($middleName)
+    {
+        $this->middleName = $middleName;
+
+        return $this;
+    }
+
+    /**
+     * Get middleName
+     *
+     * @return string 
+     */
+    public function getMiddleName()
+    {
+        return $this->middleName;
     }
 }

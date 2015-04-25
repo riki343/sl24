@@ -7,14 +7,15 @@ Sl24.controller('RegistrationController', ['$scope', '$http',
             'pass': null,
             'rpass': null,
             'email': null,
-            'slNumber': null,
+            'slNumber': '',
             'score': 0,
             'teamScore': 0,
             'parker': false,
             'diary': false,
             'cufflinks': false,
             'watches': false,
-            'directorNumber': null,
+            'director': null,
+            'middleName': '',
             'level': 1
         };
 
