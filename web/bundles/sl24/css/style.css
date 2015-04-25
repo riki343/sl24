@@ -10,4 +10,8 @@
     border-left:5px solid green;
     border-radius: 3px;
 }
-
+.main-ol{
+    font-size: 18px;
+    font-family: "PT Sans Narrow", sans-serif;
+    color: #565656;
+}
