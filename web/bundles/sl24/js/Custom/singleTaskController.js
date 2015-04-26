@@ -1,5 +1,5 @@
-Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams',
-    function ($scope, $http, $routeParams) {
+Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams', '$rootScope',
+    function ($scope, $http, $routeParams, $rootScope) {
 
         $scope.task_id = $routeParams.task_id;
         $scope.task = null;
@@ -11,6 +11,7 @@ Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams',
         $scope.urlSaveTaskInfo = URLS.urlSaveTaskInfo;
 
         $scope.getTask = function (task_id) {
+            $rootScope.spinner = true;
             var urlGetTask = $scope.urlGetTask.replace('task_id', task_id);
             $scope.taskPromise = $http.get(urlGetTask)
                 .success(function (response){
@@ -18,30 +19,28 @@ Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams',
                     $scope.taskInfoEdit = response;
                     $scope.taskInfoEdit.date = new Date($scope.taskInfoEdit.date);
                     getStatuses();
+                    $rootScope.spinner = false;
                 }
             );
         };
 
-        var getStatuses = function () {
+        function getStatuses() {
             $scope.promiseStatuses = $http.get($scope.urlGetStatuses)
                 .success(function (response) {
                     $scope.taskStatuses = response;
                 }
             );
-        };
+        }
 
         $scope.saveTaskInfo = function (task) {
+            $rootScope.spinner = true;
             $scope.taskPromise = $http.post($scope.urlSaveTaskInfo, { 'task': task })
                 .success(function (response) {
                     if (response) {
-                        $scope.modalHeader = 'Успішно';
-                        $scope.modalBody = 'Інформація про завдання успішно збережена.';
-                    } else {
-                        $scope.modalHeader = 'Помилка';
-                        $scope.modalBody = 'Невідома помилка.';
+                        $rootScope.spinner = false;
                     }
-                    $('#edit_task').modal('show');
-                });
+                }
+            );
         };
 
     }

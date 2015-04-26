@@ -1,11 +1,11 @@
-Sl24.controller('TeamController', ['$scope', '$http',
-    function ($scope, $http) {
+Sl24.controller('TeamController', ['$scope', '$http', '$rootScope',
+    function ($scope, $http, $rootScope) {
         $scope.Team = null;
         $scope.urlGetTeam = URLS.urlGetTeam;
         $scope.childs = [];
 
-
         $scope.GetTeam = function () {
+            $rootScope.spinner = true;
             $http.get($scope.urlGetTeam)
                 .success(function (response) {
                     $scope.Team = response;
@@ -14,7 +14,9 @@ Sl24.controller('TeamController', ['$scope', '$http',
                     $scope.Team.visible = false;
 
                     tree($scope.Team,$scope.Team.lvl,$scope.Team.marginrigth);
-                });
+                    $rootScope.spinner = false;
+                }
+            );
         };
 
         function tree(elem,lvl,marginrigth)
@@ -42,6 +44,7 @@ Sl24.controller('TeamController', ['$scope', '$http',
             }
 
         };
+
         $scope.removeChildForTeam = function(Team,lvl,id)
         {
             Team.visible = false;
@@ -56,6 +59,5 @@ Sl24.controller('TeamController', ['$scope', '$http',
             }
 
         };
-        console.log('TeamController was loaded!!!')
     }
 ]);

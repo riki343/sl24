@@ -57,10 +57,6 @@ Sl24.controller('RegistrationController', ['$scope', '$http',
                             $scope.addUser.cufflinks = false;
                             $scope.addUser.watches = false;
                             break;
-                        case -1:
-                            $scope.modalHeader = "Помилка!";
-                            $scope.modalBody = null;
-                            break;
                         case -2:
                             $scope.modalHeader = "Помилка!";
                             $scope.modalBody = 'Неправильний Sl-номер керівника';

@@ -64,7 +64,7 @@ class Meeting
 
     /**
      * @var boolean
-     * @ORM\Column(name="in_time", type="boolean", options={"default" = true})
+     * @ORM\Column(name="in_time", type="boolean", nullable=true, options={"default" = null})
      */
     private $inTime;
 
@@ -188,6 +188,7 @@ class Meeting
         $this->clientSex = false;
         $this->maried = false;
         $this->children = false;
+        $this->inTime = null;
     }
 
     public function getInArray() {

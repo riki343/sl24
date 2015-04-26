@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TaskController extends Controller
 {
-
     /**
      * @return JsonResponse
      */
@@ -64,6 +63,7 @@ class TaskController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $parameters = array(
+            'id' => $data->id,
             'name' => $data->name,
             'statusID' => $data->status['id'],
             'description' => $data->description,

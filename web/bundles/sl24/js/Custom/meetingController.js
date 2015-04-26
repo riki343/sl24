@@ -1,5 +1,5 @@
-Sl24.controller('MeetingController', ['$scope', '$http',
-    function($scope, $http) {
+Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope',
+    function($scope, $http, $rootScope) {
         $scope.meetings = null;
         $scope.meetingsInfo = null;
         $scope.meetingForAdd = {
@@ -25,10 +25,12 @@ Sl24.controller('MeetingController', ['$scope', '$http',
         $scope.templateMounthAddNew = TEMPLATES.mounthAddNew;
 
         $scope.getMeetings = function (user_id) {
+            $rootScope.spinner = true;
             var meetingsUrl = $scope.urlGetMeetings.replace('user_id', user_id);
             $http.get(meetingsUrl)
                 .success(function (response) {
                     $scope.meetings = response;
+                    $rootScope.spinner = false;
                 }
             );
         };
@@ -55,7 +57,6 @@ Sl24.controller('MeetingController', ['$scope', '$http',
             $('#add_new_meeting').modal('hide');
             $http.post($scope.urlAddNewMeeting, { 'meeting': meeting })
                 .success(function (response) {
-                    console.log(response);
                     if (response == 'success') {
                         $scope.getMeetings($scope.userID);
                     }
@@ -66,17 +67,13 @@ Sl24.controller('MeetingController', ['$scope', '$http',
         $scope.addMounth = function (mounth) {
             if ($scope.mounthForAdd.name != null && $scope.mounthForAdd.startDate != null && $scope.mounthForAdd.endDate != null)
             {
+                $rootScope.spinner = true;
                 $('#add_new_work_mounth').modal('hide');
                 $http.post($scope.urlAddNewMounth, { 'mounth': mounth })
                     .success(function (response) {
                         if (response) {
-                            $scope.modalHeader = 'Успішно';
-                            $scope.modalBody = 'Новий робочий місяць додано.';
-                        } else {
-                            $scope.modalHeader = 'Помилка';
-                            $scope.modalBody = 'Невідома помилка.';
+                            $rootScope.spinner = false;
                         }
-                        $('#new_mounth').modal('show');
                     }
                 );
             }

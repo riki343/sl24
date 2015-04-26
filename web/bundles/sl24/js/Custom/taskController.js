@@ -1,5 +1,5 @@
-Sl24.controller('TaskController', ['$scope', '$http',
-    function ($scope, $http) {
+Sl24.controller('TaskController', ['$scope', '$http', '$rootScope',
+    function ($scope, $http, $rootScope) {
 
         $scope.tasks = null;
         $scope.urlGetTasks = URLS.getTasks;
@@ -23,16 +23,14 @@ Sl24.controller('TaskController', ['$scope', '$http',
         $scope.doneTasks = [];
 
         $scope.getTasks = function () {
+            $rootScope.spinner = true;
             $scope.promise = $http.get($scope.urlGetTasks)
                 .success(function (response) {
                     $scope.tasks = response;
                     separationTasksByStatus(response);
+                    $rootScope.spinner = false;
                 }
             );
-
-            $scope.promise.then(function () {
-
-            });
         };
 
         $scope.addTask = function (task) {
@@ -52,7 +50,8 @@ Sl24.controller('TaskController', ['$scope', '$http',
                 $scope.promise = $http.post($scope.urlDeleteTask, {'task_id': task_id})
                     .success(function () {
                         $scope.getTasks();
-                    });
+                    }
+                );
             }
         };
 
