@@ -57,6 +57,12 @@ sl_24_edit_post_meeting:
     pattern: /editMeetingPost/{post_id}
     defaults: { _controller: Sl24Bundle:MeetingPost:editPost }
 
+################ Home page routings ###########
+
+sl24_homepage_get_info:
+    pattern: /homepage/getInfo
+    defaults: { _controller: Sl24Bundle:HomePage:getHomePageInfo }
+
 #############################################################################
 ######################### End of Meeting routing ############################
 #############################################################################

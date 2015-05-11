@@ -41,7 +41,7 @@ class Task
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="date", nullable=true)
      */
     private $date;
 
@@ -95,6 +95,39 @@ class Task
      */
     public function __construct() {
         $this->posts = new ArrayCollection();
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param int $user_id
+     * @return array
+     */
+    public static function getTasksForToday(EntityManager $em, $user_id) {
+        $result = array();
+
+        $today = new \DateTime();
+        $qb = $em->createQueryBuilder();
+        $query = $qb->select('u')
+            ->from('Sl24Bundle:Task', 'u')
+            ->where('u.date = :today')
+            ->setParameter('today', $today->format('Y-m-d'))
+            ->andWhere('u.assignedID = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->getQuery();
+        $result['today'] = Functions::arrayToJson($query->getResult());
+
+        $tommorow = $today->modify('+1 day');
+        $qb = $em->createQueryBuilder();
+        $query = $qb->select('t')
+            ->from('Sl24Bundle:Task', 't')
+            ->where('t.date = :today')
+            ->setParameter('today', $tommorow->format('Y-m-d'))
+            ->andWhere('t.assignedID = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->getQuery();
+        $result['tommorow'] = Functions::arrayToJson($query->getResult());
+
+        return $result;
     }
 
     public function getInArray()

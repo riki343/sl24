@@ -196,6 +196,10 @@ class User implements UserInterface, \Serializable
      */
     private $directorNumber;
 
+    public static function getBirthDays(EntityManager $em, $user_id) {
+
+    }
+
     public function getInArray() {
         return array(
             'id' => $this->getId(),

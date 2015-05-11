@@ -70,7 +70,7 @@ class Meeting
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="meeting_date", type="datetime", nullable=true)
+     * @ORM\Column(name="meeting_date", type="date", nullable=true)
      */
     private $meetingDate;
 
@@ -179,6 +179,38 @@ class Meeting
      * @ORM\OneToMany(targetEntity="MeetingPost", mappedBy="meeting")
      */
     private $posts;
+
+    /**
+     * @param EntityManager $em
+     * @param int $user_id
+     * @return array
+     */
+    public static function getMeetingsForToday(EntityManager $em, $user_id) {
+        $result = array();
+
+        $today = new \DateTime();
+        $qb = $em->createQueryBuilder();
+        $query = $qb->select('u')
+            ->from('Sl24Bundle:Meeting', 'u')
+            ->where('u.meetingDate = :today')
+            ->setParameter('today', $today->format('Y-m-d'))
+            ->andWhere('u.consultantID = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->getQuery();
+        $result['today'] = Functions::arrayToJson($query->getResult());
+
+        $tommorow = $today->modify('+1 day');
+        $query = $qb->select('t')
+            ->from('Sl24Bundle:Meeting', 't')
+            ->where('t.meetingDate = :today')
+            ->setParameter('today', $tommorow->format('Y-m-d'))
+            ->andWhere('t.consultantID = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->getQuery();
+        $result['tommorow'] = Functions::arrayToJson($query->getResult());
+
+        return $result;
+    }
 
     public function __construct() {
         $this->setProgress(0);
