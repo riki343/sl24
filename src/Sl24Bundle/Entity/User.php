@@ -196,8 +196,37 @@ class User implements UserInterface, \Serializable
      */
     private $directorNumber;
 
+    /**
+     * @param EntityManager $em
+     * @param int $user_id
+     * @return array
+     */
     public static function getBirthDays(EntityManager $em, $user_id) {
+        $result = array();
 
+        $today = new \DateTime();
+        $qb = $em->createQueryBuilder();
+        $query = $qb->select('u')
+            ->from('Sl24Bundle:Meeting', 'u')
+            ->where('u.clientBirthday = :today')
+            ->setParameter('today', $today->format('m-d'))
+            ->andWhere('u.consultantID = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->getQuery();
+        $result['meetings']['today'] = Functions::arrayToJson($query->getResult());
+
+        $tommorow = $today->modify('+1 day');
+        $qb = $em->createQueryBuilder();
+        $query = $qb->select('u')
+            ->from('Sl24Bundle:Meeting', 'u')
+            ->where('u.clientBirthday = :today')
+            ->setParameter('today', $tommorow->format('m-d'))
+            ->andWhere('u.consultantID = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->getQuery();
+        $result['meetings']['tommorow'] = Functions::arrayToJson($query->getResult());
+
+        return $result;
     }
 
     public function getInArray() {

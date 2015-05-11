@@ -5,119 +5,95 @@
         <a class="meeting-header-nav" style="margin-left: 8px;padding: 4px 8px;" ng-href="/meetings">Команда</a>
         <a class="meeting-header-nav" style="margin-left: 8px;padding: 4px 8px;" ng-href="/meetings">Карєра</a>
     </div>
-
-</div>
-
-<div class="col-xs-3">
-    <a href="#" style="font-size: 30px"><i class="fa fa-angle-left"></i></a>
-</div>
-<div class="col-xs-6">
-    <h3 class="text-center">Квітень 2015</h3>
-</div>
-
-<div class="col-xs-3">
-    <a href="#" class="pull-right" style="font-size: 30px"><i class="fa fa-angle-right"></i></a>
-</div>
-
-<div class="col-md-12">
-    <hr>
-</div>
-
-<div class="col-md-6 col-xs-6">
-    <h3 class="text-center" style="margin: 0;">Сьогодні</h3>
-    <hr>
-    <ol class="main-ol">
-        <li>Зустрічь з <a>Коля Іванов</a></li>
-        <li>ДН  <a>Олексій Бабій</a></li>
-        <li>Призентація о 19-00</li>
-    </ol>
-</div>
-
-<div class="col-md-6 col-xs-6" style="border-left: 1px solid #eee;">
-    <h3 class="text-center" style="margin: 0;">Завтра</h3>
-    <hr>
-    <ol class="main-ol">
-        <li>Зустрічь з <a>Коля Іванов</a></li>
-        <li>ДН  <a>Олексій Бабій</a></li>
-        <li>Призентація о 19-00</li>
-        <li>Зустрічь з <a>Коля Іванов</a></li>
-        <li>ДН  <a>Олексій Бабій</a></li>
-        <li>Призентація о 19-00</li>
-    </ol>
-
 </div>
 
 <div class="row">
-        <div class="col-xs-3 col-lg-2 col-sm-3" style="border: 1px solid #eee; margin-left: 10px; margin-top: 10px;">
-            <h4 class="text-center">Руслан</h4>
-            <h4 class="text-center">200E/<span class="text-muted">150E</span></h4>
-            <hr style="margin-top: 0;">
-            <p class="text-center">
-                <span class="label label-danger" style="font-size: 15px;">10</span>
-                <span class="label label-default" style="font-size: 15px;">10</span>
-                <span class="label label-info" style="font-size: 15px;">10</span>
-            </p>
-        </div>
+    <div class="col-xs-3">
+        <a href="#" style="font-size: 30px"><i class="fa fa-angle-left"></i></a>
+    </div>
+    <div class="col-xs-6">
+        <h3 class="text-center">Квітень 2015</h3>
+    </div>
 
-        <div class="col-xs-3 col-lg-2 col-sm-3" style="border: 1px solid #eee; margin-left: 10px; margin-top: 10px;">
+    <div class="col-xs-3">
+        <a href="#" class="pull-right" style="font-size: 30px"><i class="fa fa-angle-right"></i></a>
+    </div>
 
-            <h4 class="text-center">Руслан</h4>
-            <h4 class="text-center">200E/<span class="text-muted">150E</span></h4>
-            <hr style="margin-top: 0;">
-            <p class="text-center">
-                <span class="label label-danger" style="font-size: 15px;">10</span>
-                <span class="label label-default" style="font-size: 15px;">10</span>
-                <span class="label label-info" style="font-size: 15px;">10</span>
-            </p>
-        </div>
+    <div class="col-md-12">
+        <hr>
+    </div>
+</div>
 
-        <div class="col-xs-3 col-lg-2 col-sm-3" style="border: 1px solid #eee; margin-left: 10px; margin-top: 10px;">
+<div class="row">
+    <div class="col-md-6 col-xs-6">
+        <h3 class="text-center" style="margin: 0;">Сьогодні</h3>
+        <hr>
+        <ul ng-if="total.today == 0">
+            <li>Нагадування відсутні</li>
+        </ul>
+        <ol class="main-ol">
+            <li ng-repeat="meeting in meetings.today">
+                <a ng-href="/consultant/meeting/[[ meeting.id ]]">
+                    Зустріч з [[ meeting.client ]]
+                </a>
+            </li>
+            <li ng-repeat="task in tasks.today">
+                <a ng-href="/consultant/task/[[ task.id ]]">
+                    [[ task.name ]]
+                </a>
+            </li>
+        </ol>
+    </div>
 
-            <h4 class="text-center">Руслан</h4>
-            <h4 class="text-center">200E/<span class="text-muted">150E</span></h4>
-            <hr style="margin-top: 0;">
-            <p class="text-center">
-                <span class="label label-danger" style="font-size: 15px;">10</span>
-                <span class="label label-default" style="font-size: 15px;">10</span>
-                <span class="label label-info" style="font-size: 15px;">10</span>
-            </p>
-        </div>
+    <div class="col-md-6 col-xs-6" style="border-left: 1px solid #eee;">
+        <h3 class="text-center" style="margin: 0;">Завтра</h3>
+        <hr>
+        <ul ng-if="total.tommorow == 0">
+            <li>Нагадування відсутні</li>
+        </ul>
+        <ol class="main-ol">
+            <li ng-repeat="meeting in meetings.tommorow">
+                <a ng-href="/consultant/meeting/[[ meeting.id ]]">
+                    Зустріч з [[ meeting.client ]]
+                </a>
+            </li>
+            <li ng-repeat="task in tasks.tommorow">
+                <a ng-href="/consultant/task/[[ task.id ]]">
+                    [[ task.name ]]
+                </a>
+            </li>
+        </ol>
+    </div>
+    <div class="col-xs-12">
+        <hr/>
+    </div>
+</div>
 
-        <div class="col-xs-3 col-lg-2 col-sm-3" style="border: 1px solid #eee; margin-left: 10px; margin-top: 10px;">
+<div class="row">
+    <div class="col-xs-3 col-lg-2 col-sm-3" style="border: 1px solid #eee; margin-left: 10px; margin-top: 10px;">
+        <h4 class="text-center">[[ homeUser.name + ' ' + homeUser.surname ]]</h4>
+        <h4 class="text-center">[[ homeUser.score ]]E/<span class="text-muted">[[ homeUser.teamScore ]]E</span></h4>
+        <hr style="margin-top: 0;">
+        <p class="text-center">
+            <span class="label label-danger" style="font-size: 15px;">10</span>
+            <span class="label label-default" style="font-size: 15px;">10</span>
+            <span class="label label-info" style="font-size: 15px;">10</span>
+        </p>
+    </div>
 
-            <h4 class="text-center">Руслан</h4>
-            <h4 class="text-center">200E/<span class="text-muted">150E</span></h4>
-            <hr style="margin-top: 0;">
-            <p class="text-center">
-                <span class="label label-danger" style="font-size: 15px;">10</span>
-                <span class="label label-default" style="font-size: 15px;">10</span>
-                <span class="label label-info" style="font-size: 15px;">10</span>
-            </p>
-        </div>
+    <div class="col-xs-3 col-lg-2 col-sm-3" style="border: 1px solid #eee; margin-left: 10px; margin-top: 10px;"
+         ng-repeat="user in homeChilds">
+        <h4 class="text-center">[[ user.name + ' ' + user.surname ]]</h4>
+        <h4 class="text-center">[[ user.score ]]E/<span class="text-muted">[[ user.teamScore ]]E</span></h4>
+        <hr style="margin-top: 0;">
+        <p class="text-center">
+            <span class="label label-danger" style="font-size: 15px;">10</span>
+            <span class="label label-default" style="font-size: 15px;">10</span>
+            <span class="label label-info" style="font-size: 15px;">10</span>
+        </p>
+    </div>
 
-        <div class="col-xs-3 col-lg-2 col-sm-3" style="border: 1px solid #eee; margin-left: 10px; margin-top: 10px;">
 
-            <h4 class="text-center">Руслан</h4>
-            <h4 class="text-center">200E/<span class="text-muted">150E</span></h4>
-            <hr style="margin-top: 0;">
-            <p class="text-center">
-                <span class="label label-danger" style="font-size: 15px;">10</span>
-                <span class="label label-default" style="font-size: 15px;">10</span>
-                <span class="label label-info" style="font-size: 15px;">10</span>
-            </p>
-        </div>
-
-        <div class="col-xs-3 col-lg-2 col-sm-3" style="border: 1px solid #eee; margin-left: 10px; margin-top: 10px;">
-
-            <h4 class="text-center">Руслан</h4>
-            <h4 class="text-center">200E/<span class="text-muted">150E</span></h4>
-            <hr style="margin-top: 0;">
-            <p class="text-center">
-                <span class="label label-danger" style="font-size: 15px;">10</span>
-                <span class="label label-default" style="font-size: 15px;">10</span>
-                <span class="label label-info" style="font-size: 15px;">10</span>
-            </p>
-        </div>
 </div>
 <hr/>
 

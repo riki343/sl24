@@ -89,7 +89,7 @@ class Meeting
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
 
@@ -192,7 +192,7 @@ class Meeting
         $qb = $em->createQueryBuilder();
         $query = $qb->select('u')
             ->from('Sl24Bundle:Meeting', 'u')
-            ->where('u.meetingDate = :today')
+            ->where('u.date = :today')
             ->setParameter('today', $today->format('Y-m-d'))
             ->andWhere('u.consultantID = :user_id')
             ->setParameter('user_id', $user_id)
@@ -202,7 +202,7 @@ class Meeting
         $tommorow = $today->modify('+1 day');
         $query = $qb->select('t')
             ->from('Sl24Bundle:Meeting', 't')
-            ->where('t.meetingDate = :today')
+            ->where('t.date = :today')
             ->setParameter('today', $tommorow->format('Y-m-d'))
             ->andWhere('t.consultantID = :user_id')
             ->setParameter('user_id', $user_id)
