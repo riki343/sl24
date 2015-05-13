@@ -1,5 +1,5 @@
-Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope', '$routeParams',
-    function($scope, $http, $rootScope, $routeParams) {
+Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope', '$routeParams', '$spinner',
+    function($scope, $http, $rootScope, $routeParams, $spinner) {
         $scope.meetings = null;
         $scope.meetingsInfo = null;
         $scope.meetingForAdd = {
@@ -29,23 +29,22 @@ Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope', '$routePa
         $scope.templateMounthAddNew = TEMPLATES.mounthAddNew;
 
         $scope.getMeetings = function () {
-            $rootScope.spinner = true;
             var requestUrl = (ownPage)
                 ? urlGetMeetings.replace('user_id', $scope.userID)
                 : urlGetMeetings.replace('user_id', $routeParams.consultant_id);
-            $http.get(requestUrl)
+            var promise = $http.get(requestUrl)
                 .success(function (response) {
                     $scope.meetings = response;
-                    $rootScope.spinner = false;
                 }
             );
+            $spinner.addPromise(promise);
         };
 
         $scope.getMeetingsInfo = function () {
             var requestUrl = (ownPage)
                 ? urlGetMeetingsInfo.replace('user_id', $scope.userID)
                 : urlGetMeetingsInfo.replace('user_id', $routeParams.consultant_id);
-            $http.get(requestUrl)
+            var promise = $http.get(requestUrl)
                 .success(function (response) {
                     $scope.meetingsInfo = response;
 
@@ -60,6 +59,7 @@ Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope', '$routePa
                     }
                 }
             );
+            $spinner.addPromise(promise);
         };
 
         $scope.addNewMeeting = function (meeting) {
@@ -67,27 +67,22 @@ Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope', '$routePa
             var requestUrl = (ownPage)
                 ? urlAddNewMeeting.replace('user_id', $scope.userID)
                 : urlAddNewMeeting.replace('user_id', $routeParams.consultant_id);
-            $http.post(requestUrl, { 'meeting': meeting })
+            var promise = $http.post(requestUrl, { 'meeting': meeting })
                 .success(function (response) {
                     if (response == 'success') {
                         $scope.getMeetings();
                     }
                 }
             );
+            $spinner.addPromise(promise);
         };
 
         $scope.addMounth = function (mounth) {
             if ($scope.mounthForAdd.name != null && $scope.mounthForAdd.startDate != null && $scope.mounthForAdd.endDate != null)
             {
-                $rootScope.spinner = true;
                 $('#add_new_work_mounth').modal('hide');
-                $http.post($scope.urlAddNewMounth, { 'mounth': mounth })
-                    .success(function (response) {
-                        if (response) {
-                            $rootScope.spinner = false;
-                        }
-                    }
-                );
+                var promise = $http.post($scope.urlAddNewMounth, { 'mounth': mounth });
+                $spinner.addPromise(promise);
             }
         };
     }

@@ -72,8 +72,7 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href=""> Профайл</a> </li>
-                                <li><a href="">Налаштування</a> </li>
+                                <li><a ng-href="/consultant/settings">Налаштування</a></li>
                                 <li class="divider"></li>
                                 <li>
                                     <a href="{{ path('sl24_logout') }}" tabindex="-1" target="_self">
@@ -84,7 +83,7 @@
                         </li>
                         <li>
                             <h3 class="clock">
-                                [[ watches | date : 'HH']]:[[ watches | date : 'mm' ]]<sup>[[ watches | date : 'ss' ]]</sup>
+                                [[ app.watches | date : 'HH']]:[[ app.watches | date : 'mm' ]]<sup>[[ app.watches | date : 'ss' ]]</sup>
                             </h3>
                         </li>
                     </ul>

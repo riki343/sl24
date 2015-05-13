@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-init="sctrl.getUserSettings()">
     <div class="meeting-header">
         <a class="meeting-header-nav"
            ng-href="/consultant">
@@ -7,8 +7,10 @@
         <div class="breadcrumb-bg">
             <i class="fa fa-globe"></i> |
             <a ng-href="/consultant">
-                Зустрічі
+                [[  ]]
             </a>
+            <i class="fa fa-angle-right" style="color: #337AB7;"></i>
+            Налаштування
         </div>
     </div>
 </div>
