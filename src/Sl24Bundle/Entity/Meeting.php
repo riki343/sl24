@@ -365,6 +365,11 @@ class Meeting
         $em->flush();
     }
 
+    /**
+     * @param EntityManager $em
+     * @param User $user
+     * @return array
+     */
     public static function getMeetingsInfo(EntityManager $em, User $user) {
         $assistants = array();
         $tempUser = $user;

@@ -44,15 +44,16 @@ class MeetingController extends Controller
     /**
      * @Security("has_role('ROLE_USER')")
      * @param Request $request
+     * @param int $user_id
      * @return JsonResponse
      */
-    public function addNewMeetingAction(Request $request) {
+    public function addNewMeetingAction(Request $request, $user_id) {
         $data = json_decode($request->getContent(), true);
         $data = (object)$data['meeting'];
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         /** @var User $user */
-        $user = $this->getUser();
+        $user = $em->find('Sl24Bundle:User', $user_id);
         Meeting::addNewMeeting($em, $user, $data);
         return new JsonResponse('success');
     }
@@ -88,13 +89,14 @@ class MeetingController extends Controller
 
     /**
      * @Security("has_role('ROLE_USER')")
+     * @param int $user_id
      * @return JsonResponse
      */
-    public function getMeetingsInfoAction() {
+    public function getMeetingsInfoAction($user_id) {
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         /** @var User $user */
-        $user = $this->getUser();
+        $user = $em->find('Sl24Bundle:User', $user_id);
         return new JsonResponse(Meeting::getMeetingsInfo($em, $user));
     }
 }

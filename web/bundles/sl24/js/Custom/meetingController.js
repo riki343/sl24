@@ -1,5 +1,5 @@
-Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope',
-    function($scope, $http, $rootScope) {
+Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope', '$routeParams',
+    function($scope, $http, $rootScope, $routeParams) {
         $scope.meetings = null;
         $scope.meetingsInfo = null;
         $scope.meetingForAdd = {
@@ -16,18 +16,24 @@ Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope',
             'endDate': null
         };
 
-        $scope.urlGetMeetings = URLS.getMeetings;
-        $scope.urlGetMeetingsInfo = URLS.getMeetingsInfo;
-        $scope.urlAddNewMeeting = URLS.addNewMeeting;
+        var ownPage = !angular.isDefined($routeParams.consultant_id);
+        $scope.ownPage = ownPage;
+        $scope.consultant = (!ownPage) ? $routeParams.consultant_id : null;
+
+        var urlGetMeetings = URLS.getMeetings;
+        var urlGetMeetingsInfo = URLS.getMeetingsInfo;
+        var urlAddNewMeeting = URLS.addNewMeeting;
         $scope.urlAddNewMounth = URLS.addNewMounth;
 
         $scope.templateMeetingsAddNew = TEMPLATES.meetingsAddNew;
         $scope.templateMounthAddNew = TEMPLATES.mounthAddNew;
 
-        $scope.getMeetings = function (user_id) {
+        $scope.getMeetings = function () {
             $rootScope.spinner = true;
-            var meetingsUrl = $scope.urlGetMeetings.replace('user_id', user_id);
-            $http.get(meetingsUrl)
+            var requestUrl = (ownPage)
+                ? urlGetMeetings.replace('user_id', $scope.userID)
+                : urlGetMeetings.replace('user_id', $routeParams.consultant_id);
+            $http.get(requestUrl)
                 .success(function (response) {
                     $scope.meetings = response;
                     $rootScope.spinner = false;
@@ -36,7 +42,10 @@ Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope',
         };
 
         $scope.getMeetingsInfo = function () {
-            $http.get($scope.urlGetMeetingsInfo)
+            var requestUrl = (ownPage)
+                ? urlGetMeetingsInfo.replace('user_id', $scope.userID)
+                : urlGetMeetingsInfo.replace('user_id', $routeParams.consultant_id);
+            $http.get(requestUrl)
                 .success(function (response) {
                     $scope.meetingsInfo = response;
 
@@ -55,10 +64,13 @@ Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope',
 
         $scope.addNewMeeting = function (meeting) {
             $('#add_new_meeting').modal('hide');
-            $http.post($scope.urlAddNewMeeting, { 'meeting': meeting })
+            var requestUrl = (ownPage)
+                ? urlAddNewMeeting.replace('user_id', $scope.userID)
+                : urlAddNewMeeting.replace('user_id', $routeParams.consultant_id);
+            $http.post(requestUrl, { 'meeting': meeting })
                 .success(function (response) {
                     if (response == 'success') {
-                        $scope.getMeetings($scope.userID);
+                        $scope.getMeetings();
                     }
                 }
             );

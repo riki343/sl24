@@ -30,11 +30,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr >
+    <tr>
         <td style="padding-left:[[Team.marginrigth]]px ;">
             <i ng-if="Team.childs != 0 && Team.visible == false" class="fa fa-plus plus-team" ng-click="showChildForTeam(Team,Team.lvl,Team.id)"></i>
             <i class="fa fa-minus plus-team" ng-if="Team.visible == true" ng-click="removeChildForTeam(Team,Team.lvl,Team.id)"></i>
-           [[Team.surname]] [[ Team.name ]] ([[Team.slNumber]])
+            <a ng-href="/consultant/[[ Team.id ]]">
+                [[Team.surname]] [[ Team.name ]] ([[Team.slNumber]])
+            </a>
         </td>
         <td> [[Team.lvl]]</td>
         <td>[[Team.score]]</td>
@@ -61,7 +63,9 @@
         <td style="padding-left:[[child.marginrigth]]px ;">
             <i ng-if="child.childs != 0  && child.visible == false" class="fa fa-plus plus-team" ng-click="showChildForTeam(child,child.lvl,child.id)"></i>
             <i class="fa fa-minus plus-team" ng-if="child.visible == true" ng-click="removeChildForTeam(child,child.lvl,child.id)"></i>
-            [[child.surname]] [[ child.name ]]([[child.slNumber]])
+            <a ng-href="/consultant/[[ child.id ]]">
+                [[child.surname]] [[ child.name ]]([[child.slNumber]])
+            </a>
         </td>
         <td> [[child.lvl]]</td>
         <td>[[child.score]]</td>

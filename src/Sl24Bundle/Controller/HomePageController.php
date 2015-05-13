@@ -14,19 +14,26 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class HomePageController extends Controller {
     /**
      * @Security("has_role('ROLE_USER')")
+     * @param $user_id
      * @return JsonResponse
      */
-    public function getHomePageInfoAction() {
+    public function getHomePageInfoAction($user_id = null) {
         $result = array();
-        /** @var User $user */
-        $user = $this->getUser();
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
+        /** @var User $user */
+        $user = ($user_id)
+            ? $em->find('Sl24Bundle:User', $user_id)
+            : $this->getUser();
         $result['meetings'] = Meeting::getMeetingsForToday($em, $user->getId());
         $result['tasks'] = Task::getTasksForToday($em, $user->getId());
         $result['birthdays'] = User::getBirthDays($em, $user->getId());
         $result['childs'] = Functions::arrayToJson($user->getChilds());
         $result['user'] = $user->getInArray();
         return new JsonResponse($result);
+    }
+
+    public function getSettingsAction() {
+
     }
 }

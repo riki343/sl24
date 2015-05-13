@@ -43,8 +43,8 @@
         URLS.getMeeting = "{{ path('sl24_getMeeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.saveMeeting = "{{ path('sl24_saveMeeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.removeMeeting = "{{ path('sl24_removeMeeting', { 'meeting_id': 'meeting_id' }) }}";
-        URLS.getMeetingsInfo = "{{ path('sl24_getMeetingsInfo') }}";
-        URLS.addNewMeeting = "{{ path('sl24_addMeeting') }}";
+        URLS.getMeetingsInfo = "{{ path('sl24_getMeetingsInfo', { 'user_id': 'user_id' }) }}";
+        URLS.addNewMeeting = "{{ path('sl24_addMeeting', { 'user_id': 'user_id' }) }}";
         URLS.getMeetingPosts = "{{ path('sl_24_get_posts_meetings', { 'meeting_id': 'meeting_id' }) }}";
         URLS.addMeetingPost = "{{ path('sl_24_add_post_meeting', { 'meeting_id': 'meeting_id' }) }}";
         URLS.editMeetingPost = "{{ path('sl_24_edit_post_meeting', { 'post_id': 'post_id' }) }}";
@@ -64,6 +64,7 @@
         //////// END TASK URLS  \\\\\\\
 
         URLS.homepageGetInfo = "{{ path('sl24_homepage_get_info') }}";
+        URLS.userHomepageGetInfo = "{{ path('sl24_another_homepage_info', { 'user_id': 0 }) }}";
 
         var USER_ID = {{ app.user.id }};
         var USER_LEVEL = {{ app.user.level }};

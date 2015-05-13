@@ -17,8 +17,12 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '
             'edit': false
         };
 
+        var ownPage = !angular.isDefined($routeParams.consultant_id);
+        $scope.ownPage = ownPage;
+        $scope.consultant = (!ownPage) ? $routeParams.consultant_id : null;
+
         $scope.urlGetMeeting = URLS.getMeeting;
-        $scope.urlGetMeetingsInfo = URLS.getMeetingsInfo;
+        var urlGetMeetingsInfo = URLS.getMeetingsInfo;
         $scope.urlSaveMeeting = URLS.saveMeeting;
         $scope.urlRemoveMeeting =  URLS.removeMeeting;
         $scope.urlGetMeetingPosts = URLS.getMeetingPosts;
@@ -42,7 +46,10 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '
         };
 
         $scope.getMeetingsInfo = function () {
-            $http.get($scope.urlGetMeetingsInfo)
+            var requestUrl = (ownPage)
+                ? urlGetMeetingsInfo.replace('user_id', $scope.userID)
+                : urlGetMeetingsInfo.replace('user_id', $routeParams.consultant_id);
+            $http.get(requestUrl)
                 .success(function (response) {
                     $scope.meetingsInfo = response;
                 }

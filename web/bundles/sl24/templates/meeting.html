@@ -2,11 +2,19 @@
 
 <div class="row">
     <div class="meeting-header">
-        <a class="meeting-header-nav" ng-href="/consultant/meetings"><i class="fa fa-angle-left"></i></a>
-        <a class="meeting-header-nav" ng-href="/consultant/meeting/edit/[[ meeting.id ]]" style="margin-left: 8px; padding: 4px 8px;">Редагувати</a>
+        <a class="meeting-header-nav"
+           ng-href="[[ (ownPage) ? '/consultant/meetings' : '/consultant/' + consultant + '/meetings' ]]">
+            <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="meeting-header-nav" style="margin-left: 8px; padding: 4px 8px;"
+           ng-href="[[ (ownPage) ? '/consultant/meeting/edit/' + meeting.id : '/consultant/' + consultant + '/meeting/edit/' + meeting.id ]]">
+            Редагувати
+        </a>
         <div class="breadcrumb-bg">
             <i class="fa fa-globe"></i> |
-            <a ng-href="/consultant/meetings"> Зустрічі</a>
+            <a ng-href="[[ (ownPage) ? '/consultant/meetings' : '/consultant/' + consultant + '/meetings' ]]">
+                Зустрічі
+            </a>
             <i class="fa fa-angle-right" style="color: #337AB7;"></i>
             [[ meeting.client ]]
         </div>

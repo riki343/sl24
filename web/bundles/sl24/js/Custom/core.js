@@ -47,6 +47,22 @@ Sl24.config(['$interpolateProvider', '$httpProvider', '$routeProvider', '$locati
                 templateUrl: TEMPLATES.fullArticle,
                 controller: 'ArticleController'
             })
+            .when('/consultant/:consultant_id', {
+                templateUrl: TEMPLATES.main,
+                controller: 'HomepageController'
+            })
+            .when('/consultant/:consultant_id/meetings', {
+                templateUrl: TEMPLATES.meetings,
+                controller: 'MeetingController'
+            })
+            .when('/consultant/:consultant_id/meeting/:meeting_id', {
+                templateUrl: TEMPLATES.meeting,
+                controller: 'SingleMeetingController'
+            })
+            .when('/consultant/:consultant_id/meeting/edit/:meeting_id', {
+                templateUrl: TEMPLATES.meetingEdit,
+                controller: 'SingleMeetingController'
+            })
             .otherwise({
                 redirectTo: '/consultant/'
             });

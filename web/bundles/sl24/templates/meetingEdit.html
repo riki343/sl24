@@ -1,11 +1,18 @@
 <div class="row">
     <div class="meeting-header">
-        <a class="meeting-header-nav" ng-href="/consultant/meeting/[[ meetingEdit.id ]]"><i class="fa fa-angle-left"></i></a>
+        <a class="meeting-header-nav"
+           ng-href="[[ (ownPage) ? ('/consultant/meeting/' + meetingEdit.id) : ('/consultant/' + consultant + '/meeting/' + meetingEdit.id) ]]">
+            <i class="fa fa-angle-left"></i>
+        </a>
         <div class="breadcrumb-bg">
             <i class="fa fa-globe"></i> |
-            <a ng-href="/consultant/meetings"> Зустрічі</a>
+            <a ng-href="[[ (ownPage) ? ('/consultant/meetings/') : ('/consultant/' + consultant + '/meetings') ]]">
+                Зустрічі
+            </a>
             <i class="fa fa-angle-right" style="color: #337AB7;"></i>
-            <a ng-href="/consultant/meeting/[[ meetingEdit.id ]]"> [[ meeting.client ]]</a>
+            <a ng-href="[[ (ownPage) ? ('/consultant/meeting/' + meetingEdit.id) : ('/consultant/' + consultant + '/meeting/' + meetingEdit.id) ]]">
+                [[ meeting.client ]]
+            </a>
             <i class="fa fa-angle-right" style="color: #337AB7;"></i>
             Редагування
         </div>

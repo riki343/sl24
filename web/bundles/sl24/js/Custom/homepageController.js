@@ -1,6 +1,7 @@
-Sl24.controller('HomepageController', ['$scope', '$http', '$rootScope',
-    function ($scope, $http, $rootScope) {
+Sl24.controller('HomepageController', ['$scope', '$http', '$rootScope', '$routeParams',
+    function ($scope, $http, $rootScope, $routeParams) {
         var urlHomepageGetInfo = URLS.homepageGetInfo;
+        var urlUserHomepageGetInfo = URLS.userHomepageGetInfo;
         $scope.meetings = [];
         $scope.tasks = [];
         $scope.birthdays = [];
@@ -9,9 +10,17 @@ Sl24.controller('HomepageController', ['$scope', '$http', '$rootScope',
             'tommorow': 0
         };
 
+        var ownPage = !angular.isDefined($routeParams.consultant_id);
+        $scope.ownPage = ownPage;
+        $scope.consultant = (!ownPage) ? $routeParams.consultant_id : null;
+
         $scope.getHomeOfficeInfo = function () {
             $rootScope.spinner = true;
-            $http.get(urlHomepageGetInfo)
+            var requestUrl = (ownPage)
+                ? urlHomepageGetInfo
+                : urlUserHomepageGetInfo.replace('0', $routeParams.consultant_id);
+
+            $http.get(requestUrl)
                 .success(function (response) {
                     $scope.meetings = response.meetings;
                     $scope.tasks = response.tasks;

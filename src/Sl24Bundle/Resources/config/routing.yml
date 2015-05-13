@@ -26,7 +26,7 @@ sl24_getMeeting:
     defaults: { _controller: Sl24Bundle:Meeting:getMeeting }
 
 sl24_addMeeting:
-    path: /meetings/add
+    path: /meetings/{user_id}/add
     defaults: { _controller: Sl24Bundle:Meeting:addNewMeeting }
 
 sl24_addMounth:
@@ -42,7 +42,7 @@ sl24_removeMeeting:
     defaults: { _controller: Sl24Bundle:Meeting:removeMeeting }
 
 sl24_getMeetingsInfo:
-    path: /meetings/getmeetingsInfo
+    path: /meetings/{user_id}/getmeetingsInfo
     defaults: { _controller: Sl24Bundle:Meeting:getMeetingsInfo }
 
 sl_24_get_posts_meetings:
@@ -57,16 +57,26 @@ sl_24_edit_post_meeting:
     pattern: /editMeetingPost/{post_id}
     defaults: { _controller: Sl24Bundle:MeetingPost:editPost }
 
-################ Home page routings ###########
+#############################################################################
+######################### End of Meeting routing ############################
+#############################################################################
+
+
+#############################################################################
+######################### Begin of Meeting routing ##########################
+#############################################################################
 
 sl24_homepage_get_info:
     pattern: /homepage/getInfo
     defaults: { _controller: Sl24Bundle:HomePage:getHomePageInfo }
 
+sl24_another_homepage_info:
+    pattern: /homepage/{user_id}/getInfo
+    defaults: { _controller: Sl24Bundle:HomePage:getHomePageInfo, 'user_id': null }
+
 #############################################################################
 ######################### End of Meeting routing ############################
 #############################################################################
-
 
 #############################################################################
 ######################### Begin of Task routing #############################
@@ -138,8 +148,6 @@ sl_24_add_article:
 sl_24_get_articles_page:
     path: /article
     defaults: { _controller: Sl24Bundle:Index:index }
-
-
 
 
 #############################################################################

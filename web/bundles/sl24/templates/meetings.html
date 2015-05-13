@@ -1,8 +1,23 @@
 <div class="row">
     <div class="meeting-header">
-        <a class="meeting-header-nav" style="padding: 4px 8px; margin-right: 5px" data-toggle="modal" data-target="#add_new_work_mounth">Додати робочий місяць</a>
-        <a class="meeting-header-nav" style="padding: 4px 8px;" data-toggle="modal" data-target="#add_new_meeting" ng-click="getMeetingsInfo();">Додати зустріч</a>
-        <a class="meeting-header-nav" style="padding: 4px 8px; margin-left: 5px" data-toggle="modal" data-target="#history" ng-click="getMeetingsInfo();">Історія</a>
+        <a class="meeting-header-nav" style="padding: 4px 8px; margin-right: 5px"
+           data-toggle="modal"
+           data-target="#add_new_work_mounth"
+           ng-if="userLevel >= 4">
+            Додати робочий місяць
+        </a>
+        <a class="meeting-header-nav" style="padding: 4px 8px;"
+           data-toggle="modal"
+           data-target="#add_new_meeting"
+           ng-click="getMeetingsInfo();">
+            Додати зустріч
+        </a>
+        <a class="meeting-header-nav" style="padding: 4px 8px; margin-left: 5px"
+           data-toggle="modal"
+           data-target="#history"
+           ng-click="getMeetingsInfo();">
+            Історія
+        </a>
     </div>
 </div>
 
@@ -24,7 +39,7 @@
     <div class="col-md-12">
         <h1 class="page-header" style="margin: 15px 0 20px">Зустрічі</h1>
 
-        <div ng-init="getMeetings(userID);">
+        <div ng-init="getMeetings();">
 
             <table class="table table-striped">
                 <thead class="table-bordered" style="background-color: #fbfbfb; color: #262626;">
@@ -41,7 +56,11 @@
                 <tbody>
                 <tr ng-repeat="meeting in meetings">
                     <td class="col-md-1 text-center">[[ $index + 1 ]]</td>
-                    <td class="col-md-3"><a ng-href="/consultant/meeting/[[ meeting.id ]]">[[ meeting.client ]]</a></td>
+                    <td class="col-md-3">
+                        <a ng-href="[[ (ownPage) ? ('/consultant/meeting/' + meeting.id) : ('/consultant/' + consultant + '/meeting/' + meeting.id) ]]">
+                            [[ meeting.client ]]
+                        </a>
+                    </td>
                     <td class="col-md-2">[[ meeting.consultant.name + ' ' + meeting.consultant.surname ]]</td>
                     <td class="col-md-2">[[ meeting.status.label ]]</td>
                     <td class="col-md-2 text-center">[[ meeting.date ]]</td>
