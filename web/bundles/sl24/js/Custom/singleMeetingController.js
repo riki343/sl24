@@ -1,5 +1,5 @@
-Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '$rootScope',
-    function ($scope, $http, $routeParams, $rootScope) {
+Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '$rootScope', '$spinner',
+    function ($scope, $http, $routeParams, $rootScope, $spinner) {
         $scope.meeting = null;
         if (angular.isDefined($routeParams.meeting_id)) {
             $scope.meeting_id = $routeParams.meeting_id;
@@ -30,9 +30,8 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '
         $scope.urlEditMeetingPost = URLS.editMeetingPost;
 
         $scope.getMeeting = function (meeting_id) {
-            $rootScope.spinner = true;
             var meetingUrl = $scope.urlGetMeeting.replace('meeting_id', meeting_id);
-            $scope.meetingPromise = $http.get(meetingUrl)
+            var promise = $scope.meetingPromise = $http.get(meetingUrl)
                 .success(function (response) {
                     $scope.meeting = response;
                     $scope.meetingEdit = angular.copy(response);
@@ -40,9 +39,9 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '
                     $scope.meetingEdit.payDate = new Date($scope.meeting.payDate);
                     $scope.meetingEdit.clientBirthday.date = new Date($scope.meeting.clientBirthday.date);
                     $scope.meetingEdit.meetingDate = new Date($scope.meetingEdit.meetingDate);
-                    $rootScope.spinner = false;
                 }
             );
+            $spinner.addPromise(promise);
         };
 
         $scope.getMeetingsInfo = function () {
@@ -70,8 +69,7 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '
             var removeMeetingUrl = $scope.urlRemoveMeeting.replace('meeting_id', id);
             $http.get(removeMeetingUrl)
                 .success(function (response) {
-                    if(response)
-                    {
+                    if(response)                     {
                         location.href = '/consultant/meetings'
                     }
                 }

@@ -1,5 +1,5 @@
-Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams', '$rootScope',
-    function ($scope, $http, $routeParams, $rootScope) {
+Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams','$spinner',
+    function ($scope, $http, $routeParams, $spinner) {
 
         $scope.task_id = $routeParams.task_id;
         $scope.task = null;
@@ -11,37 +11,30 @@ Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams', '$ro
         $scope.urlSaveTaskInfo = URLS.urlSaveTaskInfo;
 
         $scope.getTask = function (task_id) {
-            $rootScope.spinner = true;
             var urlGetTask = $scope.urlGetTask.replace('task_id', task_id);
-            $scope.taskPromise = $http.get(urlGetTask)
+            var promise = $scope.taskPromise = $http.get(urlGetTask)
                 .success(function (response){
                     $scope.task = response;
                     $scope.taskInfoEdit = response;
                     $scope.taskInfoEdit.date = new Date($scope.taskInfoEdit.date);
                     getStatuses();
-                    $rootScope.spinner = false;
                 }
             );
+            $spinner.addPromise(promise);
         };
 
         function getStatuses() {
-            $scope.promiseStatuses = $http.get($scope.urlGetStatuses)
+            var promise = $http.get($scope.urlGetStatuses)
                 .success(function (response) {
                     $scope.taskStatuses = response;
                 }
             );
+            $spinner.addPromise(promise);
         }
 
         $scope.saveTaskInfo = function (task) {
-            $rootScope.spinner = true;
-            $scope.taskPromise = $http.post($scope.urlSaveTaskInfo, { 'task': task })
-                .success(function (response) {
-                    if (response) {
-                        $rootScope.spinner = false;
-                    }
-                }
-            );
+            var promise = $http.post($scope.urlSaveTaskInfo, { 'task': task });
+            $spinner.addPromise(promise);
         };
-
     }
 ]);

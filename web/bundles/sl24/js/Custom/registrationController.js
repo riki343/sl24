@@ -1,6 +1,6 @@
-Sl24.controller('RegistrationController', ['$scope', '$http',
-    function ($scope, $http) {
-        $scope.urlAddNewUser = URLS.addNewUser;
+Sl24.controller('RegistrationController', ['$scope', '$http', '$spinner',
+    function ($scope, $http, $spinner) {
+        var urlAddNewUser = URLS.addNewUser;
 
         $scope.addUser = {
             'login': null,
@@ -37,7 +37,7 @@ Sl24.controller('RegistrationController', ['$scope', '$http',
                 return;
             }
             info.login = info.slNumber;
-            $http.post($scope.urlAddNewUser, { 'info': info })
+            var promise = $http.post(urlAddNewUser, { 'info': info })
                 .success(function (response) {
                     switch (response) {
                         case 1:
@@ -62,10 +62,9 @@ Sl24.controller('RegistrationController', ['$scope', '$http',
                             $scope.modalBody = 'Неправильний Sl-номер керівника';
                             break;
                     }
-
-                    $('#add_new_user').modal('show');
                 }
             );
+            $spinner.addPromise(promise);
         };
     }
 ]);

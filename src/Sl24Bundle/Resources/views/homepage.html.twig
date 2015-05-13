@@ -67,6 +67,10 @@
         URLS.homepageGetInfo = "{{ path('sl24_homepage_get_info') }}";
         URLS.userHomepageGetInfo = "{{ path('sl24_another_homepage_info', { 'user_id': 0 }) }}";
 
+        URLS.getUserSettings = "{{ path('sl24_get_settings', { 'user_id': 'user_id' }) }}";
+        URLS.saveUserSettings = "{{ path('sl24_change_user_info', { 'user_id': 'user_id' }) }}";
+        URLS.saveNewPass = "{{ path('sl24_save_new_pass', { 'user_id': 'user_id' }) }}";
+
         var USER_ID = {{ app.user.id }};
         var USER_LEVEL = {{ app.user.level }};
     </script>

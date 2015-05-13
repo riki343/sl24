@@ -7,6 +7,10 @@
         <a class="meeting-header-nav" style="margin-left: 8px;padding: 4px 8px;" ng-href="/meetings">Завдання</a>
         <a class="meeting-header-nav" style="margin-left: 8px;padding: 4px 8px;" ng-href="/meetings">Команда</a>
         <a class="meeting-header-nav" style="margin-left: 8px;padding: 4px 8px;" ng-href="/meetings">Карєра</a>
+        <a class="meeting-header-nav" style="margin-left: 8px;padding: 4px 8px;"
+           ng-href="[[ (ownPage) ? '/consultant/settings' : ('/consultant/' + consultant + '/settings') ]]">
+            Налаштування
+        </a>
     </div>
 </div>
 

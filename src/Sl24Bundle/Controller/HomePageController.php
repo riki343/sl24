@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sl24Bundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomePageController extends Controller {
     /**
@@ -33,7 +34,43 @@ class HomePageController extends Controller {
         return new JsonResponse($result);
     }
 
-    public function getSettingsAction() {
+    /**
+     * @Security("has_role('ROLE_USER')")
+     * @param int $user_id
+     * @return JsonResponse
+     */
+    public function getSettingsAction($user_id) {
+        $user = $this->getDoctrine()->getRepository('Sl24Bundle:User')->find($user_id);
+        return new JsonResponse($user->getInArray());
+    }
 
+    /**
+     * @param Request $request
+     * @param int $user_id
+     * @return JsonResponse
+     */
+    public function saveNewPassAction(Request $request, $user_id) {
+        $data = json_decode($request->getContent(), true);
+        $data = (object) $data['user'];
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        /** @var User $user */
+        $user = User::changePass($em, $user_id, $data);
+        return new JsonResponse($user->getInArray());
+    }
+
+    /**
+     * @param Request $request
+     * @param int $user_id
+     * @return JsonResponse
+     */
+    public function saveUserInfoAction(Request $request, $user_id) {
+        $data = json_decode($request->getContent(), true);
+        $data = (object) $data['user'];
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        /** @var User $user */
+        $user = User::changeInfo($em, $user_id, $data);
+        return new JsonResponse($user->getInArray());
     }
 }

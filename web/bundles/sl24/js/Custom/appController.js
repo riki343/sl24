@@ -2,17 +2,17 @@ Sl24.controller('AppController', ['$scope', '$http', '$rootScope', '$spinner',
     function ($scope, $http, $rootScope, $spinner) {
 
         var self = this;
-        this.spinner = false;
         this.watches = new Date();
 
         $scope.userID = USER_ID;
         $scope.userLevel = USER_LEVEL;
+        this.spinner = false;
 
-        $spinner.promisesStart($scope, function () {
+        $spinner.onPromisesStart($scope, function () {
             self.spinner = true;
         });
 
-        $spinner.promisesEnd($scope, function () {
+        $spinner.onPromisesEnd($scope, function () {
             self.spinner = false;
         });
 

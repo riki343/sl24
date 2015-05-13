@@ -156,7 +156,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var int
-     * @ORM\Column(name="team_score")
+     * @ORM\Column(name="team_score", type="integer")
      */
     private $teamScore;
 
@@ -195,6 +195,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="director_number", type="integer", nullable=true, options={"default"=null})
      */
     private $directorNumber;
+
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="birthday", type="date", nullable=true)
+     */
+    private $birthday;
 
     /**
      * @param EntityManager $em
@@ -245,7 +251,11 @@ class User implements UserInterface, \Serializable
             'teamScore' => $this->getTeamScore(),
             'dealDate' => ($this->getDealDate())
                 ? $this->getDealDate()->format('Y-m-d')
-                : null,            'cufflinks' => $this->getCufflinks(),
+                : null,
+            'birthday' => ($this->getBirthday())
+                ? $this->getBirthday()->format('Y-m-d')
+                : null,
+            'cufflinks' => $this->getCufflinks(),
             'diary' => $this->getDiary(),
             'watches' => $this->getWatches(),
             'parker' => $this->getParker(),
@@ -271,6 +281,9 @@ class User implements UserInterface, \Serializable
             'dealDate' => ($this->getDealDate())
                 ? $this->getDealDate()->format('Y-m-d')
                 : null,
+            'birthday' => ($this->getBirthday())
+                ? $this->getBirthday()->format('Y-m-d')
+                : null,
             'cufflinks' => $this->getCufflinks(),
             'diary' => $this->getDiary(),
             'watches' => $this->getWatches(),
@@ -281,6 +294,49 @@ class User implements UserInterface, \Serializable
             'childs' => User::childsRecursion($this->getChilds()),
             'meetingsCount' => count($this->getMeetings()),
         );
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param int $user_id
+     * @param object $data
+     * @return User
+     */
+    public static function changePass(EntityManager $em, $user_id, $data) {
+        $user = $em->find('Sl24Bundle:User', $user_id);
+
+        if ($data->newPass == $data->rNewPass) {
+            $user->setPassword($data->newPass);
+            $em->persist($user);
+            $em->flush();
+        }
+
+        return $user;
+    }
+
+    /**
+     * @param EntityManager $em
+     * @param int $user_id
+     * @param object $data
+     * @return User
+     */
+    public static function changeInfo(EntityManager $em, $user_id, $data) {
+        $user = $em->find('Sl24Bundle:User', $user_id);
+
+        $user->setBirthday(\DateTime::createFromFormat('Y-m-d', date('Y-m-d', strtotime($data->birthday))));
+        $user->setScore($data->score);
+        $user->setTeamScore($data->teamScore);
+        $user->setSurname($data->surname);
+        $user->setName($data->name);
+        $user->setMiddleName($data->middleName);
+        $user->setCufflinks($data->cufflinks);
+        $user->setDiary($data->diary);
+        $user->setParker($data->parker);
+        $user->setWatches($data->watches);
+
+        $em->persist($user);
+        $em->flush();
+        return $user;
     }
 
     /**
@@ -1034,5 +1090,28 @@ class User implements UserInterface, \Serializable
     public function getMiddleName()
     {
         return $this->middleName;
+    }
+
+    /**
+     * Set birthday
+     *
+     * @param \DateTime $birthday
+     * @return User
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    /**
+     * Get birthday
+     *
+     * @return \DateTime 
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
     }
 }

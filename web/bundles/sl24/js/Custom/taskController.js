@@ -1,5 +1,5 @@
-Sl24.controller('TaskController', ['$scope', '$http', '$rootScope',
-    function ($scope, $http, $rootScope) {
+Sl24.controller('TaskController', ['$scope', '$http', '$rootScope', '$spinner',
+    function ($scope, $http, $rootScope, $spinner) {
 
         $scope.tasks = null;
         $scope.urlGetTasks = URLS.getTasks;
@@ -23,35 +23,36 @@ Sl24.controller('TaskController', ['$scope', '$http', '$rootScope',
         $scope.doneTasks = [];
 
         $scope.getTasks = function () {
-            $rootScope.spinner = true;
-            $scope.promise = $http.get($scope.urlGetTasks)
+            var promise = $http.get($scope.urlGetTasks)
                 .success(function (response) {
                     $scope.tasks = response;
                     separationTasksByStatus(response);
-                    $rootScope.spinner = false;
                 }
             );
+            $spinner.addPromise(promise);
         };
 
         $scope.addTask = function (task) {
             if (task && task.name && task.description) {
                 $('#add_new_task').modal('hide');
-                $scope.promise = $http.post($scope.urlAddTask, {'task': task})
+                var promise = $http.post($scope.urlAddTask, {'task': task})
                     .success(function () {
                         $scope.getTasks();
                     }
                 );
+                $spinner.addPromise(promise);
             }
         };
 
         $scope.deleteTask = function (task_id) {
             if (task_id) {
                 $('#delete_task').modal('hide');
-                $scope.promise = $http.post($scope.urlDeleteTask, {'task_id': task_id})
+                var promise = $http.post($scope.urlDeleteTask, {'task_id': task_id})
                     .success(function () {
                         $scope.getTasks();
                     }
                 );
+                $spinner.addPromise(promise);
             }
         };
 
@@ -66,7 +67,7 @@ Sl24.controller('TaskController', ['$scope', '$http', '$rootScope',
             $scope.inProgresTasks = [] ;
             $scope.doneTasks = [] ;
 
-            for( var i = 0;i < tasks.length; i++ )
+            for( var i = 0; i < tasks.length; i++ )
             {
                 switch (tasks[i].status.id) {
                     case 1:

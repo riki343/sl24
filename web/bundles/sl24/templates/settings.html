@@ -6,11 +6,187 @@
         </a>
         <div class="breadcrumb-bg">
             <i class="fa fa-globe"></i> |
-            <a ng-href="/consultant">
-                [[  ]]
+            <a ng-href="[[ (sctrl.ownPage) ? '/consultant' : '/consultant/' + sctrl.consultantID ]]">
+                [[ user.name + ' ' + user.surname ]]
             </a>
             <i class="fa fa-angle-right" style="color: #337AB7;"></i>
             Налаштування
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+        <h3 class="page-header">
+            Зміна паролю
+        </h3>
+        <form name="changePassForm" class="form-horizontal" ng-submit="sctrl.saveNewPass();" novalidate>
+            <label class="form-control-static">Новий пароль:</label>
+            <div class="input-group">
+                <input name="newPass" type="password" class="form-control"
+                       ng-model="changePassModel.newPass"
+                       ng-minlength="4"
+                       ng-maxlength="25"
+                       required />
+                <span class="input-group-addon">
+                    <i ng-show="changePassForm.newPass.$valid" class="fa fa-check fa-fw" style="color: green;"></i>
+                    <i ng-show="changePassForm.newPass.$invalid" class="fa fa-close fa-fw" style="color: red;"></i>
+                </span>
+            </div>
+
+            <div ng-messages="changePassForm.newPass.$error" style="color: red;">
+                <span ng-message="minlength">* Мінімальна довжина поля: 4 символи</span>
+                <span ng-message="maxlength">* Максимальна довжина поля: 25 символів</span>
+            </div>
+
+            <label class="form-control-static">Повторіть новий пароль:</label>
+            <div class="input-group">
+                <input name="rNewPass" type="password" class="form-control"
+                       ng-model="changePassModel.rNewPass"
+                       ng-minlength="4"
+                       ng-maxlength="25"
+                       required />
+                <span class="input-group-addon">
+                    <i ng-show="(changePassForm.rNewPass.$valid) && (changePassModel.rNewPass == changePassModel.newPass)" class="fa fa-check fa-fw" style="color: green;"></i>
+                    <i ng-show="(changePassForm.rNewPass.$invalid) || (changePassModel.rNewPass != changePassModel.newPass)" class="fa fa-close fa-fw" style="color: red;"></i>
+                </span>
+            </div>
+
+            <div class="input-group" ng-if="changePassModel.rNewPass != changePassModel.newPass" style="color: red;">
+                * Паролі не співпадають
+            </div>
+
+            <hr/>
+
+            <div class="input-group">
+                <button type="submit" id="changePassSubmit" ng-disabled="(changePassForm.$invalid) || (changePassModel.rNewPass != changePassModel.newPass)"
+                        class="btn btn-default btn-primary">
+                    Змінити
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+        <h3 class="page-header">
+            Зміна інформації
+        </h3>
+
+        <form name="changeInfoForm" class="form-horizontal" ng-submit="sctrl.saveSettings();" novalidate>
+            <label class="form-control-static">День народження:</label>
+            <div class="input-group">
+                <input name="birthday" type="date" class="form-control" ng-model="user.birthday" required />
+                <span class="input-group-addon">
+                    <i ng-show="changeInfoForm.birthday.$valid" class="fa fa-check fa-fw" style="color: green;"></i>
+                    <i ng-show="changeInfoForm.birthday.$invalid" class="fa fa-close fa-fw" style="color: red;"></i>
+                </span>
+            </div>
+
+            <label class="form-control-static">Одиниці:</label>
+            <div class="input-group">
+                <input name="score" type="number" class="form-control" ng-model="user.score" required />
+                <span class="input-group-addon">
+                    <i ng-show="changeInfoForm.score.$valid" class="fa fa-check fa-fw" style="color: green;"></i>
+                    <i ng-show="changeInfoForm.score.$invalid" class="fa fa-close fa-fw" style="color: red;"></i>
+                </span>
+            </div>
+
+            <div ng-messages="changeInfoForm.score.$error" style="color: red;">
+                <span ng-message="number">* Дозволено вводити лише цифри</span>
+            </div>
+
+            <label class="form-control-static">Командні одиниці:</label>
+            <div class="input-group">
+                <input name="teamScore" type="number" class="form-control" ng-model="user.teamScore" required />
+                <span class="input-group-addon">
+                    <i ng-show="changeInfoForm.teamScore.$valid" class="fa fa-check fa-fw" style="color: green;"></i>
+                    <i ng-show="changeInfoForm.teamScore.$invalid" class="fa fa-close fa-fw" style="color: red;"></i>
+                </span>
+            </div>
+
+            <div ng-messages="changeInfoForm.teamScore.$error" style="color: red;">
+                <span ng-message="number">* Дозволено вводити лише цифри</span>
+            </div>
+
+            <label class="form-control-static">Прізвище:</label>
+            <div class="input-group">
+                <input name="surname" type="text" class="form-control" ng-model="user.surname" pattern="[A-Za-zА-Яа-яІіЇїЄєҐґ]{1,}" required />
+                <span class="input-group-addon">
+                    <i ng-show="changeInfoForm.surname.$valid" class="fa fa-check fa-fw" style="color: green;"></i>
+                    <i ng-show="changeInfoForm.surname.$invalid" class="fa fa-close fa-fw" style="color: red;"></i>
+                </span>
+            </div>
+
+            <div ng-messages="changeInfoForm.surname.$error" style="color: red;">
+                <span ng-message="pattern">* Формат: "A-Z,a-z,А-Я,а-я</span>
+            </div>
+
+            <label class="form-control-static">Ім’я:</label>
+            <div class="input-group">
+                <input name="name" type="text" class="form-control" ng-model="user.name" required />
+                <span class="input-group-addon">
+                    <i ng-show="changeInfoForm.name.$valid" class="fa fa-check fa-fw" style="color: green;"></i>
+                    <i ng-show="changeInfoForm.name.$invalid" class="fa fa-close fa-fw" style="color: red;"></i>
+                </span>
+            </div>
+
+            <div ng-messages="changeInfoForm.name.$error" style="color: red;">
+                <span ng-message="pattern">* Формат: "A-Z,a-z,А-Я,а-я</span>
+            </div>
+
+            <label class="form-control-static">По батькові:</label>
+            <div class="input-group">
+                <input name="middleName" type="text" class="form-control" ng-model="user.middleName" required />
+                <span class="input-group-addon">
+                    <i ng-show="changeInfoForm.middleName.$valid" class="fa fa-check fa-fw" style="color: green;"></i>
+                    <i ng-show="changeInfoForm.middleName.$invalid" class="fa fa-close fa-fw" style="color: red;"></i>
+                </span>
+            </div>
+
+            <div ng-messages="changeInfoForm.middleName.$error" style="color: red;">
+                <span ng-message="pattern">* Формат: "A-Z,a-z,А-Я,а-я</span>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-xs-3">
+                    <div class="input-group">
+                        <input id="cufflinks" ng-model="user.cufflinks" type="checkbox" class="checkbox checkbox-inline" />
+                        <label for="cufflinks" class="form-control-static">&nbsp;Запонки</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="input-group">
+                        <input id="diary" ng-model="user.diary" type="checkbox" class="checkbox checkbox-inline" />
+                        <label for="diary" class="form-control-static">&nbsp;Щоденник</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="input-group">
+                        <input id="parker" ng-model="user.parker" type="checkbox" class="checkbox checkbox-inline" />
+                        <label for="parker" class="form-control-static">&nbsp;Паркер</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="input-group">
+                        <input id="watches" ng-model="user.watches" type="checkbox" class="checkbox checkbox-inline" />
+                        <label for="watches" class="form-control-static">&nbsp;Годинник</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div class="input-group">
+                <button type="submit" ng-disabled="changeInfoForm.$invalid"
+                        id="changeInfoSubmit"
+                        class="btn btn-default btn-primary">
+                    Зберегти
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="margin-bottom: 25px;"></div>

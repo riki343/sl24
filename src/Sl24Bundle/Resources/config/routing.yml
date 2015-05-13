@@ -62,6 +62,30 @@ sl_24_edit_post_meeting:
 #############################################################################
 
 
+
+#############################################################################
+######################### Begin of Settings routing #########################
+#############################################################################
+
+sl24_get_settings:
+    pattern: homepage/settings/get/{user_id}
+    defaults: { _controller: Sl24Bundle:HomePage:getSettings }
+
+sl24_save_new_pass:
+    pattern: homepage/settings/change_pass/{user_id}
+    defaults: { _controller: Sl24Bundle:HomePage:saveNewPass }
+
+sl24_change_user_info:
+    pattern: homepage/settings/change_user_info/{user_id}
+    defaults: { _controller: Sl24Bundle:HomePage:saveUserInfo }
+
+#############################################################################
+######################### End of Settings routing ###########################
+#############################################################################
+
+
+
+
 #############################################################################
 ######################### Begin of Meeting routing ##########################
 #############################################################################
