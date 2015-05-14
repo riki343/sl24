@@ -1,21 +1,19 @@
 (function () {
-    angular.module('Sl24').factory('$spinner', $spinner);
+    angular.module('Sl24').factory('$spinner', spinner);
 
-    $spinner.$inject = [
+    spinner.$inject = [
         '$rootScope'
     ];
 
-    function $spinner($rootScope) {
+    function spinner($rootScope) {
         var self = this;
         this.promises = [];
 
-        var spinner = {
+        return {
             'addPromise': addPromise,
             'onPromisesEnd': onPromisesEnd,
             'onPromisesStart': onPromisesStart
         };
-
-        return spinner;
 
         function addPromise(promise) {
             if (self.promises.length == 0) {

@@ -3,8 +3,6 @@
 
     AppController.$inject = [
         '$scope',
-        '$http',
-        '$rootScope',
         '$spinner'
     ];
 

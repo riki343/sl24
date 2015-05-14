@@ -1,5 +1,14 @@
-Sl24.controller('TaskController', ['$scope', '$http', '$rootScope', '$spinner',
-    function ($scope, $http, $rootScope, $spinner) {
+(function () {
+    angular.module('Sl24').controller('TaskController', TaskController);
+
+    TaskController.$inject = [
+        '$scope',
+        '$http',
+        '$spinner',
+        'URLS'
+    ];
+
+    function TaskController($scope, $http, $spinner, URLS) {
 
         $scope.tasks = null;
         $scope.urlGetTasks = URLS.getTasks;
@@ -84,4 +93,4 @@ Sl24.controller('TaskController', ['$scope', '$http', '$rootScope', '$spinner',
         }
 
     }
-]);
+})();
