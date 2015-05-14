@@ -61,15 +61,15 @@
             })
             .when('/consultant/career', {
                 templateUrl: TEMPLATES.career,
-                controller: 'CareerController'
+                controller: 'CareerController as career'
             })
             .when('/consultant/seminars', {
                 templateUrl: TEMPLATES.seminars,
-                controller: 'SeminarsController'
+                controller: 'SeminarsController as seminars'
             })
             .when('/consultant/quotes', {
                 templateUrl: TEMPLATES.quotes,
-                controller: 'QuotesController'
+                controller: 'QuotesController as quotes'
             })
             .when('/consultant/:consultant_id', {
                 templateUrl: TEMPLATES.main,

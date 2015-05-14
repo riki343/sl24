@@ -3,10 +3,22 @@
 
     SeminarsController.$inject = [
         '$scope',
-        '$spinner'
+        '$workingMonth',
+        'TEMPLATES'
     ];
 
-    function SeminarsController($scope, $spinner) {
+    function SeminarsController($scope, $workingMonth, TEMPLATES) {
+        $scope.templateMounthAddNew = TEMPLATES.mounthAddNew;
+        $scope.monthForAdd = {
+            'name': null,
+            'startDate': null,
+            'endDate': null
+        };
 
+        $scope.addMonth = function (month) {
+            if ($scope.monthForAdd.name && $scope.monthForAdd.startDate && $scope.monthForAdd.endDate) {
+                $workingMonth.addMonth(month);
+            }
+        };
     }
 })();

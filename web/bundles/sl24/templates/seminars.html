@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="meeting-header">
+        <a class="meeting-header-nav" style="padding: 4px 8px; margin-right: 5px"
+           data-toggle="modal"
+           data-target="#add_new_work_mounth"
+           ng-if="userLevel >= 4">
+            Додати робочий місяць
+        </a>
+    </div>
+</div>
+
+
+<div ng-include="templateMounthAddNew"></div>

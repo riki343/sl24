@@ -14,28 +14,27 @@
                         <form class="form-horizontal">
                             <div class="form-group">
                                 <label for="mounth_name" class="control-label">Назва:</label>
-                                <input type="text" id="mounth_name" class="form-control" name="name" ng-model="mounthForAdd.name" required>
+                                <input type="text" id="mounth_name" class="form-control" name="name" ng-model="monthForAdd.name" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="mounth_start_date" class="control-label">Початок:</label>
-                                <input type="date" id="mounth_start_date" class="form-control" name="startDate" ng-model="mounthForAdd.startDate" required>
+                                <input type="date" id="mounth_start_date" class="form-control" name="startDate" ng-model="monthForAdd.startDate" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="mounth_end_date" class="control-label">Кінець:</label>
-                                <input type="date" id="mounth_end_date" class="form-control" name="endDate" ng-model="mounthForAdd.endDate" required>
+                                <input type="date" id="mounth_end_date" class="form-control" name="endDate" ng-model="monthForAdd.endDate" required>
                             </div>
 
                             <div class="form-group">
-                                <button type="button" class="btn btn-primary" style="background-color: #c62828 !important;" ng-click="addMounth(mounthForAdd)">Додати</button>
+                                <button type="button" class="btn btn-primary" style="background-color: #c62828 !important;" ng-click="addMonth(monthForAdd)">Додати</button>
                                 <a class="btn btn-default" data-dismiss="modal" aria-hidden="true">Закрити</a>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

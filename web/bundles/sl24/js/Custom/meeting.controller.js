@@ -19,12 +19,6 @@
             'employmentType': null
         };
 
-        $scope.mounthForAdd = {
-            'name': null,
-            'startDate': null,
-            'endDate': null
-        };
-
         var ownPage = !angular.isDefined($routeParams.consultant_id);
         $scope.ownPage = ownPage;
         $scope.consultant = (!ownPage) ? $routeParams.consultant_id : null;
@@ -32,10 +26,8 @@
         var urlGetMeetings = URLS.getMeetings;
         var urlGetMeetingsInfo = URLS.getMeetingsInfo;
         var urlAddNewMeeting = URLS.addNewMeeting;
-        $scope.urlAddNewMounth = URLS.addNewMounth;
 
         $scope.templateMeetingsAddNew = TEMPLATES.meetingsAddNew;
-        $scope.templateMounthAddNew = TEMPLATES.mounthAddNew;
 
         $scope.getMeetings = function () {
             var requestUrl = (ownPage)
@@ -84,15 +76,6 @@
                 }
             );
             $spinner.addPromise(promise);
-        };
-
-        $scope.addMounth = function (mounth) {
-            if ($scope.mounthForAdd.name != null && $scope.mounthForAdd.startDate != null && $scope.mounthForAdd.endDate != null)
-            {
-                $('#add_new_work_mounth').modal('hide');
-                var promise = $http.post($scope.urlAddNewMounth, { 'mounth': mounth });
-                $spinner.addPromise(promise);
-            }
         };
     }
 })();
