@@ -1,5 +1,9 @@
-Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope', '$routeParams', '$spinner',
-    function($scope, $http, $rootScope, $routeParams, $spinner) {
+(function () {
+    angular.module('Sl24').controller('MeetingController', MeetingController);
+
+    MeetingController.$inject = ['$scope', '$http', '$rootScope', '$routeParams', '$spinner'];
+
+    function MeetingController($scope, $http, $rootScope, $routeParams, $spinner) {
         $scope.meetings = null;
         $scope.meetingsInfo = null;
         $scope.meetingForAdd = {
@@ -86,4 +90,4 @@ Sl24.controller('MeetingController', ['$scope', '$http', '$rootScope', '$routePa
             }
         };
     }
-]);
+})();

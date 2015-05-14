@@ -1,5 +1,14 @@
-Sl24.controller('AppController', ['$scope', '$http', '$rootScope', '$spinner',
-    function ($scope, $http, $rootScope, $spinner) {
+(function () {
+    angular.module('Sl24').controller('AppController', AppController);
+
+    AppController.$inject = [
+        '$scope',
+        '$http',
+        '$rootScope',
+        '$spinner'
+    ];
+
+    function AppController($scope, $spinner) {
 
         var self = this;
         this.watches = new Date();
@@ -22,4 +31,4 @@ Sl24.controller('AppController', ['$scope', '$http', '$rootScope', '$spinner',
             });
         }, 1000);
     }
-]);
+})();

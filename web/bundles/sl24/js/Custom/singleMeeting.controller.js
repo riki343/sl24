@@ -1,5 +1,16 @@
-Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '$rootScope', '$spinner',
-    function ($scope, $http, $routeParams, $rootScope, $spinner) {
+(function () {
+    angular.module('Sl24').controller('SingleMeetingController', SingleMeetingController);
+
+    SingleMeetingController.$inject = [
+        '$scope',
+        '$http',
+        '$routeParams',
+        '$rootScope',
+        '$spinner',
+        'URLS'
+    ];
+
+    function SingleMeetingController($scope, $http, $routeParams, $rootScope, $spinner, URLS) {
         $scope.meeting = null;
         if (angular.isDefined($routeParams.meeting_id)) {
             $scope.meeting_id = $routeParams.meeting_id;
@@ -132,7 +143,7 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '
                 addPost(post);
             }
         };
-        
+
         $scope.enterButton = function (e) {
             if (e.keyCode == '13') {
                 e.preventDefault();
@@ -145,4 +156,4 @@ Sl24.controller('SingleMeetingController', ['$scope', '$http', '$routeParams', '
         };
 
     }
-]);
+})();

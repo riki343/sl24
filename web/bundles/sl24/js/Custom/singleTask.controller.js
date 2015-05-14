@@ -1,5 +1,14 @@
-Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams','$spinner',
-    function ($scope, $http, $routeParams, $spinner) {
+(function () {
+    angular.module('Sl24').controller('SingleTaskController', SingleTaskController);
+
+    SingleTaskController.$inject = [
+        '$scope',
+        '$http',
+        '$routeParams',
+        '$spinner'
+    ];
+
+    function SingleTaskController($scope, $http, $routeParams, $spinner) {
 
         $scope.task_id = $routeParams.task_id;
         $scope.task = null;
@@ -37,4 +46,4 @@ Sl24.controller('SingleTaskController', ['$scope', '$http', '$routeParams','$spi
             $spinner.addPromise(promise);
         };
     }
-]);
+})();

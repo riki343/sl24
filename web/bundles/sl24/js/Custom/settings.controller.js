@@ -1,5 +1,15 @@
-Sl24.controller('SettingsController', ['$scope', '$http', '$spinner', '$routeParams',
-    function ($scope, $http, $spinner, $routeParams) {
+(function () {
+    angular.module('Sl24').controller('SettingsController', SettingsController);
+
+    SettingsController.$inject = [
+        '$scope',
+        '$http',
+        '$spinner',
+        '$routeParams',
+        'URLS'
+    ];
+
+    function SettingsController($scope, $http, $spinner, $routeParams, URLS) {
         var self = this;
 
         this.urlGetUserSettings = URLS.getUserSettings;
@@ -27,7 +37,7 @@ Sl24.controller('SettingsController', ['$scope', '$http', '$spinner', '$routePar
             );
             $spinner.addPromise(promise);
         };
-        
+
         this.saveSettings = function () {
             var replace = (self.ownPage) ? $scope.userID : self.consultantID;
             var requestUrl = self.urlSaveUserSettings.replace('user_id', replace);
@@ -42,4 +52,4 @@ Sl24.controller('SettingsController', ['$scope', '$http', '$spinner', '$routePar
             $spinner.addPromise(promise);
         };
     }
-]);
+})();

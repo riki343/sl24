@@ -1,5 +1,9 @@
-Sl24.controller('ArticleController', ['$scope', '$http', '$sce', '$routeParams', '$spinner',
-    function ($scope, $http, $sce, $routeParams, $spinner) {
+(function () {
+    angular.module('Sl24').controller('ArticleController', ArticleController);
+
+    ArticleController.$inject = ['$scope', '$http', '$sce', '$routeParams', '$spinner'];
+
+    function ArticleController($scope, $http, $sce, $routeParams, $spinner) {
         $scope.urlGetArticle = URLS.urlGetArticle;
         $scope.urlAddArticle = URLS.urlAddArticle;
         $scope.urlGetFullArticle = URLS.urlGetFullArticle;
@@ -34,4 +38,4 @@ Sl24.controller('ArticleController', ['$scope', '$http', '$sce', '$routeParams',
             $spinner.addPromise(promise);
         };
     }
-]);
+})();
