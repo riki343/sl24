@@ -1,9 +1,16 @@
 (function () {
     angular.module('Sl24').controller('ArticleController', ArticleController);
 
-    ArticleController.$inject = ['$scope', '$http', '$sce', '$routeParams', '$spinner'];
+    ArticleController.$inject = [
+        '$scope',
+        '$http',
+        '$sce',
+        '$routeParams',
+        '$spinner',
+        'URLS'
+    ];
 
-    function ArticleController($scope, $http, $sce, $routeParams, $spinner) {
+    function ArticleController($scope, $http, $sce, $routeParams, $spinner, URLS) {
         $scope.urlGetArticle = URLS.urlGetArticle;
         $scope.urlAddArticle = URLS.urlAddArticle;
         $scope.urlGetFullArticle = URLS.urlGetFullArticle;

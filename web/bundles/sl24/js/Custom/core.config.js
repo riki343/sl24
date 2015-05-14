@@ -1,7 +1,13 @@
 (function () {
     angular.module('Sl24').config(Sl24Config);
 
-    Sl24Config.$inject = ['$interpolateProvider', '$httpProvider', '$routeProvider', '$locationProvider', 'TEMPLATES'];
+    Sl24Config.$inject = [
+        '$interpolateProvider',
+        '$httpProvider',
+        '$routeProvider',
+        '$locationProvider',
+        'TEMPLATES'
+    ];
 
     function Sl24Config($interpolateProvider, $httpProvider, $routeProvider, $locationProvider, TEMPLATES) {
         $interpolateProvider.startSymbol('[[');
@@ -52,6 +58,18 @@
             .when('/consultant/article/getfull/:article_id', {
                 templateUrl: TEMPLATES.fullArticle,
                 controller: 'ArticleController'
+            })
+            .when('/consultant/career', {
+                templateUrl: TEMPLATES.career,
+                controller: 'CareerController'
+            })
+            .when('/consultant/seminars', {
+                templateUrl: TEMPLATES.seminars,
+                controller: 'SeminarsController'
+            })
+            .when('/consultant/quotes', {
+                templateUrl: TEMPLATES.quotes,
+                controller: 'QuotesController'
             })
             .when('/consultant/:consultant_id', {
                 templateUrl: TEMPLATES.main,

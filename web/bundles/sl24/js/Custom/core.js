@@ -2,6 +2,7 @@
     angular.module('Sl24', [
         'ngRoute',
         'ngAnimate',
-        'ngMessages'
+        'ngMessages',
+        'Sl24.data'
     ]);
 })();

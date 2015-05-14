@@ -1,8 +1,11 @@
 (function () {
-    angular.module('Sl24')
+    angular.module('Sl24.data')
         .factory('$homeOffice', homeOfficeService);
 
-    homeOfficeService.$inject = ['$http', '$q'];
+    homeOfficeService.$inject = [
+        '$http',
+        '$q'
+    ];
 
     function homeOfficeService($http, $q) {
 
