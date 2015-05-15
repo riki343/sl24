@@ -5,6 +5,7 @@
     seminarsService.$inject = [
         '$http',
         '$q',
+        '$spinner',
         'URLS'
     ];
 

@@ -3,17 +3,13 @@
 
     ArticleController.$inject = [
         '$scope',
-        '$http',
         '$sce',
         '$routeParams',
-        '$spinner',
-        'URLS'
+        'URLS',
+        '$articles'
     ];
 
-    function ArticleController($scope, $http, $sce, $routeParams, $spinner, URLS) {
-        $scope.urlGetArticle = URLS.urlGetArticle;
-        $scope.urlAddArticle = URLS.urlAddArticle;
-        $scope.urlGetFullArticle = URLS.urlGetFullArticle;
+    function ArticleController($scope, $sce, $routeParams, URLS, $articles) {
         $scope.Articles = [];
         $scope.Article = null;
         $scope.user = [];
@@ -22,27 +18,22 @@
         $scope.article_id = $routeParams.article_id;
 
         $scope.GetArticle = function () {
-            var promise = $http.get($scope.urlGetArticle)
-                .success(function (response) {
-                    $scope.user =  response.user;
-                    $scope.Articles = response.articles;
-                    for(var i = 0; i < $scope.Articles.length; i++) {
-                        $scope.Articles[i].articleText = $sce.trustAsHtml($scope.Articles[i].articleText);
-                    }
+            var promise = $articles.getArticles();
+            promise.then(function (response) {
+                $scope.user = response.data.user;
+                $scope.Articles = response.data.articles;
+                for(var i = 0; i < $scope.Articles.length; i++) {
+                    $scope.Articles[i].articleText = $sce.trustAsHtml($scope.Articles[i].articleText);
                 }
-            );
-            $spinner.addPromise(promise);
+            });
         };
 
         $scope.ShowFullArticle = function (id) {
-            var urlGetFullArticle = $scope.urlGetFullArticle.replace('0', id);
-            var promise = $http.get(urlGetFullArticle)
-                .success(function (response){
-                    $scope.Article =  response.article;
-                    $scope.Article.articleText = $sce.trustAsHtml($scope.Article.articleText);
-                }
-            );
-            $spinner.addPromise(promise);
+            var promise = $articles.getFullArticle(id);
+            promise.then(function(response) {
+                $scope.Article = response.data.article;
+                $scope.Article.articleText = $sce.trustAsHtml($scope.Article.articleText);
+            });
         };
     }
 })();

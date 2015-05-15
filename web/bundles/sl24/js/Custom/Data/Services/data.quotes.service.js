@@ -5,10 +5,11 @@
     quotesService.$inject = [
         '$http',
         '$q',
+        '$spinner',
         'URLS'
     ];
 
-    function quotesService($http, $q, URLS) {
+    function quotesService($http, $q, $spinner, URLS) {
 
         var quotes = {
 

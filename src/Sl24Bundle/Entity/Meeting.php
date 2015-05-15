@@ -176,7 +176,7 @@ class Meeting
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="MeetingPost", mappedBy="meeting")
+     * @ORM\OneToMany(targetEntity="MeetingPost", mappedBy="meeting", cascade={"remove"})
      */
     private $posts;
 

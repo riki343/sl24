@@ -3,18 +3,12 @@
 
     SettingsController.$inject = [
         '$scope',
-        '$http',
-        '$spinner',
-        '$routeParams',
-        'URLS'
+        '$settings',
+        '$routeParams'
     ];
 
-    function SettingsController($scope, $http, $spinner, $routeParams, URLS) {
+    function SettingsController($scope, $settings, $routeParams) {
         var self = this;
-
-        this.urlGetUserSettings = URLS.getUserSettings;
-        this.urlSaveUserSettings = URLS.saveUserSettings;
-        this.urlSaveNewPass = URLS.saveNewPass;
 
         this.ownPage = !angular.isDefined($routeParams.consultant_id);
         this.consultantID = $routeParams.consultant_id;
@@ -23,33 +17,26 @@
             'newPass': '',
             'rNewPass': ''
         };
-
         $scope.user = {};
 
         this.getUserSettings = function () {
-            var replace = (self.ownPage) ? $scope.userID : self.consultantID;
-            var requestUrl = self.urlGetUserSettings.replace('user_id', replace);
-            var promise = $http.get(requestUrl)
-                .success(function (response) {
-                    $scope.user = response;
-                    $scope.user.birthday = new Date($scope.user.birthday);
-                }
-            );
-            $spinner.addPromise(promise);
+            var id = (self.ownPage) ? $scope.userID : self.consultantID;
+            var promise = $settings.getUserSettings(id);
+            promise.then(function (response) {
+                response = response.data;
+                $scope.user = response;
+                $scope.user.birthday = new Date($scope.user.birthday);
+            });
         };
 
         this.saveSettings = function () {
-            var replace = (self.ownPage) ? $scope.userID : self.consultantID;
-            var requestUrl = self.urlSaveUserSettings.replace('user_id', replace);
-            var promise = $http.post(requestUrl, { 'user': $scope.user });
-            $spinner.addPromise(promise);
+            var id = (self.ownPage) ? $scope.userID : self.consultantID;
+            $settings.saveSettings(id, $scope.user);
         };
 
         this.saveNewPass = function () {
-            var replace = (self.ownPage) ? $scope.userID : self.consultantID;
-            var requestUrl = self.urlSaveNewPass.replace('user_id', replace);
-            var promise = $http.post(requestUrl, { 'user': $scope.changePassModel });
-            $spinner.addPromise(promise);
+            var id = (self.ownPage) ? $scope.userID : self.consultantID;
+            $settings.saveNewPass(id, $scope.changePassModel);
         };
     }
 })();

@@ -3,27 +3,18 @@
 
     RegistrationController.$inject = [
         '$scope',
-        '$http',
-        '$spinner',
-        'URLS'
+        '$registration'
     ];
 
-    function RegistrationController($scope, $http, $spinner, URLS) {
-        var urlAddNewUser = URLS.addNewUser;
+    function RegistrationController($scope, $registration) {
         var tempUser = {
-            'login': null,
-            'pass': null,
-            'rpass': null,
-            'email': null,
+            'login': null, 'pass': null,
+            'rpass': null, 'email': null,
             'slNumber': '',
-            'score': 0,
-            'teamScore': 0,
-            'parker': false,
-            'diary': false,
-            'cufflinks': false,
-            'watches': false,
-            'director': null,
-            'middleName': '',
+            'score': 0, 'teamScore': 0,
+            'parker': false, 'diary': false,
+            'cufflinks': false, 'watches': false,
+            'director': null, 'middleName': '',
             'level': 1
         };
 
@@ -47,17 +38,17 @@
                 return;
             }
             info.login = info.slNumber;
-            var promise = $http.post(urlAddNewUser, { 'info': info })
-                .success(function (response) {
-                    switch (response) {
-                        case 1:
-                            $scope.addUser = tempUser.clone();
-                            break;
-                        case -2: break;
-                    }
+
+            var promise = $registration.register(info);
+            promise.then(function (response) {
+                switch (response.data) {
+                    case 1:
+                        $scope.addUser = tempUser.clone();
+                        break;
+                    case -2:
+                        break;
                 }
-            );
-            $spinner.addPromise(promise);
+            });
         };
     }
 })();

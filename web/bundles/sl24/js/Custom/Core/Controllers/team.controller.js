@@ -3,27 +3,23 @@
 
     TeamController.$inject = [
         '$scope',
-        '$http',
-        '$spinner'
+        '$team'
     ];
 
-    function TeamController($scope, $http, $spinner) {
+    function TeamController($scope, $team) {
         $scope.Team = null;
-        $scope.urlGetTeam = URLS.urlGetTeam;
         $scope.childs = [];
 
         $scope.GetTeam = function () {
-            var promise = $http.get($scope.urlGetTeam)
-                .success(function (response) {
-                    $scope.Team = response;
-                    $scope.Team.lvl = 1;
-                    $scope.Team.marginrigth = 0;
-                    $scope.Team.visible = false;
+            var promise = $team.getTeam();
+            promise.then(function (response) {
+                $scope.Team = response;
+                $scope.Team.lvl = 1;
+                $scope.Team.marginrigth = 0;
+                $scope.Team.visible = false;
 
-                    tree($scope.Team,$scope.Team.lvl,$scope.Team.marginrigth);
-                }
-            );
-            $spinner.addPromise(promise);
+                tree($scope.Team,$scope.Team.lvl,$scope.Team.marginrigth);
+            });
         };
 
         function tree(elem, lvl, marginrigth)

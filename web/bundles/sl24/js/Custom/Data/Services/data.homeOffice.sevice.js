@@ -4,10 +4,12 @@
 
     homeOfficeService.$inject = [
         '$http',
-        '$q'
+        '$q',
+        '$spinner',
+        'URLS'
     ];
 
-    function homeOfficeService($http, $q) {
+    function homeOfficeService($http, $q, $spinner, URLS) {
 
         var homeOffice = {
             'getHomeOfficeInfo': getHomeOfficeInfo,
@@ -17,11 +19,12 @@
 
         function getHomeOfficeInfo(id) {
             var deffered = $q.defer();
-            $http.get(URLS.userHomepageGetInfo.replace('0', id))
-                .success(function (data) {
-                    return deffered.resolve(data);
+            var promise = $http.get(URLS.userHomepageGetInfo.replace('0', id));
+            promise.then(function (data) {
+                    deffered.resolve(data);
                 }
             );
+            $spinner.addPromise(promise);
             return deffered.promise;
         }
     }
